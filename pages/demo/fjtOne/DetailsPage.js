@@ -1,0 +1,110 @@
+var img = [
+ {
+	linkImg:'../../../img/timg3.jpg',
+    text:"看这世界这么美"
+ },{
+	linkImg:'../../../img/timg.jpg',
+    text:"看这世界哈哈"
+ },{
+ 	linkImg:'../../../img/timg1.jpg',
+    text:"看这世界"
+ },{
+ 	linkImg:'../../../img/timg2.jpg',
+    text:"看这世界"
+ },{
+ 	linkImg:'../../../img/timg3.jpg',
+    text:"看这世界这么美"
+ },{
+ 	linkImg:'../../../img/timg.jpg',
+    text:"看这世界哈哈"
+    }
+]
+new Vue({
+	el:'#fuwu',
+	data:{
+		fuwu:[
+		{
+			linkImg:'../../../img/bao.png',
+			title:'只换不修',
+			text:'商品质量问题365天只换不修'
+			
+		},{
+			linkImg:'../../../img/huan.png',
+			title:'正品保障',
+			text:'该商品由中国人保正品保证险'
+		}
+		]
+	}
+})
+new Vue({
+	el:'#lingquan',
+	data:{
+		lingquan:[
+		{
+			id:'1',
+			money:'10',
+			full:'订单金额满100元可使用',
+			validity:'有效期2018.06.28-2018.07.20'
+		},{
+			id:'2',
+			money:'20',
+			full:'订单金额满1000元可用',
+			validity:'有效期2018.06.28-2018.07.20'
+		}
+		]
+	}
+})
+new Vue({
+	el:'#xuanze',
+	data:{
+		xuanze:[
+			{
+			id:'1',
+			text:'新疆芒果'
+		},{
+			id:'2',
+			text:'夏威夷椰子'
+		},{
+			id:'3',
+			text:'榴莲'
+		},{
+			id:'5',
+			text:'水蜜桃'
+		},{
+			id:'6',
+			text:'水蜜桃'
+		},{
+			id:'7',
+			text:'水蜜桃'
+		},{
+			id:'8',
+			text:'水蜜桃'
+		}
+		]
+	}
+})
+new Vue({
+	el:'#canshu',
+	data:{
+		canshu:[
+		{
+			title:'处理器品牌',
+			text:'Apple/苹果'
+			
+		},{
+			title:'颜色类型',
+			text:'国行玫瑰金，新款pro10.5寸'
+		},{
+			title:'颜色类型',
+			text:'国行玫瑰金，新款pro10.5寸'
+		}
+		]
+	}
+})
+
+var img = new Vue({
+	el:'#slider',
+	data:{
+		img:img
+	}
+})

@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>农兄弟-推广活动</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" href="../../css/custom.css" />-->
+	</head>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">{{title}}</h1>
+		</header>
+
+		<div class="mui-content">
+		
+		</div>
+		<div class="mui-slider-group">
+			<ul id="listTo" class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media" v-for="action in actions">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" v-bind:src="action.images">
+						<div class="mui-media-body">
+							<span>{{action.title}}</span>
+							<p class='mui-ellipsis-2'>{{action.place}}</p>
+							<span style="color: red;font-size: 16px;">
+								{{action.price}}
+							</span>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+			
+		</div>
+
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		mui.init();
+
+			function getDefaultData() {
+				return {
+					title: '',
+				}
+			}
+
+		var vt = new Vue({
+				el: '#title',
+				data: getDefaultData(),
+				/*methods: {
+					resetData: function() {//重置数据
+						Object.assign(this.$data, getDefaultData());
+					}
+				}*/
+			});
+		
+		//监听自定义事件，获取新闻详情
+			document.addEventListener('get_detail', function(event) {
+				
+				//前页传入的数据，直接渲染
+				vt.title = event.detail.title;
+			});
+
+		
+		new Vue({
+			el:"#listTo",
+			data:{
+				actions:[
+					{
+					images:"../../img/home/wurenji2.png",	
+					title:"无人机喷洒1",
+					place:"地区：江苏淮安",
+					price:"市场价：66元/亩"
+					},
+					{
+					images:"../../img/home/wurenji2.png",
+					title:"无人机喷洒2",
+					place:"地区：江苏淮安",
+					price:"市场价：66元/亩"
+					},
+					{
+					images:"../../img/home/wurenji2.png",
+					title:"无人机喷洒3",
+					place:"地区：江苏淮安",
+					price:"市场价：66元/亩"
+					},
+					{
+					images:"../../img/home/wurenji2.png",
+					title:"无人机喷洒4",
+					place:"地区：江苏淮安",
+					price:"市场价：66元/亩"
+					}
+				]
+				}
+			});
+			
+			
+		</script>
+	</body>
+
+</html>

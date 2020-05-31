@@ -1,0 +1,262 @@
+<!--<html>
+<body>
+ <img id="image"src=""/>
+<br/>
+ <input type="file"onchange="selectImage(this);"/>
+<br/>
+ <input type="button"onclick="uploadImage();"value="提交"/>
+<script>
+ var image = '';
+ function selectImage(file){
+		 if(!file.files || !file.files[0]){
+		return;
+	}
+ var reader = new FileReader();
+	 reader.onload = function(evt){
+	 document.getElementById('image').src = evt.target.result;
+	 image = evt.target.result;
+	}
+	reader.readAsDataURL(file.files[0]);
+	}
+ function uploadImage(){
+ 	alert(image)
+ 	console.log(image)
+	$.ajax({
+		 
+		type:'POST',
+		 
+		 url: 'ajax/uploadimage', 
+		 
+		 data: {image: image},
+		 
+		 async: false,
+		 
+		 dataType: 'json',
+		 
+		 success: function(data){
+		 
+		if(data.success){
+		 
+		alert('上传成功');
+		 
+		}else{
+		 
+		alert('上传失败');
+		 
+		}
+		 
+		},
+		 
+		 error: function(err){
+		 
+		alert('网络故障');
+		 
+		}
+	 
+});
+ 
+}
+</script>-->
+
+<html>
+<meta charset="utf-8">
+   <form action="表单提交处理的url" method="post">
+	   <img id="showImg" src=""/>
+	   <br/>
+	   <!--下面的隐藏域主要用来改变file类型的input的值，但是file类型的input的值出于安全考虑不让修改，但是表单提交后需要处理该值(放置图片路径)来显示服务器上的图片-->
+	   <input type="hidden" id="img" name="uploadImg"/>
+	   请选择上传图片：<input type="file" id="uploadImg" onchange="selectImg(this);"/>
+   </form>
+   <textarea id="textar" style="height: 300px;" rows="" cols=""></textarea>
+</html>
+<script type="text/javascript" src="js/mui.min.js" ></script>
+<script src="pages/util/util.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+   var image = '';
+   var canvas;
+   var base64;//将canvas压缩为base64格式
+   var succes;
+   function selectImg(file){
+	   if(!file.files || !file.files[0]){
+		  return;
+	   }
+	   var reader = new FileReader();//读取文件
+	   reader.onload = function(event){//文件读取完成的回调函数
+	   	
+		 // var base64=event.target.result.split(',')[1];
+		  image = document.getElementById('showImg');
+		  image.src = event.target.result;//读入文件的base64数据(可直接作为src属性来显示图片)
+		  
+		  //shangchuan(event.target.result);
+		  subString(event.target.result);
+		  
+		  document.getElementById("textar").value=event.target.result;
+		  //图片读取完成的回调函数（必须加上否则数据读入不完整导致出错！）
+		 /* image.onload = function(){
+			  canvas = convertImageToCanvas(image); //图片转canvas 
+			  base64 = canvas.toDataURL('image/jpeg'); //将图片数据转为base64.
+			   
+			
+		  }*/
+	   }
+	   //将文件已Data URL的形式读入页面
+	   reader.readAsDataURL(file.files[0]);
+   }
+   //截取上传
+   	function subString(base64Img){
+					arr=[];
+					var xixi="";
+					//var str="Q3rWBZ/AC+sHjJ8bz6qqoyFLuViJMjAZvkHI6g+teVQzKnGU3/M7/gl+h21aDkor+VW/Fv8AUyNR/Z+8S3UkEll8Qf7NiSJYmjiMREhB++d6ZDHgH6VJL8F/GC2ghg8UaZ562yQ+cWi3GUMSZiMAZYHaV6cZGK2weYUYU405K9lb8DkxlOdSrKUeruZl58I/iIlm0dj4j06LUPLj";
+					//base64Img=str;
+					var n=500000;
+					var str1='';
+					var id=guid();
+					//var imgLength=Math.ceil(base64Img.length/10000);
+					//alert(base64Img.length/n)
+					for(var i=0;i<base64Img.length/n;i++){
+						//setTimeout()
+						var aa=base64Img.slice(n*i, n*(i+1));
+						
+						
+						//var wt = plus.nativeUI.showWaiting("正在上传...");
+ 							//alert(aa);
+ 							if(i>base64Img.length/n-1){
+ 								/*var url1='http://192.168.15.119:999/api/UploadFile/'+id+'●"1"●'+i+'●'+aa+'';
+ 								console.log(url1);
+				   				mui.ajax(
+						   			{ url:url1 ,
+							   		async: false, 
+							   		
+							   		success: function(response) 
+								   		{ 
+								   			console.log(response);
+								   		} 
+							   		});
+						   					console.log('end');*/
+   			
+									shangchuan(id,aa,"1",i);
+									//wt.close();
+							} else{
+								
+				   				/*mui.ajax(
+						   			{ url: 'http://192.168.15.119:999/api/UploadFile/'+id+'●"0"●'+i+'●'+aa+'',
+							   		async: false, 
+							   		
+							   		success: function(response) 
+								   		{ 
+								   			console.log(response);
+								   		} 
+							   		});
+						   					console.log('end');*/
+   			
+								
+								shangchuan(id,aa,"0",i);
+								//wt.close();
+							}
+						
+						if(i==0)
+						{
+							sleep(1000);
+						}else{
+							sleep(200);
+						}
+						
+						//shangchuan(aa);
+						//xixi=xixi+aa;
+					}
+					id="";
+				}
+   //等待时间
+   function sleep(d){
+				var t = Date.now();			
+				while(Date.now - t <= d);
+			} 
+							
+						
+   
+  	 //生成唯一的guid
+   			function guid() {
+			    function S4() {
+			       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+			    }
+			    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+			}
+   			
+   			
+	//上传图片			
+	function shangchuan(id,aa,e,i){
+				var data={ 
+						"FileID":id,  //唯一性值，GUID
+					    "Base64":aa,  //base64字符串
+					    "IsEnd":e,   //  0断点继续上传  1断点上传结束，后台保存文件
+						"Index":i
+					};
+					console.log("--------"+data);
+				//http://192.168.15.119:999/api/UploadFile
+				//http://151012fp30.iask.in/api/UploadFile
+				
+				
+				
+				ToConn("http://192.168.15.119:999/api/UploadFile",data, function(ee){
+					succes='1';
+					console.log("======"+ee)
+					if(JSON.parse(ee).Success=="0"){
+						mui.toast("上传出错,重新上传")
+					}else{
+						mui.toast("上传成功")
+					}
+					
+					
+				},function(cc){
+					succes='0';
+					alert("上传失败！请检查网络");
+				});
+				
+			}
+	// 把image 转换为 canvas对象  
+	/*function convertImageToCanvas(image) {  
+		// 创建canvas DOM元素，并设置其宽高和图片一样   
+		var canvas = document.createElement("canvas");  
+		canvas.width = image.width;  
+		canvas.height = image.height;  
+		// 坐标(0,0) 表示从此处开始绘制，相当于偏移。  
+		canvas.getContext("2d").drawImage(image, 0, 0);  
+	  
+		return canvas;  
+	}*/
+	function toajax(){
+		var data={ 
+						"FileID":guid(),  //唯一性值，GUID
+					    "Base64":base64Img,  //base64字符串
+					    "IsEnd":"1"   //  0断点继续上传  1断点上传结束，后台保存文件
+					};
+						
+						mui.ajax("http://192.168.15.119:999/api/UploadFile", {
+							data: {
+								'strJson':JSON.stringify(data)
+								},
+							dataType: 'json',
+							//服务器返回json格式数据
+							type: 'POSt',
+							//HTTP请求类型
+							timeout: 10000,
+							//超时时间设置为10秒；
+					
+							success: function (ee){
+								succes='1';
+								alert("上传成功")
+							},
+							error: function(xhr, type, errorThrown) {
+								succes='0';
+								//异常处理；
+								//alert("xhr" + xhr + type + errorThrown);
+								alert("网络异常");
+							}
+						});
+
+	}
+</script>
+
+ <script src="../js/jquery-3.3.1.js"></script>
+</body>
+</html>

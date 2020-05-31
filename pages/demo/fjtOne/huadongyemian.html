@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../../css/mui.css">
+		<style>
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-menu mui-icon mui-icon-bars mui-pull-right"></a>
+			<a class="mui-action-back mui-icon mui-icon-back mui-pull-left"></a>
+			<h1 class="mui-title">off canvas（侧滑导航）</h1>
+		</header>
+		<div class="mui-content mui-content-padded">
+			<a @tap="open_Url()">afsdfasfas阿斯顿发顺丰司法所f</a>
+		</div>
+		<script src="../../../js/mui.js"></script>
+		<script src="../../../js/vue.min.js"></script>
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			var webview_detail = null;//详情页webview
+			var attribute =[]
+            var titleNView = {
+			    backgroundColor: '#FFFAFA',//导航栏背景色
+			    titleText: 'wocao', //导航栏标题
+			    titleColor: '#000000',//文字颜色
+			    type:'transparent',//透明渐变样式
+			    autoBackButton: true,//自动绘制返回箭头
+			    splitLine:{//底部分割线
+			        color:'#cccccc'
+			    }
+			}
+			mui.plusReady(function() {
+				//预加载详情页
+				webview_detail = mui.preload({
+					url:'cehuayemian.html',
+					id: 'cehuayemian',
+					styles: {
+						
+						"titleNView": titleNView
+					},
+					
+				});
+			});
+			function open_Url(){
+				mui.fire(webview_detail,'get_mess',{
+					
+				});
+				//更改详情页原生导航条信息
+				webview_detail.setStyle({
+					"titleNView":titleNView
+				});
+				setTimeout(function () {
+					webview_detail.show("slide-in-right", 300);
+				},150);
+			}
+		</script>
+	</body>
+</html>

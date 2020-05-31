@@ -1,0 +1,296 @@
+.mui-content{
+	padding-left: 14px;
+	padding-right: 14px;
+	padding-bottom: 57px;
+}
+
+.personInfoBox{
+	height:74px;
+	display:flex;
+	padding: 7px;
+	background-color: white;
+	display:flex;
+	align-items: center;
+}
+.personInfo-content{
+	width:100%;
+	height:100%;
+	display:flex;
+	flex-direction:column;
+}
+.personInfo_top{
+	flex:1.9;
+	display:flex;
+	align-items:center;
+}
+.personInfo_bottom{
+	flex:1;
+	display:flex;
+	align-items: center;
+	font-size:12px;
+	color: grey;
+}
+#tag-default{
+	font-size:9px;
+	color: white;
+	background-color:red;
+	width:37px;
+	height:14px;
+	line-height:14px;
+	text-align: center;
+	margin-right:7px;
+	border-radius: 12px;
+}
+#tag-item{
+	font-size:9px;
+	color: white;
+	background-color:#0664F8;
+	/*width:37px;
+	height:14px;*/
+	padding-left: 7px;
+	padding-right: 7px;
+	line-height:14px;
+	text-align: center;
+	margin-right:7px;
+	border-radius: 12px;
+}
+#tag-address{
+	line-height: 14px;
+	overflow: hidden;
+}
+.mui-btn.mui-btn-block{
+	height:47px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.payTypeInfo{
+	font-weight:800;
+	font-size:15px;
+	display:flex;
+	align-items:center;
+}
+.muti-items{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+}
+.muti-items img{
+	width:97px;
+	height:97px;
+	margin-right: 7px;
+}
+#after-sale{
+	display:flex;
+	flex-direction:column;
+	text-align:left;
+	width:100%;
+	margin-top: 7px;
+}
+#after-sale .message{
+	margin-top:7px;
+	height:31px;
+	line-height: 31px;
+	border:1px solid #eee;
+	border-radius: 22px;
+}
+#after-sale input{
+	width:98%;
+    border:none;
+	font-size: 13px;
+}
+
+.mui-card{
+	margin:0px;
+	margin-bottom:14px;
+	padding-bottom: 7px;
+}
+.express{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	margin-top: 14px;
+}
+.express-left{
+	font-size: 14px;
+}
+.express-right{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+}
+.express-chosen{
+	display:flex;
+	flex-direction:column;
+	text-align: right;
+	margin-right: 7px;
+	font-weight: 700;
+}
+.single-item{
+	display:flex;
+	align-items:center;
+	width:100%;
+}
+.single-item img{
+	width:97px;
+	height: 97px;
+	flex: 1;
+}
+.item-detail{
+	width:70%;
+	height: 97px;
+	display: flex;
+	flex-direction:column;
+	padding-left: 21px;
+	flex: 3;
+}
+
+.item-title{
+   flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.item-standard{
+	flex: 1;
+	font-size:12px;
+	display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.item-price{
+	flex: 1;
+	display: flex;
+	color: red;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.item-discount{
+	flex:1;
+	display: flex;
+}
+.item-discount-text{
+	border:1px solid #768fe9;
+	padding: 1px 9px;
+	border-radius: 13px;
+	color:#768fe9;
+	font-size: 12px;
+}
+.item-mun{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	margin-top: 14px;
+}
+.del-btn{
+	padding:4px 9px;
+}
+.add-btn{
+	padding:4px 9px;
+}
+.item-mun-text{
+	padding:3px 13px 3px 15px;
+	background-color:#e6e6e6;
+	text-align: center;
+}
+.procedures{
+	background-color:white;
+	padding:0px 11px;
+	font-size: 14px;
+	margin-bottom:14px;
+}
+.procedures-container{
+	height:51px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.procedures-container .right-container{
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+}
+.procedures-container .right-container .right-text{
+	margin-right: 7px;
+}
+.pricedetail{
+	background-color:white;
+	padding:0px 14px;
+	font-size: 14px;
+}
+.pricedetail .pricedetail-container{
+	height:51px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.pricedetail .pricedetail-container .right-text{
+	font-weight: 700;
+}
+.bottom-bar{
+	position:fixed;
+	bottom:0px;
+	height:51px;
+	width:100%;
+	background-color: white;
+	display: flex;
+	justify-content:space-between;
+}
+.left-bar{
+	flex: 1.7;
+	line-height: 51px;
+	text-indent: 1em;
+	color:red;
+	font-weight: bold;
+	font-size: 12px;
+}
+.left-bar-price{
+	font-size: 17px;
+}
+.right-bar{
+	flex: 1;
+	background-color: red;
+	color:white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cover{
+	height:0px;
+	width:100%;
+    background-color:rgba(0,0,0,0.3);
+	position: fixed;
+	bottom: 0px;
+	display: flex;
+	flex-direction:column-reverse;
+}
+.covershow{
+	height:100%;
+} 
+ 
+.module{
+	height:0px;
+	background-color: white;
+	opacity: 0.4;
+	transition: .5s;
+}
+.show{
+	height:473px;
+	opacity: 1;
+}
+.caix {
+    background: url(../../img/shopcar/settle/cait.jpg) no-repeat;
+    background-size: 100%;
+    height: 10px;
+    border-bottom: solid 0.3rem #e9e9e9;
+}
+input::-webkit-input-placeholder{ /*WebKit browsers*/
+	font-size: 12px;
+	text-indent: 1em;
+}

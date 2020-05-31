@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="settle.css"/>
+		<style type="text/css">
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				border: none;
+				margin-top:7px;
+			}
+		</style>
+		<script src="../util/util.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body onresize="hideBottom();">
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">填写订单</h1>
+		</header>
+		<div class="mui-content">
+			<!--用户信息-->
+		    <div class="personInfoBox" @tap="toAddress">
+		    	<div class="personInfo-content" style="font-size: 13px;text-align: center;line-height: 63px;text-decoration: underline ;"  v-if="!getAddressInfo.Accept_name" >
+		        	       		   <a>请添加收货地址</a> 
+		        </div>
+		    	<div class="personInfo-content" v-else>
+		    			<div class="personInfo_top">
+		    				<div>{{getAddressInfo.Accept_name}}</div>
+		    				<div style="margin-left: 17px;">{{getAddressInfo.Telphone}}</div>
+		    			</div>
+		    			<div class="personInfo_bottom">
+			    				<div  id="tag-default" v-if="getAddressInfo.Is_default">
+			    					默认
+			    				</div>
+			    				<template v-for="item,index in getAddressInfo.Tags">
+			    					<div id="tag-item"  v-if="index<1">
+			    						{{item}}
+			    					</div>	
+			    				</template>
+			    				
+			    				<div id="tag-address">
+			    					{{getAddressInfo.Address_area}} {{getAddressInfo.Address_detail}}
+			    				</div>
+		    			</div>
+		       </div>
+		    	<a><span class="mui-icon mui-icon-arrowright"></span></a>
+		    </div>
+		    <!--支付方式-->
+		   <div class="caix"></div> 
+		    <div  class="mui-btn mui-btn-block" type='button'>
+		    	<span>支付方式</span>
+		    	<span class="payTypeInfo">
+		    		<span style="margin-right:7px;">
+		    			在线支付 
+		    		</span>
+		    	</span>
+		    </div>
+		    <!--产品内容-->
+		    <div class="mui-card" v-for="item,index in orderinfo">
+				<div class="mui-card-header">
+					<span id="" style="font-size:15px;">
+						<a id="icon-home"><span class="mui-icon mui-icon-home"></span></a>
+						 {{item.shopInfo.name}}
+					</span>
+				</div>
+				<div class="mui-card-content" v-if=" item.goodsInfo.length>1">
+					<div class="mui-card-content-inner">
+						<div class="muti-items">
+								<div style="display: flex;flex-wrap:wrap;">
+									<img v-for="item_a  in item.goodsInfo" :src="item_a.imgUrls[0].src"/>
+								</div>
+								<a id="icon-more"><span class="mui-icon mui-icon-more"></span></a>
+						</div>
+						<div class="express">
+							<div class="express-left">
+								配送
+							</div>
+							<div class="express-right">
+								<div class="express-chosen">
+									<span>快递运输</span>
+									<span>工作日、双休日与节假日均可送货</span>
+								</div>
+								<a id="icon-more"><span class="mui-icon mui-icon-more"></span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mui-card-content" v-else>
+					<div class="mui-card-content-inner">
+						<div class="single-item">
+							<img :src="item.goodsInfo[0].imgUrls[0].src"/>
+							<div class="item-detail">
+								<div class="item-title">
+									{{item.goodsInfo[0].title}}
+								</div>
+								<div class="item-standard">
+										<span>{{item.goodsInfo[0].configstr}}</span>   
+								</div>
+								<div class="item-price">
+									<span>¥{{item.goodsInfo[0].price}}</span>
+									<span>x{{item.goodsInfo[0].num}}</span>
+								</div>
+								<div class="item-discount" style="">
+									<span class="item-discount-text" v-for="item_b in item.goodsInfo[0].discounts">
+										  {{item_b}}
+									</span>
+								</div>
+							</div>
+						</div>
+						<!--<div class="item-mun">
+							<span id="">
+								购买数量
+							</span>
+							<span id="">
+								<span  class="del-btn"  @tap="del(index)">-</span>
+								<span  class="item-mun-text">{{item.goodsInfo[0].num}}</span>
+								<span  class="add-btn" @tap="add(index)">+</span>
+							</span>
+						</div>-->
+						<div class="express">
+							<div class="express-left">
+								配送
+							</div>
+							<div class="express-right">
+								<div class="express-chosen">
+									<span>快递运输</span>
+									<span>工作日、双休日与节假日均可送货</span>
+								</div>
+								<a id="icon-more"><span class="mui-icon mui-icon-more"></span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mui-card-footer">
+						<div id="after-sale">
+							<span id="">
+								退换无忧 商家赠送
+							</span>
+							<span style="font-size: 11px;">
+								7天退货，15天内换货，可享一次运费赔付到小金库
+							</span>
+							<span style="border: 1px solid #eee;border-radius: 11px;margin-top: 4px;">
+								<input type="text" id="" value="" maxlength="30"  placeholder="选填：给商家留言（30字以内）" />
+							</span>
+						</div>
+				</div>
+			</div>
+			<div class="procedures">
+				<div class="procedures-container">
+			    	<span>发票</span><span class="right-container"><span class="right-text">不开发票</span><a id="icon-more"><span class="mui-icon mui-icon-more"></span></a></span>
+			    </div>
+			     <div class="procedures-container">
+			    	<span>优惠券</span><span class="right-container"><span class="right-text">优惠10.00元</span><a id="icon-more"><span class="mui-icon mui-icon-more"></span></a> </span>
+			    </div>
+			     <div class="procedures-container">
+			    	<span>礼品卡（会员卡）</span><span class="right-container"><span class="right-text">无可用</span><a id="icon-more"><span class="mui-icon mui-icon-more"></span></a></span>
+			    </div>
+			     <div class="procedures-container">
+			    	<span>积分（共500积分，满1000积分可用）</span>
+			    </div>
+			</div>
+			<div class="pricedetail">
+				<div class="pricedetail-container">
+			    	<span>商品金额</span><span class="right-text">¥{{sumPrice}}</span>
+			    </div>
+			     <div class="pricedetail-container">
+			    	<span>运费</span><span class="right-text" style="color:red;">+ ¥{{sumFreight}}</span>
+			    </div>
+			     <div class="pricedetail-container">
+			    	<span>优惠券</span><span class="right-text" style="color:red;">- ¥10.00</span>
+			    </div>
+			     <div class="pricedetail-container">
+			    	<span>退换无忧</span><span class="right-text" style="color:red;">+ ¥0.00</span>
+			    </div>
+			</div>
+			<div class="bottom-bar">
+				<span class="left-bar">
+					¥ <span class="left-bar-price">{{sumPrice+sumFreight}}</span>
+				</span>
+				<span class="right-bar" @tap="submitSettle">
+					提交订单
+				</span>
+			</div>
+		</div>
+		<!--<div  v-bind:class="{covershow:isshow}" @tap="toogle(false)" class="cover">
+				<div @tap.stop="toogle(true)" v-bind:class="{show:isshow}" class="module"></div>
+		</div>-->
+		<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="settle.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

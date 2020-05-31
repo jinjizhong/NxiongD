@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="Supply_demand.css" />
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a onclick="publish()" class="fabu" id="fabu">发布</a>
+			<h1 class="mui-title" id="headTitle"></h1>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" id="title" style="width: 100%;">
+						<a href="#item1mobile" class="mui-control-item mui-active" style="padding: 0 23%;">
+							供
+						</a>
+						<a href="#item2mobile" class="mui-control-item" style="padding: 0 23%;" id="zanshi">
+							求
+						</a>
+					</div>
+				</div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" style="" id="message1">
+									<li @tap="toUrl(item.Land_title,item.Id)" class="mui-table-view-cell" v-for="item,index in info">
+										<img :src="item.Image1" style="width: 35%;" />
+										<div class="title">{{item.Land_title}}</div>
+										<div style="padding-top: 10PX;height: 20px;">{{item.Land_special}}</div>
+										<div class="jiage">{{item.Land_price}}元</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" style="" id="message2">
+									<li @tap="toUrl(item.Land_title,item.Id)" class="mui-table-view-cell" v-for="item,index in info">
+										<img :src="item.Image1" style="width: 35%;" />
+										<div class="title">{{item.Land_title}}</div>
+										<div style="padding-top: 10PX;height: 20px;">{{item.Land_special}}</div>
+										<div class="jiage">{{item.Land_price}}元</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../../js/jquery-3.3.1.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../../js/mui.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../../js/vue.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../../js/mui.pullToRefresh.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../../js/mui.pullToRefresh.material.js" charset="utf-8"></script>
+		<script type="text/javascript" src="Supply_demand.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../public.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../util/util.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui('.mui-slider').slider().stopped = true; //这是关闭页面主体左右滑动效果
+			//打开遮罩层
+//			mui.showLoading("正在加载..", "div");
+		</script>
+	</body>
+
+</html>

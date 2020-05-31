@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../shop/type.css"/>
+    <script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>无人机分类</title>
+    <script type="text/javascript" src="http://cdn01.weipaitang.com/res/js/zepto.js?v=0.9.1.58"></script>
+    <script type="text/javascript" src="http://cdn01.weipaitang.com/res/js/zepto.picLazyLoad.min.js?v=0.9.1.58"></script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		 <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">作业区域</h1>
+	</header>
+<div id="contentbox">
+    <div class="menu" id="left-menu">
+    </div>
+    <div class="categoryBox" >
+        <div class="categoryContent" id="right-content">
+        </div>
+    </div>
+</div>
+<script src="../util/util.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+mui.init();
+mui.plusReady(function () {
+		
+		setInfo();
+		
+	});
+	
+//定义区域
+var Area=["清河区","淮安区","淮阴区","清浦区","涟水县","洪泽县","盱眙县","金湖县"];
+var typeData=[{"id": "2344b94f1999d982ad1440b19d",
+				"name": "清江浦区",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "齐湖村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "王元村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "范庄村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "161e582344b94f1999d1440b19d",
+				"name": "淮安区",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "杨柳村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "十里村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "发茂村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "e582344b94f1999d982440b19d",
+				"name": "淮阴区",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "杨庄社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "北桥社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "1e582344b94f1999d982ad149d",
+				"name": "洪泽区",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "长河村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "幸福村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "1e582344b94f1999d982ad149d",
+				"name": "涟水县",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "花园村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "淮浦路社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "1e582344b94f1999d982ad149d",
+				"name": "盱眙县",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "马坝社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "伏湖村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "1e582344b94f1999d982ad149d",
+				"name": "金湖县",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "三车村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "东方红社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			}];
+
+function setInfo(){
+	var leftTypeArr=typeData;
+	var leftHtmlStr="";
+	document.getElementById("right-content").innerHTML="";
+	for(var i=0;i<leftTypeArr.length;i++){
+		leftHtmlStr+='<div  id="aa'+i+'" class="menuItem" category="'+(i-1)+'" onClick="moveTo(this)" >'+leftTypeArr[i].name+'</div>';
+		
+		var rightHtmlStr=(i==0?"<div class='categoryList first' category='"+(i-1)+"'>":"<div class='categoryList' category='"+(i-1)+"'>");
+		
+		rightHtmlStr+='<div class="title" id="a'+i+'">'+leftTypeArr[i].name+'<a id="'+leftTypeArr[i].id+'" class="all"  onClick="checkType(this)">查看全部</a></div>';
+		
+		for(var j=0;j<leftTypeArr[i].types.length;j++){
+			
+			rightHtmlStr+='<div class="categoryItem" id="'+leftTypeArr[i].types[j].id+'" onClick="checkType(this)"><div class="categoryIcon lazyLoad" data-original="'+
+			leftTypeArr[i].types[j].Class_img+'"></div><div class="cursorArea"></div><span class="text">'+leftTypeArr[i].types[j].name+'</span></div>';
+			
+		}
+		rightHtmlStr+="</div>";
+		document.getElementById("right-content").innerHTML+=rightHtmlStr;
+	}
+		document.getElementById("left-menu").innerHTML=leftHtmlStr;
+}
+function checkType(self){
+//	self.id
+	mui.openWindow({
+		url:"tuig_active.html",
+		extras: {
+	 			 vid:plus.webview.currentWebview().vid,
+                 tyname: plus.webview.currentWebview().tyname
+                }
+	})
+}
+function moveTo(self){
+	var aID=self.id;
+	console.log(self.innerText+"----"+aID);
+   document.getElementById(aID.substring(1)).scrollIntoView(true);
+}
+</script>
+<script src="../shop/type.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

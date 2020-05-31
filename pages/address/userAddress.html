@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="userAddress.css" />
+		<script src="../util/util.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	    <header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">收货地址</h1>
+		</header>
+		<div class="mui-content" style="padding-left: 7px;padding-right:7px;padding-bottom: 51px;">
+			<template v-for="item,index in addres_arr">
+				<div class="checked-item" v-if="item.In_use" @tap="changeInUse(item)">
+					<div class="top">
+						<div class="left-container">
+							<span class="name">
+				    			{{item.Accept_name}}
+				    		</span>
+							<span class="tel">
+				    			{{item.Telphone}}
+				    		</span>
+				    		<span class="tag-default" v-if="item.Is_default">
+					    			默认
+					    	</span>
+			    		<template v-for="tag_item,index in item.Tags">
+					    		<span class="tag-item"  v-if="index<1">
+					    		   {{tag_item}}
+					    		</span>
+			    		</template>
+						</div>
+						<img src="../../img/ok.png"/>
+					</div>
+					<div class="bottom">
+						<span class="address">{{item.Address_area}} {{item.Address_detail}}</span>
+						<!--<a onclick="showMap()"><span class="mui-icon mui-icon-compose"></span></a>-->
+						<a><span class="mui-icon mui-icon-trash" style="margin-right: 12px;"></span></a>
+						<a @tap.stop="go_editAddress(item)"><span class="mui-icon mui-icon-compose"></span></a>
+					</div>
+				</div>
+				</template>
+				<template v-for="item,index in addres_arr">
+				<!--未选中的地址栏-->
+				<div v-if="!item.In_use" class="unchecked-item"  @tap="changeInUse(item)">
+					<div class="top">
+								<span class="name">
+					    			{{item.Accept_name}}
+					    		</span>
+								<span class="tel">
+					    			{{item.Telphone}}
+					    		</span>
+		    					<span class="tag-default" v-if="item.Is_default">
+					    			默认
+					    		</span>
+								<template v-for="tag_item,index in item.Tags">
+							    		<span class="tag-item" v-if="index<1">
+							    		   {{tag_item}}
+							    		</span>
+					    		</template>
+					</div>
+					<div class="bottom">
+						<span class="address" style="">{{item.Address_area}} {{item.Address_detail}}</span>
+						<!--<a onclick="showMap()"><span class="mui-icon mui-icon-compose"></span></a>-->
+						<a><span class="mui-icon mui-icon-trash" style="margin-right: 12px;"></span></a>
+						<a  @tap.stop="go_editAddress(item)"><span class="mui-icon mui-icon-compose"></span>
+					</div>
+				</div>
+			</template>
+			<!--底部新建收货地址-->
+			<div id="bottom-button">
+				<div class="button" @tap="go_editAddress">
+					＋ 新建收货地址
+				</div>
+			</div>
+		</div>	
+		<div id="list"></div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="userAddress.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

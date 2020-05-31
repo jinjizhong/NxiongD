@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="myself.css" />
+<style>
+
+</style>
+</head>
+
+<body>
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">订单详情</h1>
+</header>
+
+<div class="mui-content" style="padding-left:10px;padding-right: 10px;">
+	<div class="toux_img">
+		<p class="yiwanc" style="color: #28bc06;">{{states[state]}}</p>
+	</div>
+	<div class="dd_xiangq_sp_k"  v-for="item in goodsInfo">
+		<dl>
+			<dt>
+				<i></i>
+				<p><a href="#">{{item.shopInfo.shopName}}</a></p>
+				<p><a href="#" class="lianx">联系客服 </a></p>
+				<span>共{{item.goods.length}}件商品</span>
+			</dt>
+				<dd v-for="item1 in item.goods">
+					<a href="#">
+						<h1><img :src="item1.imgUrl"/></h1>
+						<div class="wenz">
+							<p>{{item1.goodsName}}</p>
+							<span>{{item1.configstr}}</span>
+						</div>
+					</a>
+					<div class="ddxq_jiaq">
+						<p>¥{{item1.currentprice}}</p>
+						<span>x{{item1.num}}</span>
+					</div>
+				</dd>
+		</dl>
+	</div>
+	<div class="min_xi">
+		<p><em>商品金额：</em>{{sumPrice}} （在线支付）</p>
+		<p><em>收货地址：</em>江苏省淮安市健康西路140号</p>
+		<p><em>收货人：</em>尘埃 </p>
+		<p><em>收货电话：</em>182****0710</p>
+		<p><em>配送方式：</em>神风快递  64000550114</p>
+		<p><em>邮箱：</em>223***788@qq.com</p>
+		<p><em>送货时间：</em>2018-07-07 星期六</p>
+		<p><em>发票信息：</em>电子发票个人明细</p>
+	</div>
+	<div class="zuizong_jies">
+		<p><em>商品总额</em><span>¥{{sumPrice}} </span></p>
+		<p><em>返现</em><span>¥0.00</span></p>
+		<p><em>运费</em><span>¥0.00</span></p> 
+	</div>
+	<div class="xiangq_liang_ann">
+		<a href="#">申请售后</a>
+		<a href="#" class="sc">删除订单</a>
+	</div>
+</div>
+<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/mui.min.js"></script>
+<script type="text/javascript">
+mui.init();
+var vm = new Vue({
+				el: '.mui-content',
+				data:{
+					states:['待付款','待收货','已完成','已取消'],
+					id:"0",
+					state:0,
+					sumPrice:"0",
+					address:"",
+					personName:"",
+					personTel:"",
+					personMail:"",
+					sendType:"",
+					sendDate:"",
+                    invoice:"",
+                    cashback:"",
+                    freight:"",
+					goodsInfo:[]
+				}
+});
+
+document.addEventListener('order_detail',function(e){
+	if(e.detail.item){
+		var goods=e.detail.item.goodsInfo;
+		var shops=[];
+		for(var a in goods){
+			var z=true;
+			for(var b in shops){
+				if (goods[a].shopInfo.shopID===shops[b].shopInfo.shopID){
+					shops[b].goods.push(goods[a].baseInfo);
+					z=false;
+					break;
+				}
+			}
+			if(z){
+				var item={
+					shopInfo:goods[a].shopInfo,
+					goods:[goods[a].baseInfo]
+				}
+				shops.push(item);
+			}
+		}
+		vm.goodsInfo=shops;
+		vm.id=e.detail.item.id;
+		vm.sumPrice=e.detail.item.sumPrice;
+		vm.state=e.detail.item.state;
+		console.log(JSON.stringify(vm.goodsInfo))
+	}else{
+		plus.webview.currentWebview().hide("auto", 300);
+		return;
+	}
+})
+
+</script>
+</body>
+</html>

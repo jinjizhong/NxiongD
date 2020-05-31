@@ -1,0 +1,375 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>页面</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" type="text/css" href="lvyouPage.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="title">详情页</h1>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="pullrefresh" style="background-color: white;">
+			<div class="mui-scroll">
+				<div id="contentOne" style="text-indent: 2em;padding-bottom: 20px;" class="mui-content-padded">
+					<!--这个里面显示新闻的HTML数据-->
+				</div>
+				<!--评论-->
+				<hr style="display: none;" id="yincangOne" />
+				<span style="margin-left: 45%;margin-top: 10px;display: none;" id="yincang">评论</span>
+				<ul class="children">
+					<li style="" class="mui-content-padded" v-for="item,index in pinglun">
+						<span v-if="item.Content==''||item.Content==null">
+							没有评论
+						</span>
+						<span style="display: flex;flex-direction: row;">
+							<div style="display: flex;flex-direction: column;height: 40px;width: 40px;">
+								<img :src="item.Evaluate_img" height="40px" width="40px" style="border-radius: 50%;" />
+							</div>
+							<div style="display: flex;flex-direction: column;margin-left: 10px;width: 90%;">
+								<div style="display: flex;flex-direction: row;margin-bottom: 5px;">
+									<div style="" class="length">
+										<span style="">{{item.UserName}}</span>
+									</div>
+									<div style="display: flex;flex-direction: row;position: relative;right:-120px;line-height: 21px;">
+										<span style="font-size: 12px;color: #a6a8ab;">
+		    						        {{item.Time}}
+		    					        </span>
+									</div>
+									<!--<div style="display: flex;flex-direction: row;position: relative;right:-90px;line-height: 21px;">
+										<div>
+											<img src="../../../img/position.png" height="12px" width="12px" />
+										</div>
+										<div style="font-size: 10px;color: #b0b2b5;">{{item.address}}</div>
+									</div>-->
+								</div>
+								<p style="font-size: 15px;margin-right: 15px;">
+									{{item.Content}}
+								</p>
+								<!--<div style="display: flex;flex-direction: row;font-size: 12px;color: #919497;">
+									<div>
+										<span>
+		    						         {{item.time}}
+		    					        </span>
+									</div>
+									<div style="position: relative;right:-155px;">
+										{{item.num}}回复
+									</div>
+								</div>-->
+							</div>
+						</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!--最下面的固定栏-->
+		<footer class="commentAll" style="z-index: 10;">
+			<div class="footer-center">
+				<textarea type="text" class='content input-text comment-input' placeholder="输入评论内容..." onkeyup="keyUP(this)"></textarea>
+			</div>
+			<!--<div class="footer-rightTwo icons">
+				<i data-index="1" class="mui-icon mui-icon-star"></i>
+			</div>-->
+			<label for="" class="footer-right">
+				<a href="javascript:;" class="plBtn" id="plBtn">评论</a>
+			</label>
+		</footer>
+		<script type="text/javascript" src="../../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/vue.js" charset="utf-8"></script>
+		<script type="text/javascript" src="lvyouPage.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../public.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../util/util.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../../js/jquery-3.3.1.min.js"></script>
+
+		<!--textarea限制字数-->
+		<script type="text/javascript">
+//			mui('.mui-scroll-wrapper').scroll({
+//				deceleration: 0.4 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
+//			});
+
+//			mui('.mui-scroll-wrapper').scroll({
+//				deceleration: 0.005,
+//				indicators: true,
+//				//					bounce:false
+//			});
+			function keyUP(t) {
+				var len = $(t).val().length;
+				document.getElementById('plBtn').innerHTML = '发送';
+				if(len > 139) {
+					$(t).val($(t).val().substring(0, 140));
+					mui.toast('最多只能输入140字');
+				} else if(len == 0) {
+					document.getElementById('plBtn').innerHTML = '评论';
+				}
+			}
+			//下面三个点击时间是为了关闭键盘。
+			document.getElementById('pullrefresh').addEventListener('tap', function() {
+				document.activeElement.blur();
+			});
+			document.getElementById('header').addEventListener('tap', function() {
+				document.activeElement.blur();
+			});
+			document.getElementById('pullrefresh').addEventListener('scroll', function() {
+				document.activeElement.blur();
+			});
+
+			//上拉加载评论列表
+			var page = 1;
+			mui.init({
+				pullRefresh: {
+					container: ".mui-content",
+					down: {},
+					up: {
+						height: 50, //可选.默认50.触发上拉加载拖动距离
+						auto: false, //可选,默认false.自动上拉加载一次
+						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: function() {
+							var self = this;
+							var messageId = plus.webview.currentWebview().message;
+							mui.ajax(serverUrl, {
+								data: {
+									"strJson": "{'DriverID':'1234567890','UserID': '任务标识','TaskGuid': 'b4026263-704e-4e12-a64d-f79cb42962cc','DataType': 'EvaluateList','page': '" + (++page) + "','rows': '10','keywords': '','GoodsID': '2','NewsID':'" + messageId + "'}"
+								},
+								async: true,
+								dataType: 'json', //服务器返回json格式数据  
+								type: 'POST', //HTTP请求类型
+								timeout: 10000, //超时时间设置为10秒；              
+								success: function(item) {
+									console.log(item + '=-====---');
+									var info = JSON.parse(item);
+									if(info.rows == null || info.rows == '') {
+										mui('.mui-content').pullRefresh().endPullupToRefresh(true);
+//										mui('.mui-content').endPullUpToRefresh(true);
+										mui('.mui-content').pullRefresh().disablePullupToRefresh();
+									}
+									mui('.mui-content').pullRefresh().endPullupToRefresh(false);
+									pinglun.pinglun = pinglun.pinglun.concat(info.rows);
+								},
+								error: function(xhr, type, errorThrown) {
+									//异常处理；
+									console.log(xhr + "----");
+								}
+							});
+						}
+					}
+				}
+			});
+
+			window.addEventListener("touchmove", myTouchMove()) // 监听滑动事件
+			// 滑动关闭键盘
+			function myTouchMove(evt) {
+				if(document.hasFocus) {
+					document.activeElement.blur(); //  关闭键盘
+				}
+			}
+
+			//下面这个是显示新闻内容
+			mui.plusReady(function() {
+				var title = plus.webview.currentWebview().title;
+				document.getElementById('title').innerHTML = title;
+				var message = plus.webview.currentWebview().message;
+				var content = document.getElementById('contentOne');
+				var strData = {
+					'DriverID': '1234567890',
+					'UserID': '1234567890',
+					'TaskGuid': '86537836334',
+					'DataType': 'NewInfo',
+					'Id': message,
+				}
+				mui.ajax(getUrl, {
+					data: {
+						"strJson": JSON.stringify(strData)
+					},
+					async: true,
+					dataType: 'json', //服务器返回json格式数据  
+					type: 'POST', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；              
+					success: function(item) {
+						console.log(item + '++++');
+						var items = JSON.parse(item);
+						content.innerHTML = items.News_content;
+						//关闭遮罩层
+						document.getElementById('yincang').style.display = 'block';
+						document.getElementById('yincangOne').style.display = 'block';
+						mui.hideLoading();
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(xhr + "----");
+					}
+				});
+				//下面是初始化加载评论
+				var strJson = {
+					'DriverID': '1234567890',
+					'UserID': '任务标识',
+					'TaskGuid': 'b4026263-704e-4e12-a64d-f79cb42962cc',
+					'DataType': 'EvaluateList',
+					'page': '1',
+					'rows': '10',
+					'keywords': '',
+					'GoodsID': '2',
+					'NewsID': message,
+				}
+				mui.ajax(serverUrl, {
+					data: {
+						"strJson": JSON.stringify(strJson)
+					},
+					async: true,
+					dataType: 'json', //服务器返回json格式数据  
+					type: 'POST', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；              
+					success: function(item) {
+						console.log(item + '初始化评论');
+						var info = JSON.parse(item);
+						if(info.rows) {
+							pinglun.pinglun = info.rows;
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(xhr + "----");
+					}
+				});
+
+			})
+
+			var pinglun = new Vue({
+				el: '.children',
+				data: {
+					pinglun: []
+				}
+			})
+			//
+			$('.commentAll').on('click', '.plBtn', function() {
+				//这个是从系统内存里取东西
+				var userID = null;
+				var userImg = '';
+				var userName = '';
+				var valu = localStorage.getItem("UserInfo");
+				if(valu) {
+					var user = JSON.parse(valu);
+					console.log(valu);
+					userID = user.userinfo.Id;
+					userName = user.userinfo.User_name;
+					userImg = user.userinfo.HeadUrl;
+				}
+				var myDate = new Date();
+				//获取当前年
+				var year = myDate.getFullYear();
+				//获取当前月
+				var month = myDate.getMonth() + 1;
+				//获取当前日
+				var date = myDate.getDate();
+				var now = year + '/' + month + "/" + date;
+				//				var now = year + '-' + month + "-" + date + " " + h + ':' + m + ":" + s;
+				//获取输入内容
+				var oSize = $(this).parent().prevAll('.footer-center').find('.comment-input').val();
+				//动态创建评论模块
+				oHtml = '<li style="" class="mui-content-padded">\
+							<a style="display: flex;flex-direction: row;">\
+								<div style="display: flex;flex-direction: column;height: 40px;width: 40px">\
+									<img src="' + userImg + '" height="40px" width="40px" style="border-radius: 50%;" />\
+								</div>\
+								<div style="display: flex;flex-direction: column;margin-left: 10px;width: 90%;">\
+									<div style="display: flex;flex-direction: row;margin-bottom: 5px;">\
+										<div style="" class="length">\
+											<span style="">' + userName + '</span>\
+										</div>\
+										<div style="display: flex;flex-direction: row;position: relative;right:-120px;line-height: 21px;">\
+											<span style="font-size: 12px;color: #a6a8ab;">' + now + '</span>\
+										</div>\
+									</div>\
+									<div style="font-size: 15px;">\
+										<p>' + oSize + '</p>\
+									</div>\
+								</div>\
+							</a>\
+						</li>'
+				if(oSize.replace(/(^\s*)|(\s*$)/g, "") != '') {
+					$(this).parents('.commentAll ').prev('.mui-content').children('.mui-scroll').children('.children').prepend(oHtml);
+					$(this).parent().prevAll('.footer-center').find('.comment-input').prop('value', '');
+					document.getElementById('plBtn').innerHTML = '评论';
+					var messageId = plus.webview.currentWebview().message;
+					mui.ajax(setUrl, {
+						data: {
+							"strJson": "{'TaskGuid':'86537836334','DriverID': '1234567890','UserID': '" + userID + "','DataType': 'AddEvaluate','Content': '" + oSize + "','Type':'2','GoodsID':'','NewsID':'" + messageId + "','HeadUrl':'" + userImg + "','User_name':'" + userName + "'}"
+						},
+						async: true,
+						dataType: 'json', //服务器返回json格式数据  
+						type: 'POST', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；              
+						success: function(item) {
+							console.log(item + '++++');
+							mui.toast('评论成功');
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(xhr + "----");
+						}
+					});
+				} else {
+					mui.toast('请输入内容');
+				}
+			});
+
+			//打开遮罩层
+			mui.showLoading("正在加载..", "div");
+
+			mui('.icons').on('tap', 'i', function() {
+				var index = parseInt(this.getAttribute("data-index"));
+				var parent = this.parentNode;
+				var children = parent.children;
+				if(this.classList.contains("mui-icon-star")) { //点击的那个之前如果由空心的星星变成实心的
+					//					            for(var i=0;i<index;i++){
+					children[0].classList.remove('mui-icon-star'); //star是空心的星星
+					children[0].classList.add('mui-icon-star-filled'); //filled是实心的黄色星星
+					mui.toast('收藏成功');
+					//					            }
+				} else {
+					//					            for (var i = index; i < 1; i++) {  //点击的那个之后由实心的星星变成空心的
+					children[0].classList.add('mui-icon-star')
+					children[0].classList.remove('mui-icon-star-filled')
+					mui.toast('取消成功')
+					//					            }
+				}
+			});
+			(function($, doc) {
+				var MIN_SOUND_TIME = 800;
+				$.init({
+					gestureConfig: {
+						tap: true, //默认为true
+						doubletap: true, //默认为false
+						longtap: true, //默认为false
+						swipe: true, //默认为true
+						drag: true, //默认为true
+						hold: true, //默认为false，不监听
+						release: true //默认为false，不监听
+					}
+				});
+				//下面这段代码解决弹出键盘是和输入框之间有一条线透明的问题
+				if(mui.os.ios) {
+					// 解决在ios上fixed元素focusin时位置出现错误的问题 
+					document.addEventListener('DOMContentLoaded', function() {
+						var footerDom = document.querySelector('footer');
+
+						document.addEventListener('focusin', function() {
+							footerDom.style.position = 'absolute';
+						});
+						document.addEventListener('focusout', function() {
+							footerDom.style.position = 'fixed';
+						});
+					});
+				}
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

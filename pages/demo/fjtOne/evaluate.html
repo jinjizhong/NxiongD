@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+        <link rel="stylesheet" href="../../../css/mui.css">
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="" id="eval" style="border-radius: 10px;" >
+				<div class="mui-content-padded" style="background-color: white;display: flex;flex-direction: column;border-radius: 10px;" v-for="item in eval">
+					<div style="display: flex;flex-direction: column;padding: 5px 10px 0;">
+						<div style="display: flex;flex-direction: row;">
+							<div style="display: flex;flex-direction: row;">
+								<img :src="item.headImg" style="width: 30px;height: 30px;" />
+							</div>
+							<div style="display: flex;flex-direction: row;padding-left: 10px;">
+								{{item.userName}}
+							</div>
+						</div>
+					</div>
+					<div style="display: flex;flex-direction: column;padding: 5px 10px 0;">
+						{{item.time}}
+					</div>
+					<div style="display: flex;flex-direction: column;padding: 5px 10px 0;">
+						{{item.text}}
+					</div>
+					<div style="display: flex;flex-direction: column;padding: 5px 10px 5px;">
+						<div style="display: flex;flex-direction: row;">
+							<div style="display: flex;flex-direction: row;">
+								浏览{{item.number}}次
+							</div>
+							<div style="display: flex;flex-direction: row;">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<script type="text/javascript" src="../../../js/mui.js"></script>
+	<script src="../../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="evaluate.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	    mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+	
+	</script>
+</body>
+
+</html>

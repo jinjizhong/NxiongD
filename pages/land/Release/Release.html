@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link href="Release.css" rel="stylesheet" />
+		<style type="text/css">
+			/*后添加的。用于使输入框摆脱mui的限制*/
+			
+			input,
+			textarea {
+				-webkit-user-select: auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">发布土地信息</h1>
+		</header>
+		<div class="mui-content" style="background-color: #f4f5f5">
+			<form class="mui-input-group">
+				<div class="border">
+					<label>
+						<span>土地类型</span>
+						<a class="jianku"><span class="mui-icon mui-icon-arrowright"></span></a>
+						<input id="tudilei" name="tudilei" type="text" placeholder="请选择土地类型" readonly="readonly" />
+					</label>
+				</div>
+				<div class="border">
+					<label>
+						<span>土地区域</span>
+						<a class="jianku"><span class="mui-icon mui-icon-arrowright"></span></a>
+						<input id="tudiqu" name='tudiqu' type="text" placeholder="请选择区域" readonly="readonly" />
+					</label>
+				</div>
+				<div class="border">
+					<label>
+						<span>流转方式</span>
+						<a class="jianku"><span class="mui-icon mui-icon-arrowright"></span></a>
+						<input id='liuzhuan' name='liuzhuan' type="text" placeholder="请选择流转方式" readonly="readonly" />
+					</label>
+				</div>
+				<div>
+					<label>
+						<span>土地面积</span>
+						<label style="float: right; margin-top: 2px;">亩</label>
+						<input id="mianji" name="mianji" type="text" pattern="[0-9]*" placeholder="请输入面积大小" />
+					</label>
+				</div>
+			</form>
+			<div style="padding-left: 60%;">1亩≈666.67平方米</div>
+			<form class="mui-input-group">
+				<div class="border">
+					<label>
+						<span>流转年限</span>
+						<label style="float: right; margin-top: 2px;">年</label>
+						<input id="nianxian" name='nianxian' type="text" min="1" max="99" maxlength="10" pattern="[0-9]*" placeholder="请输入流转年限" />
+					</label>
+				</div>
+				<div>
+					<label>
+						<span>价格</span>
+						<label style="float: right; margin-top: 2px;">元/亩/年</label>
+						<input id="jiage" name='jiage' type="text" pattern="[0-9]*" placeholder="请输入价格" />
+					</label>
+
+				</div>
+			</form>
+			<form class="mui-input-group">
+				<div>
+					<label>
+						<span>标题</span>
+						<input id="biaoti" name='biaoti' type="text" />
+					</label>
+				</div>
+			</form>
+			<form class="mui-input-group">
+				<div class="border">
+					<label>
+						<span>联系人<span>
+						<input id="lianxiren" name='lianxiren' type="text" placeholder="请输入联系人姓名" />
+					</label>
+				</div>
+				<div>
+					<label>
+						<span>联系电话</span>
+						<input id="dianhua" name='dianhua' type="text" pattern="[0-9]*" placeholder="请输联系电话" />
+					</label>
+				</div>
+			</form>
+			<div style="padding-top: 10px;">
+				<textarea id="Land_special" style="height: 50px;width: 95%;margin-left: 2.5%;" placeholder="请用20字描述一下您的土地的特色。。。" onkeyup="key(this)"></textarea>
+			</div>
+			<div style="padding-top: 10px;">
+				<textarea id="textarea" cols="6" style="height: 150px;width: 95%;margin-left: 2.5%;" onkeyup="keyUP(this)" placeholder="请输入您的土地的详细介绍，不超过200字。。。"></textarea>
+			</div>
+			<div style="margin: 10px">
+				图片
+				<p>(三张图片,提供图片大小为5M以下)</p>
+			</div>
+			<!--<div id="image-list" class="row image-list"></div>-->
+			<div style="width: 100%;background-color: #fff;">
+				<div id="image-list" class="row image-list" style="width: 75%;height: 85px;background-size: cover;padding: 10px 10px;overflow: hidden;"></div>
+			</div>
+			<button type="submit" class="tijiao">提交信息</button>
+		</div>
+		<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../util/util.js" type="text/javascript" charset="utf-8"></script>
+		<script src="Release.js"></script>
+		<script type="text/javascript">
+			function key(t) {
+				var len = $(t).val().length;
+				if(len > 21) {
+					$(t).val($(t).val().substring(0, 20));
+					mui.toast('最多输入20字');
+				} else if(len == 0) {
+					$('.tijiao').attr('disabled', true);
+				}
+			}
+
+			function keyUP(t) {
+				var len = $(t).val().length;
+				if(len > 200) {
+					$(t).val($(t).val().substring(0, 200));
+					mui.toast('最多只能输入200字');
+				} else if(len == 0) {
+					$('.tijiao').attr("disabled", true);
+				}
+			}
+		</script>
+	</body>
+
+</html>

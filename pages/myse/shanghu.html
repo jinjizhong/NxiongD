@@ -1,0 +1,432 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css"/>
+<style type="text/css">
+body {
+	padding-top: 50px;
+}
+.register {
+	padding: 8px 6px;
+	font-size: 14px;
+}
+.res-item {
+	position: relative;
+	width: 100%;
+	border-radius: 4px;
+	margin-bottom: 8px;
+	background-color: #fff;
+}
+
+.res-item .input-item {
+	width: 54%;
+	margin-left: 20px;
+	height: 40px;
+	border: none;
+	font-size: inherit;
+}
+.login__submit{
+	background-color: red;
+	font-weight:bold;
+	width:70%;
+	font-size:14px;
+	text-align: center;
+	height:37px;
+	line-height: 37px;
+	color: white;
+	margin: 1.5rem auto;
+	border-radius: 22px;
+}
+.login__submit a{
+	color: #FFFFFF;
+}
+.res-item a{
+	margin-left: 15px;
+	color: #000000;
+}
+.res-item img{
+	margin: 10px;
+	width: 120px;
+	height: 80px;
+}
+select,
+textarea,
+input[type='text'] {
+	line-height: 21px;
+	width: 50%!important;
+	height: 40px;
+	margin-bottom: 0;
+	padding: 10px 15px;
+	-webkit-user-select: text;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 3px;
+	outline: none;
+	background-color: #fff;
+	-webkit-appearance: none;
+}
+/*input,textarea {
+ 	* 解决ios输入框无法输入的问题
+				-webkit-user-select: auto;
+			}*/
+</style>
+</head>
+
+<body>
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">商户认证信息</h1>
+</header>
+
+<div class="register">
+   <!-- <div class="res-item">
+    	<a>选择商户类型</a>
+        <input style="margin-left: 38px;" id="leixing" type="text" placeholder="类型" class="input-item" readonly="readonly">
+    </div>-->
+    <div class="res-item">
+    	<a>商户名称</a>
+        <input id="shop_name" type="text" placeholder="名称" class="input-item">
+    </div>
+    <div class="res-item">
+    	<a>商户电话</a>
+        <input id="shop_phone" type="text" placeholder="电话" class="input-item">
+    </div>
+    <div class="res-item">
+    	<a>所属地区</a>
+        <input id="shop_area" type="text" placeholder="地区" class="input-item " readonly="readonly">
+    </div>
+    <div class="res-item">
+    	<a>商户描述</a>
+        <input id="descrip" type="text" placeholder="写出你的描述（选填）" class="input-item">
+    </div>
+    <div class="res-item">
+    	<div style="padding: 10px 15px">
+	    	上传营业执照<br />
+	    	<p>拍照注意事项：</p>
+			<p>照片要拍清楚，不能有双影，证件上字要清晰。</p>
+			<img id="zhengshu"  src="../../img/myse/zhengjian2.png" onclick="headImage();" />
+			<!--<p  style='padding-left: 30px;'><button onclick="upload();"> 上传证件</button></p>-->
+		</div>
+    </div>
+    
+    <!--<div class="res-item">
+    	<div style="padding: 10px 15px">
+	    	<p>商户头像上传：</p>
+			<img id="zhengshu"  src="../../img/myse/zhengjian2.png" onclick="headImage();" />
+		</div>
+    </div>-->
+    
+   <!-- <textarea id="Imgdata" type="text" style="height: 200px;width: 100%;">
+    	</textarea>-->
+    <div id="sub_renzheng" class="login__submit"> 提 交 认 证 </div>
+ 
+</div>
+
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/jquery-3.3.1.js"></script>
+<script src="../../js/mui.picker.min.js"></script>
+<script src="../../js/data.city.js"></script>
+<script src="../util/util.js"></script>
+<script type="text/javascript">
+mui.init()
+	
+	var shop_name=document.getElementById("shop_name");
+	var shop_area=document.getElementById("shop_area");
+	var shop_phone=document.getElementById("shop_phone");
+	var descrip=document.getElementById("descrip");
+	var zhengshu=document.getElementById('zhengshu');
+	var dianji=false;
+	var tijiao=0;
+	mui.plusReady(function () {
+		
+		var chucun=localStorage.getItem("UserInfo");
+		//初始化个人信息
+		
+		shopInfo(JSON.parse(chucun).userinfo.Id,chucun);
+		
+	});
+	
+	//商户认证信息获取
+	function shopInfo(id,chucun){
+		var vt=plus.nativeUI.showWaiting("加载中...");
+			var data={ 
+				"TaskGuid":"86537836334",
+			    "DriverID":"1234567890",
+			    "UserID":"1234567890",
+			    "DataType":"ShopInfo",
+			    "Id":id
+			};
+			
+			ToConn(getUrl,data, function(aa){
+					console.log("/////////"+aa)
+					if(JSON.parse(aa).Shop_phone===""){
+						shop_phone.value=JSON.parse(chucun).userinfo.Mobile;
+					}else{
+						shop_phone.value=JSON.parse(aa).Shop_phone;
+					}
+					shop_name.value=JSON.parse(aa).Shop_name;
+					
+					shop_area.value=JSON.parse(aa).Shop_area;
+					descrip.value=JSON.parse(aa).Description;
+					if(JSON.parse(aa).Shop_license===""){
+						zhengshu.src="file:///storage/emulated/0/Android/data/io.dcloud.HBuilder/apps/HBuilder/www/img/myse/zhengjian2.png";
+					}else{
+						zhengshu.src=JSON.parse(aa).Shop_license;
+					}
+					vt.close();
+				},function(xhr, type, errorThrown){
+					
+					vt.close();
+					alert("连接失败,请检查网络");
+					plus.webview.currentWebview().close();
+			});
+		
+	}
+	
+		//选择省市区
+		var city_picker = new mui.PopPicker({layer:3});
+			city_picker.setData(init_city_picker);
+		$("#shop_area").on("tap", function(){
+			setTimeout(function(){
+				city_picker.show(function(items){
+					shop_area.value = (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text
+				});
+			},200);
+		});
+		
+		var vcity={ 11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",
+		            21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",
+		            33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",
+		            42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",
+		            51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",
+		            63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"
+		           };
+				
+	//重写返回逻辑
+	mui.back = function() {
+		dianji=false;
+		plus.webview.currentWebview().close();
+	}
+	
+	function headImage(){
+   		 if (mui.os.plus) {
+	        var buttonTit = [{
+	            title: "拍照"
+	        }, {
+	            title: "从手机相册选择"
+	        }];
+        
+	        plus.nativeUI.actionSheet({
+	            cancel: "取消",
+	            buttons: buttonTit
+	        }, function(b) { /*actionSheet 按钮点击事件*/
+	            switch (b.index) {
+	                case 0:
+	                    break;
+	                case 1:
+	                    getImage(); /*拍照*/
+	                    break;
+	                case 2:
+	                    galleryImg();/*打开相册*/
+	                    break;
+	                default:
+	                    break;
+	            }
+	        })
+    }        
+}
+
+// 拍照获取图片
+function getImage() {
+    var c = plus.camera.getCamera();
+    c.captureImage(function(e) {
+        plus.io.resolveLocalFileSystemURL(e, function(entry) {
+        	var imgSrc = entry.toLocalURL() + "?version=" + new Date().getTime(); //拿到图片路径
+        	tijiao=1;
+        	setHtml(imgSrc);
+        	
+        }, function(e) {
+            console.log("读取拍照文件错误：" + e.message);
+        });
+    }, function(s) {
+        console.log("error" + s);
+    }, {
+        filename: "_doc/camera/"
+    })
+}
+// 从相册中选择图片 
+function galleryImg(){
+	// 从相册中选择图片
+    plus.gallery.pick( function(e){
+    	for(var i in e.files){
+	    	var fileSrc = e.files[i];
+	    	tijiao=1;
+	    	setHtml(fileSrc);
+    	}
+    }, function ( e ) {
+    	console.log( "取消选择图片" );
+    },{
+    	filter: "image",
+    	multiple: true,
+    	maximum: 1,
+    	system: false,
+    	onmaxed: function() {
+    		plus.nativeUI.alert('最多只能选择1张图片');
+    	}
+    });
+}
+
+//上传图片加赋值
+function setHtml(imgSrc){
+	//页面图片赋值
+	document.getElementById('zhengshu').src = imgSrc;
+	
+}
+	
+	//function uplode(){}
+	
+	//提交认证
+	document.getElementById("sub_renzheng").addEventListener('tap',function(e){
+		//window.top.location.href="../myself.html";
+		console.log(zhengshu.src)
+		var myreg=/^[1][3,4,5,7,8][0-9]{9}$/; 
+		var ss=localStorage.getItem("UserInfo");
+				//alert(JSON.parse(ss).userinfo.IsShop);
+				if(shop_name.value===""){
+					alert("商户名称不能为空！")
+				}else if(shop_area.value===""){
+					alert("所属地区不能为空！")
+				}else if(shop_phone.value===""){
+					alert("商户电话不能为空！")
+				}else if(zhengshu.src==="file:///storage/emulated/0/Android/data/io.dcloud.HBuilder/apps/HBuilder/www/img/myse/zhengjian2.png"){
+					alert("请上传营业执照！")
+				}else if(ss==null){
+					mui.toast("请登录账号!");
+					//跳转到登录页面
+					mui.openWindow({
+						url:"../myse/sign.html",
+					 	extras: {
+		 			 		price:document.getElementById("allPrice").innerHTML
+	            		}
+					});
+					
+				}else if(!myreg.test(shop_phone.value)){
+					alert("请输入正确的手机号")
+				}else{
+					serve_order(ss);
+				}
+		
+		
+	});
+	//点击逻辑判断
+	function serve_order(ss){
+		if(!dianji){
+			dianji=true;
+				
+			if(tijiao===1){
+				//上传图片
+				var wt = plus.nativeUI.showWaiting("上传证件中...",{back:"none"});
+				updatefile(document.getElementById('zhengshu').src, function(s){
+								succes='1';
+								if(JSON.parse(s).Success=="0"){
+									mui.toast("上传出错,重新上传");
+									wt.close();
+								}else{
+									//mui.toast("上传成功");
+									Toajax(ss,JSON.parse(s).Date);
+									plus.storage.setItem("upimgUrl",JSON.parse(s).Date);
+									//alert("111"+plus.storage.getItem("upimgUrl"))
+									wt.close();
+								}
+							});
+				}else{
+					Toajax(ss,plus.storage.getItem("upimgUrl"));
+				}
+							
+			}else{
+				alert("不要重复提交")
+			}
+		}
+		//提交验证到服务器
+		function Toajax(ss,img){
+			var ww = plus.nativeUI.showWaiting("信息提交中...",{back:"none"});
+			
+			var data={ 
+				"TaskGuid":"86537836334",
+				"DriverID":"1234567890",
+				"UserID":"1234567890",
+				"DataType":"AddShop",
+  				"Shop_name":shop_name.value,
+				"Shop_area":shop_area.value,
+				"Shop_licence":img,
+				"Shop_phone":shop_phone.value,
+				"UserID":JSON.parse(ss).userinfo.Id,
+				"Description":descrip.value
+			};
+			
+			ToConn(setUrl,data, function(aa){
+				console.log(aa);
+				if(JSON.parse(aa).Success==="1"){
+					alert("信息提交成功！");
+					ww.close();
+					savedate();
+					plus.webview.currentWebview().close();
+				}else{
+					alert("提交失败！");
+					dianji=false;
+					ww.close();
+				}
+					
+				},function(ee){
+					alert("提交失败，检查网络！")
+					dianji=false;
+					ww.close();
+			});
+		}
+
+//成功认证之后修改存储数据
+	function savedate(){
+		var ss=localStorage.getItem("UserInfo");
+		var address=JSON.parse(ss).address;
+		var userinfo=JSON.parse(ss).userinfo;
+		var tempJson={
+			"userinfo":{
+		        "Id":userinfo.Id,
+		        "User_name":userinfo.User_name,
+		        "Address":userinfo.Address,
+		        "Amount":userinfo.Amount,
+		        "Email":userinfo.Email,
+		        "Exp":userinfo.Exp,
+		        "Group_id":userinfo.Group_id,
+		        "HeadUrl":userinfo.HeadUrl,
+		        "ID_address":userinfo.ID_address,
+		        "ID_card":userinfo.ID_card,
+		        "ID_images":userinfo.ID_images,
+		        "ID_img":userinfo.ID_img,
+		        "ID_type":userinfo.ID_type,
+		        "Mobile":userinfo.Mobile,
+		        "Nick_name":userinfo.Nick_name,
+		        "Point":userinfo.Point,
+		        "Reg_ip":userinfo.Reg_ip,
+		        "Salt":userinfo.Salt,
+		        "Sex":userinfo.Sex,
+		        "IsShop":true,
+		        "Telphone":userinfo.Telphone,
+		        "ServerOrders":userinfo.ServerOrders,
+		        "GoodOrders":userinfo.GoodOrders
+		    },
+		    	"address":address
+		};
+		localStorage.setItem("UserInfo",JSON.stringify(tempJson));
+				
+	}
+
+</script>
+</body>
+
+</html>

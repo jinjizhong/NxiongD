@@ -1,0 +1,551 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css"/>
+<style>
+.mui-content form{
+	margin-top: 10px;
+}
+.mui-content form div{
+	padding: 15px;
+}
+.mui-content form div input{
+	float: right;
+}
+.mui-content form div img{
+	margin: 10px;
+	width: 120px;
+	height: 80px;
+}
+.tijiao{
+	background-color: red;
+	font-weight:bold;
+	width:70%;
+	font-size:14px;
+	text-align: center;
+	height:37px;
+	line-height: 37px;
+	color: white;
+	margin: 1.5rem auto;
+	border-radius: 22px;
+}
+input[type=checkbox] {
+	display: none
+}
+input[id^=checkbox]+label {
+	margin: -6px 0px;
+	background-color: #FFF;
+	border: 1px solid #C1CACA;
+	padding: 9px;
+	border-radius: 33px;
+	display: inline-block;
+	position: relative;
+}[id^=checkbox]:checked+label:before {
+	content: ' ';
+	border-radius: 33px;
+	position: absolute;
+	background: red;
+	opacity: .8;
+	display: none;
+	top: 3px;
+	left: 3px;
+	width: 12px;
+	height: 12px
+}[id^=checkbox]:checked+label:before {
+	content: ' ';
+	display: block
+}
+select,
+textarea,
+input[type='text'] {
+	width: 70%!important;
+	margin-bottom: 0;
+	-webkit-user-select: text;
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">机手认证</h1>
+</header>
+<div class="mui-content">
+	<form class="mui-input-group" >
+		<div>
+			<label>姓名</label>
+			<input id="yourname" name="yourname" type="text" placeholder="请输入真实姓名(必填)">
+		</div>
+		<div>
+			<label>身份证</label>
+			<input id='card_no' name='card_no' type="text" placeholder="请输入身份证号码(必填)" />
+		</div>
+		<div>
+			<label>地区信息</label>
+			<input id="city_text" name='city_text' type="text" placeholder="请选择作业区域(必填)" readonly="readonly" />
+			<!--<p id="city_text" style="float: right;">请选择区域(必填)</p>-->
+		</div>
+		<div>
+			<label>详细地址</label>
+			<input id="xiangqing" name="xiangqing" type="text" placeholder="请输入详细地址(必填)" />
+		</div>
+		<div>
+			<label>证件类型</label>
+			<input id="leixing" name='leixing' type="text" placeholder="选择证书类型(必填)" readonly="readonly" />
+			
+		</div>
+		<div id="zhaopian">
+			<!--<label>身份证照片</label><br />
+			<img class="headImage" src="../../img/myse/zhengjian1.png" />
+			<img class="headImage" src="../../img/myse/zhengjian3.png" /><br />-->
+			<label>机手资格证书照片</label><br />
+			<img id="ID_img" class="headImage" src="../../img/myse/zhengjian2.png" onclick="PhotoImage();"/>
+			<p>拍照注意事项：</p>
+			<p>照片要拍清楚，不能有双影，身份证上字要清晰。</p>
+			<!--<img src="../../img/myse/shenfen1.jpg" />
+			<img src="../../img/myse/shenfen2.jpg" />-->
+		</div>
+	</form>
+	
+	<div style="text-align: center; margin-top: 20px;">
+		<input type="checkbox" id="checkbox" checked="checked" /><label for="checkbox"></label>
+		<label>
+			<p style="display:inline;">我已阅读并同意</p>
+		</label>
+		<a href="">农兄弟入驻协议</a>
+	</div>
+	<div onclick='javascript:checkCard();' class="tijiao">提交认证</div>
+	
+</div>
+
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/jquery-3.3.1.js"></script>
+<script src="../../js/mui.picker.min.js"></script>
+<script src="../../js/data.city.js"></script>
+<script src="../util/util.js"></script>
+
+<script type="text/javascript">
+mui.init();
+
+	var truename = document.getElementById('yourname');    //真实姓名
+	var card = document.getElementById('card_no');         //身份证
+	var region = document.getElementById('city_text');     //地区信息
+	var address = document.getElementById('xiangqing');    //详细地址
+	var certificate = document.getElementById('leixing');  //证件类型
+	var ID_img=document.getElementById("ID_img");//身份证
+	var tijiao=0;
+	var localImg="";
+
+mui.plusReady(function(){
+	
+	userInfo(JSON.parse(localStorage.getItem("UserInfo")).userinfo.Id);
+	
+	});
+	
+	//选择类型
+document.getElementById('leixing').addEventListener('tap', function(){
+	if(mui.os.plus){
+		var leixingID = [{
+			title:  "中国航空运动协会"
+		},{
+			title:  "农兄弟飞防服务合格证"
+		},{
+			title:  "慧飞无人机应用技术培训中心"
+		},{
+			title:  "中国驾驶员协会"
+		},{
+			title:  "其他机手专业相关证书"
+		}];
+		plus.nativeUI.actionSheet({
+			title   : "选择证件类型",
+			cancel  : "取消",
+			buttons : leixingID
+		}, function(b) { 
+            switch (b.index) {
+            	case 0:
+                    break;
+                case 1:
+				document.getElementById("leixing").value = leixingID[0].title;
+                    break;
+                case 2:
+				document.getElementById("leixing").value = leixingID[1].title;
+                    break;
+                case 3:
+				document.getElementById("leixing").value = leixingID[2].title;
+                    break;
+                case 4:
+				document.getElementById("leixing").value = leixingID[3].title;
+                    break;
+                case 5:
+				document.getElementById("leixing").value = leixingID[4].title;
+                    break;
+                default:
+                    break;
+            }
+        });
+	}
+}, false);
+
+//点击选择图片方式
+function PhotoImage(){
+	
+   		 if (mui.os.plus) {
+	        var buttonTit = [{
+	            title: "拍照"
+	        }, {
+	            title: "从手机相册选择"
+	        }];
+        
+	        plus.nativeUI.actionSheet({
+	            cancel: "取消",
+	            buttons: buttonTit
+	        }, function(b) { /*actionSheet 按钮点击事件*/
+	            switch (b.index) {
+	                case 0:
+	                    break;
+	                case 1:
+	                    getImage(); /*拍照*/
+	                    break;
+	                case 2:
+	                    galleryImg();/*打开相册*/
+	                    break;
+	                default:
+	                    break;
+	            }
+	        })
+    }        
+}
+// 拍照获取图片
+function getImage() {
+    var c = plus.camera.getCamera();
+    c.captureImage(function(e) {
+        plus.io.resolveLocalFileSystemURL(e, function(entry) {
+	        	var imgSrc = entry.toLocalURL() + "?version=" + new Date().getTime(); //拿到图片路径
+		            setHtml(imgSrc);
+		            localImg=imgSrc;
+		            tijiao=1;
+		    }, function(e) {
+            console.log("读取拍照文件错误：" + e.message);
+        });
+    }, function(s) {
+        console.log("error" + s);
+    }, {
+        filename: "_doc/camera/"
+    })
+}
+// 从相册中选择图片 
+function galleryImg(){
+	// 从相册中选择图片
+    plus.gallery.pick( function(e){
+    	for(var i in e.files){
+	    	var fileSrc = e.files[i]
+	    	setHtml(fileSrc);
+	    	localImg=fileSrc;
+	    	tijiao=1;
+		}
+    }, function ( e ) {
+    	console.log( "取消选择图片" );
+    },{
+    	filter: "image",
+    	multiple: true,
+    	maximum: 1,
+    	system: false,
+    	onmaxed: function() {
+    		plus.nativeUI.alert('最多只能选择1张图片');
+    	}
+    });
+}
+
+function setHtml(imgPath){
+			/*//此处this表示当前的，$(this)表示当前点击的图片元素
+   			$(obj).prop('src',imgPath);//此处执行替换新路径即可*/
+   			ID_img.src=imgPath;
+		}
+//机手认证信息获取
+	function userInfo(id){
+		var vt=plus.nativeUI.showWaiting("加载中...");
+			var data={ 
+				"TaskGuid":"86537836334",
+			    "DriverID":"1234567890",
+			    "UserID":"1234567890",
+			    "DataType":"DriverInfo",
+			    "Id":id
+			};
+			
+			ToConn(getUrl,data, function(aa){
+					console.log("/////////"+aa)
+					truename.value=JSON.parse(aa).User_name;
+					card.value=JSON.parse(aa).ID_card;
+					region.value=JSON.parse(aa).ID_address;
+					address.value=JSON.parse(aa).Address;
+					certificate.value=JSON.parse(aa).ID_type;
+					//alert(JSON.parse(aa).ID_imgages)
+					if(JSON.parse(aa).ID_images===""){
+						ID_img.src="file:///storage/emulated/0/Android/data/io.dcloud.HBuilder/apps/HBuilder/www/img/myse/zhengjian2.png";
+						vt.close();
+					}else{
+						ID_img.src=JSON.parse(aa).ID_images;
+						vt.close();
+					}
+				},function(ee){
+					vt.close();
+					alert("连接失败,请检查网络");
+					plus.webview.currentWebview().close();
+			});
+		
+	}	
+
+//选择省市区
+var city_picker = new mui.PopPicker({layer:3});
+city_picker.setData(init_city_picker);
+$("#city_text").on("tap", function(){
+	setTimeout(function(){
+		city_picker.show(function(items){
+			document.getElementById("city_text").value = (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text
+		});
+	},200);
+});
+
+var vcity={ 11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",
+            21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",
+            33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",
+            42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",
+            51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",
+            63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"
+           };
+
+checkCard = function(){
+	//alert(ID_img.src)
+    if(truename.value==="") {
+        alert('姓名不能为空！'); 
+        
+    }else if(card.value === '')
+    {
+        alert('请输入身份证号，身份证号不能为空');
+        document.getElementById('card_no').focus();
+    }else if(isCardNo(card.value) === false)
+    {
+        alert('您输入的身份证号码不正确，请重新输入');
+        document.getElementById('card_no').focus();
+    }else if(checkProvince(card.value) === false)
+    {
+        alert('您输入的身份证号码不正确,请重新输入');
+        document.getElementById('card_no').focus();
+    }else if(checkBirthday(card.value) === false)
+    {
+        alert('您输入的身份证号码生日不正确,请重新输入');
+        document.getElementById('card_no').focus();
+    }else if(checkParity(card.value) === false)
+    {
+        alert('您的身份证校验位不正确,请重新输入');
+        document.getElementById('card_no').focus();
+    }else if(region.value === '')
+    {
+        alert('地区信息不能为空');
+        document.getElementById('city_text').focus();
+    }else if(address.value === '')
+    {
+        alert('详细地址不能为空');
+        document.getElementById('xiangqing').focus();
+    }else if(certificate.value === '')
+    {
+        alert('请选择证件类型');
+        document.getElementById('leixing').focus();
+    }else if(! $("input[type='checkbox']").is(':checked'))
+    {
+    	alert('请阅读并同意农兄弟入驻协议');
+    }else if(ID_img.src==="file:///storage/emulated/0/Android/data/io.dcloud.HBuilder/apps/HBuilder/www/img/myse/zhengjian2.png"){
+    	alert("请上传证书");
+    }else{
+    	xinxi();
+    	//alert('信息已提交，等待认证通过');
+ 	}
+};
+//提交信息
+var dianji=false;
+function xinxi(){
+	if(!dianji){
+			dianji=true;
+			if(tijiao===1){
+				//上传图片
+				var wt = plus.nativeUI.showWaiting("证书上传中...",{back:"none"});
+				updatefile(localImg, function(s){
+								succes='1';
+								if(JSON.parse(s).Success=="0"){
+									mui.toast("上传出错,重新上传")
+								}else{
+									//mui.toast("上传成功");
+									toserver(JSON.parse(s).Date);
+									plus.storage.setItem("ImgUrl",JSON.parse(s).Date);
+									//alert("111"+plus.storage.getItem("upimgUrl"))
+									wt.close();
+								}
+							});
+				}else{
+					toserver(plus.storage.getItem("ImgUrl"));
+				}
+							
+			}else{
+				alert("不要重复提交")
+			}
+}
+
+//提交到服务器
+function toserver(sss){
+			var ww = plus.nativeUI.showWaiting("信息提交中...",{back:"none"});
+			var ss=localStorage.getItem("UserInfo");
+			
+			var data={ 
+				"TaskGuid":"86537836334",
+				"DriverID":"1234567890",
+				"DataType":"AddDriver",
+				"UserID":JSON.parse(ss).userinfo.Id,
+				"User_name":truename.value,
+				"ID_card":card.value,
+				"ID_address":region.value,
+				"Address":address.value,
+				"ID_type":certificate.value,
+				"ID_images":sss
+			};
+			
+			ToConn(setUrl,data, function(aa){
+					alert("信息已提交，等待认证通过！");
+					console.log("提交成功返回："+aa)
+					ww.close();
+					//savedate();
+					plus.webview.currentWebview().close();
+				},function(ee){
+					alert("提交失败!")
+			});
+		
+}
+
+//重写返回逻辑
+	mui.back = function() {
+		dianji=false;
+		plus.webview.currentWebview().close();
+	}
+//检查号码是否符合规范，包括长度，类型
+isCardNo = function(card)
+{
+    //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+    var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;
+    if(reg.test(card) === false)
+    {
+        return false;
+    }
+
+    return true;
+};
+
+//取身份证前两位,校验省份
+checkProvince = function(card)
+{
+    var province = card.substr(0,2);
+    if(vcity[province] == undefined)
+    {
+        return false;
+    }
+    return true;
+};
+
+//检查生日是否正确
+checkBirthday = function(card)
+{
+    var len = card.length;
+    //身份证15位时，次序为省（3位）市（3位）年（2位）月（2位）日（2位）校验位（3位），皆为数字
+    if(len == '15')
+    {
+        var re_fifteen = /^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/; 
+        var arr_data = card.match(re_fifteen);
+        var year = arr_data[2];
+        var month = arr_data[3];
+        var day = arr_data[4];
+        var birthday = new Date('19'+year+'/'+month+'/'+day);
+        return verifyBirthday('19'+year,month,day,birthday);
+    }
+    //身份证18位时，次序为省（3位）市（3位）年（4位）月（2位）日（2位）校验位（4位），校验位末尾可能为X
+    if(len == '18')
+    {
+        var re_eighteen = /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/;
+        var arr_data = card.match(re_eighteen);
+        var year = arr_data[2];
+        var month = arr_data[3];
+        var day = arr_data[4];
+        var birthday = new Date(year+'/'+month+'/'+day);
+        return verifyBirthday(year,month,day,birthday);
+    }
+    return false;
+};
+
+//校验日期
+verifyBirthday = function(year,month,day,birthday)
+{
+    var now = new Date();
+    var now_year = now.getFullYear();
+    //年月日是否合理
+    if(birthday.getFullYear() == year && (birthday.getMonth() + 1) == month && birthday.getDate() == day)
+    {
+        //判断年份的范围（3岁到100岁之间)
+        var time = now_year - year;
+        if(time >= 3 && time <= 100)
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+};
+
+//校验位的检测
+checkParity = function(card)
+{
+    //15位转18位
+    card = changeFivteenToEighteen(card);
+    var len = card.length;
+    if(len == '18')
+    {
+        var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2); 
+        var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'); 
+        var cardTemp = 0, i, valnum; 
+        for(i = 0; i < 17; i ++) 
+        { 
+            cardTemp += card.substr(i, 1) * arrInt[i]; 
+        } 
+        valnum = arrCh[cardTemp % 11]; 
+        if (valnum == card.substr(17, 1)) 
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+};
+
+//15位转18位身份证号
+changeFivteenToEighteen = function(card)
+{
+    if(card.length == '15')
+    {
+        var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2); 
+        var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'); 
+        var cardTemp = 0, i;   
+        card = card.substr(0, 6) + '19' + card.substr(6, card.length - 6);
+        for(i = 0; i < 17; i ++) 
+        { 
+            cardTemp += card.substr(i, 1) * arrInt[i]; 
+        } 
+        card += arrCh[cardTemp % 11]; 
+        return card;
+    }
+    return card;
+};
+</script>
+</body>
+
+</html>

@@ -1,0 +1,466 @@
+{
+    "@platforms": ["android", "iPhone", "iPad"],
+    "id": "H5A7EBF37",/*应用的标识，创建应用时自动生成，勿手动修改*/
+    "name": "农兄弟",/*应用名称，程序桌面图标名称*/
+    "version": {
+        "name": "1.0",/*应用版本名称*/
+        "code": ""
+    },
+    "description": "",/*应用描述信息*/
+    "icons": {
+        "72": "icon.png"
+    },
+    "launch_path": "guide.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "developer": {
+        "name": "",/*开发者名称*/
+        "email": "",/*开发者邮箱地址*/
+        "url": ""/*开发者个人主页地址*/
+    },
+    "permissions": {
+        
+        "Cache": {
+            "description": "管理应用缓存"
+        },
+        "Console": {
+            "description": "跟踪调试输出日志"
+        },
+        
+        "Events": {
+            "description": "应用扩展事件"
+        },"Maps":{}
+    },
+    "plus": {
+    	
+        "splashscreen": {
+            "autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+            "waiting": true/*是否在程序启动界面显示等待雪花，true表示显示，false表示不显示。*/
+        },
+        "popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
+        "runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+        "signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+        "distribute": {"plugins":{"maps":{"baidu":{"appkey_ios":"sICDdehVHllEAHGvKvdfVArxf1Lmg30P","appkey_android":"NHBROVwf5sdGK4nPYCDT815LuqMLyANB","appkey":"","description":""}}},
+            "apple": {
+                "appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+                "mobileprovision": "",/*iOS应用打包配置文件*/
+                "password": "",/*iOS应用打包个人证书导入密码*/
+                "p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+                "devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+                "frameworks":[
+                ]/*调用Native.js调用原生Objective-c API需要引用的FrameWork，如需调用GameCenter，则添加"GameKit.framework"*/
+            },
+            "google": {
+                "packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+                "keystore": "",/*Android应用打包使用的密钥库文件*/
+                "password": "",/*Android应用打包使用密钥库中证书的密码*/
+                "aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+               "permissions": ["<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+				/*使用Native.js调用原生安卓API需要使用到的系统权限*/
+            },
+            "orientation": [
+                "portrait-primary"
+            ],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+            "icons": {
+                "ios": {
+                    "prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+                     /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+                    "iphone": {
+                        "normal": "", /*iPhone3/3GS程序图标，分辨率：57x57*/
+                        "retina": "", /*iPhone4程序图标，分辨率：114x114*/
+                         /*iPhone4S/5/6程序图标，分辨率：120x120*/
+			 /*iPhone6 Plus程序图标，分辨率：180x180*/
+                        "spotlight-normal": "", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
+                        "spotlight-retina": "", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
+                         /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
+                        "settings-normal": "", /*iPhone4设置页面程序图标，分辨率：29x29*/
+                         /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+			"app@2x":"unpackage/res/icons/120x120.png","app@3x":"unpackage/res/icons/180x180.png","settings@3x":"unpackage/res/icons/87x87.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","spotlight@3x":"unpackage/res/icons/120x120.png","notification@3x":"unpackage/res/icons/60x60.png","notification@2x":"unpackage/res/icons/40x40.png" /*iPhone6Plus设置页面程序图标，分辨率：87x87*/
+                    },
+                    "ipad": {
+                        "normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
+                        "retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
+                         /*iPad iOS7程序图标，分辨率：76x76*/
+                         /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+                        "spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+                        "spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+                        /*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+                        /*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+                        /*iPad设置页面程序图标，分辨率：29x29*/
+                        "app":"unpackage/res/icons/76x76.png","app@2x":"unpackage/res/icons/152x152.png","settings":"unpackage/res/icons/29x29.png","proapp@2x":"unpackage/res/icons/167x167.png","spotlight":"unpackage/res/icons/40x40.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","notification":"unpackage/res/icons/20x20.png","notification@2x":"unpackage/res/icons/40x40.png" /*iPad高分屏设置页面程序图标，分辨率：58x58*/
+                    },"appstore":"unpackage/res/icons/1024x1024.png"
+                },
+                "android": {
+                    "mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+                    "ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+                    "hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+                    "xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+                    "xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"/*1080P 高分屏程序图标，分辨率：144x144*/
+                }
+            },
+            "splashscreen": {
+                "ios": {
+                    "iphone": {
+                        "default": "", /*iPhone3启动图片选，分辨率：320x480*/
+                        "retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+                        "retina40": "",/*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/
+                        "retina47": "",/*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/
+                        "retina55": "",/*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/
+                        "retina55l": ""/*5.5 英寸设备(iPhone6 Plus)横屏启动图片，分辨率：2208x1242*/
+                    },
+                    "ipad": {
+                        "portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+                        "portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+                        "landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
+                        "landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+                        "portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+                        "portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+                        "landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+                        "landscape-retina7": ""/*iPad iOS7高分屏横屏启动图片，分辨率：2048x1536*/
+                    }
+                },
+                "android": {
+                    "mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+                    "ldpi": "", /*大屏启动图片，分辨率：320x442*/
+                    "hdpi": "img/logo/android/qdym480.png", /*高分屏启动图片，分辨率：480x762*/
+                    "xhdpi": "img/logo/android/qdym720.png", /*720P高分屏启动图片，分辨率：720x1242*/
+                    "xxhdpi": "img/logo/android/qdym1080.png"/*1080P高分屏启动图片，分辨率：1080x1882*/
+                }
+            }
+        }
+    },
+	"dependencies": {
+		"pages": {
+			"pages/tab-webview-main.html": {
+				"resources": [
+					"pages/home.html"
+				],
+				"refer": [
+					"pages/myself.html",
+					"pages/mall.html"
+				],
+				"priority": 0
+			},
+			"pages/home.html": {
+				"resources": [
+					"pages/mall.html"
+				],
+				"refer": [
+					"pages/zixun/news_list.html",
+					"pages/myself.html",
+					"pages/demo/news_tab_demo.html",
+					"pages/shopcar.html",
+					"pages/tuiguang/tuig_active.html",
+					"pages/secondPage/pinglun/lvyouPage.html",
+					"pages/secondPage/lvyouPage/travelPage.html",
+					"pages/secondPage/secondPage.html",
+					"pages/secondPage/moreTypes/moreTypes.html",
+					"pages/shop/goodslist/goodslist.html",
+					"pages/secondPage/secondPage1.html",
+					"pages/land/land.html",
+					"pages/secondPage/Supply_demand/Supply_demand.html",
+					"pages/tuiguang/tuig_type.html",
+					"pages/tuiguang/type.html"
+				],
+				"priority": 0
+			},
+			"pages/zixun/news_list.html": {
+				"resources": [],
+				"refer": [
+					"pages/zixun/news_detail.html"
+				],
+				"priority": 0
+			},
+			"pages/myself.html": {
+				"resources": [],
+				"refer": [
+					"pages/myse/set.html",
+					"pages/myse/notice.html",
+					"pages/myse/information.html",
+					"pages/myse/dizhi.html",
+					"pages/myse/dingdan.html",
+					"pages/myse/sign.html",
+					"pages/myse/renzheng.html",
+					"pages/myse/zhibao.html",
+					"pages/address/userAddress.html",
+					"pages/myse/shanghu.html",
+					"pages/myse/erweiM.html",
+					"pages/myse/Merchant.html",
+					"pages/myse/driver_fabu.html"
+				],
+				"priority": 0
+			},
+			"pages/myse/set.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/settle/settle.html": {
+				"resources": [],
+				"refer": [
+					"pages/pay/pay.html",
+					"pages/address/userAddress.html"
+				],
+				"priority": 0
+			},
+			"pages/shopcar.html": {
+				"resources": [
+					"img/shopcar/emptycar.png"
+				],
+				"refer": [
+					"pages/settle/settle.html"
+				],
+				"priority": 0
+			},
+			"pages/address/uerAddress.html": {
+				"resources": [],
+				"refer": [
+					"pages/address/editAddress/editAddress.html",
+					"pages/address/map/map.html"
+				],
+				"priority": 0
+			},
+			"pages/mall.html": {
+				"resources": [],
+				"refer": [
+					"pages/demo/fjtOne/DetailsPage.html",
+					"pages/shop/goodslist/goodslist.html"
+				],
+				"priority": 0
+			},
+			"pages/demo/fjtOne/DetailsPage.html": {
+				"resources": [],
+				"refer": [
+					"pages/demo/fjtOne/evaluate.html"
+				],
+				"priority": 0
+			},
+			"pages/tuiguang/tuig_active.html": {
+				"resources": [],
+				"refer": [
+					"pages/home.html",
+					"pages/tuiguang/tuig_detail.html"
+				],
+				"priority": 0
+			},
+			"pages/demo/news_tab_demo.html": {
+				"resources": [],
+				"refer": [
+					"pages/demo/detail.html"
+				],
+				"priority": 0
+			},
+			"pages/myse/sign.html": {
+				"resources": [],
+				"refer": [
+					"pages/myself.html",
+					"pages/myse/sign.html",
+					"pages/myse/zhuce.html",
+					"pages/myse/zhaohui.html"
+				],
+				"priority": 0
+			},
+			"pages/myse/dingdan.html": {
+				"resources": [],
+				"refer": [
+					"pages/myse/dingdanxiangQ.html",
+					"pages/myse/dingdanxiangQ_mei.html"
+				],
+				"priority": 0
+			},
+			"pages/myse/dingdanxiangQ.html": {
+				"resources": [],
+				"refer": [
+					"pages/myse/dingdan.html"
+				],
+				"priority": 0
+			},
+			"pages/myse/dingdanxiangQ_mei.html": {
+				"resources": [],
+				"refer": [
+					"pages/pay/pay.html",
+					"pages/myse/dingdan.html",
+					"pages/myse/zhibao.html"
+				],
+				"priority": 0
+			},
+			"pages/pay/pay.html": {
+				"resources": [],
+				"refer": [
+					"pages/myse/dingdanxiangQ_mei.html"
+				],
+				"priority": 0
+			},
+			"pages/shop/goodslist/goodslist.html": {
+				"resources": [],
+				"refer": [
+					"pages/shop/goodsdetail/goodsdetail.html",
+					"pages/mall.html"
+				],
+				"priority": 0
+			},
+			"pages/shop/goodsdetail/goodsdetail.html": {
+				"resources": [],
+				"refer": [
+					"pages/shopcar.html",
+					"pages/settle/settle.html"
+				],
+				"priority": 0
+			},
+			"pages/tuiguang/tuig_detail.html": {
+				"resources": [],
+				"refer": [
+					"pages/pay/pay.html",
+					"pages/tuiguang/pingjia/pingjia.html",
+					"pages/address/userAddress.html",
+					"pages/myse/sign.html"
+				],
+				"priority": 0
+			},
+			"pages/secondPage/pinglun/lvyouPage.html": {
+				"resources": [],
+				"refer": [
+					"pages/secondPage/pinglun/fabiao.html"
+				],
+				"priority": 0
+			},
+			"pages/tuiguang/tuig_order/tuig_order.html": {
+				"resources": [],
+				"refer": [
+					"pages/address/uerAddress.html"
+				],
+				"priority": 0
+			},
+			"pages/address/editAddress/editAddress.html": {
+				"resources": [],
+				"refer": [
+					"pages/address/map/map.html"
+				],
+				"priority": 0
+			},
+			"pages/address/userAddress.html": {
+				"resources": [],
+				"refer": [
+					"pages/address/editAddress/editAddress.html"
+				],
+				"priority": 0
+			},
+			"pages/secondPage/secondPage.html": {
+				"resources": [],
+				"refer": [
+					"pages/secondPage/pinglun/lvyouPage.html"
+				],
+				"priority": 0
+			},
+			"pages/myse/zhibao.html": {
+				"resources": [],
+				"refer": [
+					"pages/myse/dingdanxiangQ_mei.html",
+					"pages/myse/pingfen.html"
+				],
+				"priority": 0
+			},
+			"pages/secondPage/secondPage1.html": {
+				"resources": [],
+				"refer": [
+					"pages/secondPage/pinglun/lvyouPage.html"
+				],
+				"priority": 0
+			},
+			"pages/secondPage/lvyouPage/travelPage.html": {
+				"resources": [],
+				"refer": [
+					"pages/secondPage/pinglun/lvyouPage.html"
+				],
+				"priority": 0
+			},
+			"pages/myse/renzheng.html": {
+				"resources": [],
+				"refer": [
+					"pages/myse/feishou.html"
+				],
+				"priority": 0
+			},
+			"pages/tab_main.html": {
+				"resources": [
+					"pages/home.html"
+				],
+				"refer": [
+					"pages/myself.html",
+					"pages/mall.html",
+					"pages/shopcar.html",
+					"pages/shop/goodslist/goodslist.html",
+					"pages/shop/type.html"
+				],
+				"priority": 0
+			},
+			"pages/myse/pingfen.html": {
+				"resources": [],
+				"refer": [
+					"pages/myse/zhibao.html"
+				],
+				"priority": 0
+			},
+			"guide.html": {
+				"resources": [],
+				"refer": [
+					"pages/tab_main.html"
+				],
+				"priority": 0
+			},
+			"pages/land/land.html": {
+				"resources": [],
+				"refer": [
+					"pages/land/details/details.html",
+					"pages/land/Release/Release.html"
+				],
+				"priority": 0
+			},
+			"pages/shop/type.html": {
+				"resources": [
+					"pages/shop/type.js"
+				],
+				"refer": [
+					"pages/shop/goodslist/goodslist.html"
+				],
+				"priority": 0
+			},
+			"pages/tuiguang/tuig_type.html": {
+				"resources": [],
+				"refer": [
+					"pages/tuiguang/tuig_active.html",
+					"pages/tuiguang/tuig_active_1.html"
+				],
+				"priority": 0
+			},
+			"pages/secondPage/Supply_demand/Supply_demand.html": {
+				"resources": [],
+				"refer": [
+					"pages/secondPage/Supply_demand/detail/detail.html",
+					"pages/secondPage/Supply_demand/Publish/Publish.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"img/tubiao/technology.png",
+				"img/tubiao/activity.png",
+				"img/tubiao/tourism.png",
+				"img/logo/service.png",
+				"fonts/mui.ttf",
+				"css/custom.css",
+				"css/icons-extra.css",
+				"img/logo/tudiziyuan.png",
+				"index.html",
+				"fonts/mui-icons-extra.ttf",
+				"img/logo/policy.png",
+				"img/tubiao/dynamic.png",
+				"js/mui.min.js",
+				"img/logo/mall.png",
+				"img/tubiao/policy.png",
+				"img/tubiao/mall.png"
+			]
+		}
+	}
+}

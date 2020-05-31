@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<style type="text/css">
+		.mui-input-group{
+			margin-top: 10px;
+		}
+		.mui-input-group div{
+			padding: 15px;
+		}
+		.mui-table-view li img{
+			margin: 10px;
+			width: 120px;
+			height: 80px;
+		}
+		.tiaoguo{
+			background-color: #FFFFFF;
+			width:90%;
+			font-size:18px;
+			text-align: center;
+			padding: 15px 0px;
+			margin: 2rem auto;
+			border-radius: 5px;
+		}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    	<h1 class="mui-title">机手认证</h1>
+    <div class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-pull-right">提交</div>
+</header>
+<div class="mui-content">
+	<div>
+		<ul class="mui-table-view">
+		    <li class="mui-table-view-cell mui-collapse-content">
+		    	认证方式
+		    	<a style="float: right;">证书</a>
+		    </li>
+		    <li id="leixing" class="mui-table-view-cell">
+		    	证件类型
+		    	<p id="leixing1" style="float: right;">选择证书类型</p>
+		    </li>
+		    <li class="mui-table-view-cell mui-collapse-content">
+		    	上传资格证书照片<br /><br />
+		    	<p>拍照注意事项：</p>
+				<p>照片要拍清楚，不能有双影，证件上字要清晰。</p>
+				<img id="zhengshu" src="../../img/myse/zhengjian2.png" onclick="headImage()" />
+		    </li>
+		</ul>
+	</div>
+    <div class="tiaoguo mui-action-back">我不是飞手 跳过认证</div>
+    
+</div>
+
+
+
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+mui.init()
+document.getElementById('leixing').addEventListener('tap', function(){
+	if(mui.os.plus){
+		var leixingID = [{
+			title:  "中国航空运动协会"
+		},{
+			title:  "农兄弟学院飞防服务合格证"
+		},{
+			title:  "慧飞无人机应用技术培训中心"
+		},{
+			title:  "中国航空器拥有者及驾驶员协会"
+		},{
+			title:  "其他无人机农业植保专业相关证书"
+		}];
+		plus.nativeUI.actionSheet({
+			title   : "选择证件类型",
+			cancel  : "取消",
+			buttons : leixingID
+		}, function(b) { 
+            switch (b.index) {
+            	case 0:
+                    break;
+                case 1:
+                $("#leixing1").html(leixingID[0].title);
+                    break;
+                case 2:
+                $("#leixing1").html(leixingID[1].title);
+                    break;
+                case 3:
+                $("#leixing1").html(leixingID[2].title);
+                    break;
+                case 4:
+                $("#leixing1").html(leixingID[3].title);
+                    break;
+                case 5:
+                $("#leixing1").html(leixingID[4].title);
+                    break;
+                default:
+                    break;
+            }
+        });
+	}
+}, false);
+function headImage(){
+    if (mui.os.plus) {
+        var buttonTit = [{
+            title: "拍照"
+        }, {
+            title: "从手机相册选择"
+        }];
+        
+        plus.nativeUI.actionSheet({
+            title: "上传图片",
+            cancel: "取消",
+            buttons: buttonTit
+        }, function(b) { /*actionSheet 按钮点击事件*/
+            switch (b.index) {
+                case 0:
+                    break;
+                case 1:
+                    getImage(); /*拍照*/
+                    break;
+                case 2:
+                    galleryImg();/*打开相册*/
+                    break;
+                default:
+                    break;
+            }
+        })
+    }        
+}
+
+// 拍照获取图片
+function getImage() {
+    var c = plus.camera.getCamera();
+    c.captureImage(function(e) {
+        plus.io.resolveLocalFileSystemURL(e, function(entry) {
+        	var imgSrc = entry.toLocalURL() + "?version=" + new Date().getTime(); //拿到图片路径
+            setHtml(imgSrc);
+        }, function(e) {
+            console.log("读取拍照文件错误：" + e.message);
+        });
+    }, function(s) {
+        console.log("error" + s);
+    }, {
+        filename: "_doc/camera/"
+    })
+}
+// 从相册中选择图片 
+function galleryImg(){
+	// 从相册中选择图片
+    plus.gallery.pick( function(e){
+    	for(var i in e.files){
+	    	var fileSrc = e.files[i]
+	    	setHtml(fileSrc);
+    	}
+    }, function ( e ) {
+    	console.log( "取消选择图片" );
+    },{
+    	filter: "image",
+    	multiple: true,
+    	maximum: 1,
+    	system: false,
+    	onmaxed: function() {
+    		plus.nativeUI.alert('最多只能选择1张图片');
+    	}
+    });
+}
+function setHtml(imgSrc){
+	document.getElementById('zhengshu').src = imgSrc
+}
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+<style>
+.head-img {
+	margin-top: -6px;
+	width: 50px;
+	height: 50px;
+	border-radius:3333px;
+	}
+.head{
+	height:40px;
+}
+.mui-card{
+	border-radius: 8px;
+}
+.mui-table-view-cell a span p{
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <a id="icon-more"><span class="mui-icon mui-icon-more mui-pull-right"></span></a>
+    <h1 class="mui-title">个人设置</h1>
+</header>
+<div class="mui-content">
+	<div class="mui-card" style="margin:15px 5px;">
+		<div class="mui-card-content">
+			<div class="mui-card-content-inner">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse-content">
+					    <a>
+					    	头像
+					    	<span class="mui-pull-right head">
+								<img id="touxiang" class="head-img mui-action-preview" src="../../img/logo/android/qdym1080.png"/>
+							</span>
+					    </a>
+					</li>
+					<li class="mui-table-view-cell mui-collapse-content">
+					    <a class="mui-navigate-right">
+					    	我的姓名
+					    	<span style="position:absolute;top:30%;right:35px;">
+					    		<p id="nicheng" class="mui-text-right">农兄弟平台</p>
+					    	</span>
+					    </a>
+					</li>
+					<li class="mui-table-view-cell mui-collapse-content">
+			            <a class="mui-navigate-right">
+			            	修改手机号码
+			                <span style="position:absolute;top:30%;right:35px;">
+			                	<p class="mui-text-right">17717872289</p>
+			                </span>
+			            </a>
+			      </li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right">
+							修改登录密码
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/mui.view.js"></script>
+<script type="text/javascript">
+mui.init();
+mui.plusReady(function(){
+	document.getElementById('nicheng').addEventListener('tap', function(){
+		mui.prompt(' ' , '昵称' , '请输入您的昵称 ' , new Array("取消" , "确认") , function(e){
+			if(e.index == 1){
+				if(e.value != 0){
+					document.getElementById('nicheng').innerHTML = e.value;
+				}else{
+				mui.toast('输入不能为空');
+				}
+			}else{
+				mui.toast('您取消了输入');
+			}
+		});
+	});
+	
+});
+
+mui.plusReady(function(){
+    document.getElementById('touxiang').addEventListener('tap',function(){
+        if(mui.os.plus){
+            var a=[{
+                title:'拍照'
+            },{
+                title:'从手机相册选择'
+            }];
+            plus.nativeUI.actionSheet({
+                title:'修改头像',
+                cancel:'取消',
+                buttons:a
+            },function(b){/*actionSheet 按钮点击事件*/
+                switch(b.index){
+                    case 0:
+                        break;
+                    case 1:
+                        //拍照
+                        getImages();
+                        break;
+                    case 2:
+                        //打开相册
+                        galleryImages();
+                        break;
+                    default:
+                        break;
+                }
+            },false);   
+        }
+    });
+
+    //拍照
+    function getImages(){
+        var mobileCamera=plus.camera.getCamera();
+        mobileCamera.captureImage(function(e){
+            plus.io.resolveLocalFileSystemURL(e,function(entry){
+                var path=entry.toLocalURL()+'?version='+new Date().getTime();
+                uploadHeadImg(path);
+            },function(err){
+                console.log("读取拍照文件错误");
+            });
+        },function(e){
+            console.log("er",err);
+        },function(){
+            filename:'_doc/head.png';
+        });
+    }
+
+    //从本地相册选择
+    function galleryImages(){
+        console.log("你选择了从相册选择");
+        plus.gallery.pick(function(a){
+            plus.io.resolveLocalFileSystemURL(a,function(entry){
+                plus.io.resolveLocalFileSystemURL('_doc/',function(root){
+                    root.getFile('head.png',{},function(file){
+                        //文件已经存在
+                        file.remove(function(){
+                            console.log("文件移除成功");
+                            entry.copyTo(root,'head.png',function(e){
+                                var path=e.fullPath+'?version='+new Date().getTime();
+                                uploadHeadImg(path);
+                            },function(err){
+                                console.log("copy image fail: ",err);
+                            });
+                        },function(err){
+                            console.log("删除图片失败：（"+JSON.stringify(err)+")");
+                        });
+                    },function(err){
+                        //打开文件失败
+                        entry.copyTo(root,'head.png',function(e){
+                            var path=e.fullPath+'?version='+new Date().getTime();
+                            uploadHeadImg(path);
+                        },function(err){
+
+                            console.log("上传图片失败：（"+JSON.stringify(err)+")");
+                        });
+                    });
+                },function(e){
+                    console.log("读取文件夹失败：（"+JSON.stringify(err)+")");
+                });
+            });
+        },function(err){
+            console.log("读取拍照文件失败: ",err);
+        },{
+            filter:'image'
+        });
+    };
+
+    //上传图片
+    function uploadHeadImg(imgPath){
+        //选中图片之后，头像当前的照片变为选择的照片
+        var mainImg=document.getElementById('touxiang');
+        alert(imgPath)
+        mainImg.src=imgPath;
+
+
+//      var images=new Image();
+//      images.src=imgPath;
+//      var imgData=getBase64Image(images);
+//      mui.ajax('http://127.0.0.1/uploadHeadImg',{
+//          data:{
+//              'imgDatas':imgData
+//          },
+//          dataType:'json',//服务器返回json格式数据
+//          type:'post',//HTTP请求类型
+//          timeout:10000,//超时时间设置为10秒；
+//          success:function(data){
+//              if(data.status=='1'){
+//                  mui.alert('上传成功！');
+//              }
+//          },
+//          error:function(xhr,type,errorThrown){
+//              if(type=='timeout'){
+//                  mui.alert('服务器连接超时，请稍后再试');
+//              }   
+//          }
+//      });
+    }
+});
+
+</script>
+</body>
+
+</html>

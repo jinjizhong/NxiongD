@@ -1,0 +1,488 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>农兄弟-详情页面</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="tuig.css" />
+		<script src="../../js/mui.min.js"></script>
+	</head>
+
+<body> 
+	<!--<header class="mui-bar mui-bar-nav">
+			
+			<div id="sliderSegmentedControl" class="mui-slider-indicator">
+					<a id="shangp" style="padding-right: 15px;">
+						商品
+					</a>
+					<a id="pingl" href="">
+						评论
+					</a>
+					<a id="xiangq" style="padding-left: 15px;">
+						详情
+					</a>
+			</div>
+			
+	</header>-->
+<!--banner-->
+<div id="slider" class="mui-slider">
+		<div id="tupian" class="mui-slider-group mui-slider-loop" style="height: 200px;">
+				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img :src="Image3">
+					</a>
+				</div>
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img :src="Image1">
+					</a>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img :src="Image2">
+					</a>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img :src="Image3">
+					</a>
+				</div>
+				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img :src="Image1">
+					</a>
+				</div>
+			</div>
+		<div class="mui-slider-indicator">
+			<div class="mui-indicator mui-active"></div>
+			<div class="mui-indicator"></div>
+			<div class="mui-indicator"></div>
+		</div>
+	</div>
+
+<div id="detailbody">
+  			<div class="title">
+  					<div class="title-left">
+	  						<div class="name">{{Product_name}}  </div>
+	  						<div class="price">
+	  								¥ &nbsp
+	  								<span id="price">
+	  									 {{Old_price}}
+	  								</span>&nbsp/亩
+	  						</div>
+  					</div>
+  					<div class="title-right">
+  							<label class="share" onclick="shares()">
+  									<a><span class="mui-icon mui-icon-redo"></span></a>
+  									<span class="text">分享</span>
+  							</labei>
+  					</div>
+  			</div>
+  			<div class="evaluate">
+						<div  class="flag">
+								<span id="">
+									面积选择（亩）
+								</span>
+						<div class="mianji">
+							<div class="counter_box">
+							<div class="mui-numbox" data-numbox-min='1'>
+								<div onclick="del()" class="mui-btn mui-btn-numbox-minus" style="padding-top: 8px;">-</div>
+								<input id="num" class="mui-input-numbox" type="number" readonly="readonly" value="1" />
+								<div onclick="add()" class="mui-btn mui-btn-numbox-plus" style="padding-top: 8px;">+</div>
+							</div>
+							</div>
+							<!--<span class="danw">
+								/亩
+							</span>-->
+						</div>
+					</div>
+						
+			</div>
+			<div class="paramconfig" id='pickDateBtn'>
+						<span>
+							作业时间	
+						</span>
+				<a id="link-icon"><span id="info">请选择作业时间</span></a>
+			</div>
+			
+		<!--百度地图-->	
+		<div class="evaluate">
+			<div class="flag">
+					<span id="">
+						地址定位
+					</span>
+				</div>
+			<div id="map" style="height: 150px;">
+		
+			</div>
+		</div>
+	<div class="evaluate">
+				<div class="flag">
+						<span id="">
+							区域类型
+						</span>
+				</div>
+		<div class="content">
+				<div class="remen_sos">
+					<ul>
+						<li class="aa"><a>一整块区域</a></li>
+						<li class="aa"><a>两整块区域</a></li>
+						<li class="aa"><a>多块以上</a></li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>		
+	<!--收货地址开始-->
+	<div class="evaluate">
+		<div class="flag">
+					<span id="">
+						联系地址
+					</span>
+				</div>
+			<div class="personInfoBox" onclick="toAddress()">
+		    	<div class="personInfo-content">
+		    			<div class="personInfo_top">
+		    				<h5>费宇</h5>
+		    				<h5 style="margin-left: 17px;">158****3673</h5>
+		    			</div>
+		    			<div class="personInfo_bottom">
+			    				<div id="tag-default" style="">
+			    					默认
+			    				</div>
+			    				<div id="tag-home" style="">
+			    					家
+			    				</div>
+		    			
+			    				<div id="tag-address">
+			    					江苏省淮安市 南港费庄19号
+			    				</div>
+		    			</div>
+		        </div>
+		    	<a><span class="mui-icon mui-icon-arrowright"></span></a>
+		    </div> </div>
+		    <!--收货地址结束-->
+		    <!--评价开始-->
+			<div class="evaluate">
+					<div class="pj_k">
+						<div class="bt"><p>评价<em>（100+）</em></p><span>好评度  <em>95%</em></span></div>
+						<div class="toux_k">
+							<h1><img src="../../img/user.png"></h1>
+							<span>艾米</span>
+							<div class="sd">2018-07-18<p></p><p></p><p></p><p></p></div>
+						</div>
+						<p class="px22">服务态度非常好！给我们带来很大的方便，非常完美，给满分好评！</p>
+					</div>
+					<div id="pingj" class="lianjie">
+						<a>查看更多评价</a>
+					</div>	
+				</div>
+			<!--评价结束-->	
+				
+			<div class="advertisement">
+				  	<div class="flag"><span>详情信息</span></div>
+				  	<div id="content_detail" class="content">
+				  			
+				  	</div>
+			</div>
+</div> 
+<!--底部导航-->
+	<nav class="mui-bar mui-bar-tab ">
+		<a class="mui-tab-item">
+			<div style="color: red;font-weight:800px;">合计：￥<span id="allPrice">8</span> 元</div>
+		</a>
+		<a id="orderTo" class="mui-tab-item" style="background-color: #00C7C7;font-weight:800px;color: #FFFFFF;font-size: 16px;">去付款</a>
+	</nav>
+</div>
+
+</body>
+</html>
+<script type="text/javascript" src="../../js/vue.min.js" ></script>
+<script type="text/javascript" src="tuig_detial.js" ></script>
+<script type="text/javascript" src="../util/util.js" ></script>
+<script type="text/javascript">
+	
+	//mui初始化
+		mui.init({
+			swipeBack: false //启用右滑关闭功能
+		});
+		
+		window.onload=function(){
+			var slider_auto = mui("#slider");
+			slider_auto.slider({
+				interval: 2000
+			});
+		}
+		
+	//日期选择
+	var info=document.getElementById("info");//作业时间
+	var num=document.getElementById("num");//亩数
+	var price=document.getElementById("price").innerHTML;//单价
+	
+	//监听自定义事件，获取新闻详情
+	document.addEventListener('tui_detail', function(event) {
+		var guid = event.detail.Id;
+		var content_detail=document.getElementById("content_detail");
+		var allPrice=document.getElementById("allPrice");//总价格
+	
+		if(!guid) {
+			return;
+		}
+		var detail_url="http://151012fp30.iask.in/api/GetData";
+		var data={
+			"strJson":"{'DriverID':'1234567890','UserID': '1234567890','TaskGuid':'86537836334','DataType': 'ServerInfo','Id':'"+guid+"'}"
+		};
+		
+		fw.Product_name= event.detail.Product_name;
+		fw.Now_price= event.detail.Now_price;
+		fw.Old_price= event.detail.Old_price;
+		allPrice.innerHTML=event.detail.Old_price;
+		
+		mui.ajax(detail_url, {
+		data: data,
+		dataType: 'json',
+		//服务器返回json格式数据
+		type: 'POST',
+		//HTTP请求类型
+		timeout: 10000,
+		success: function(ee){
+			var obj=JSON.parse(ee);
+			//console.log(obj.Image1);
+			ig.Image1=obj.Image1;
+			ig.Image2=obj.Image2;
+			ig.Image3=obj.Image3;
+			fw.Content=obj.Content;
+			content_detail.innerHTML=obj.Content;
+		},
+		error: function(xhr, type, errorThrown) {
+			//异常处理；
+			mui.toast('详情获取失败！');
+			//alert("xhr" + xhr + type + errorThrown);
+		}
+	});
+		
+	});
+
+	//重写返回逻辑
+	mui.back = function() {
+		plus.webview.currentWebview().hide("auto", 300);
+	}
+		
+	//窗口隐藏时，重置页面数据
+	mui.plusReady(function () {
+		var self = plus.webview.currentWebview();
+		self.addEventListener("hide",function (e) {
+			window.scrollTo(0, 0);
+			fw.retData();
+			ig.retData2();
+		},false);
+		
+	});
+	//Vue绑定界面数据
+	var fw=new Vue({
+		el: '#detailbody',
+		data: getDefaultData(),
+		methods: {
+			retData: function() {//重置数据
+				Object.assign(this.$data, getDefaultData());
+			}
+		}
+	});
+	var ig=new Vue({
+		el: '#tupian',
+		data: {
+			Image1:'',
+			Image2:'',
+			Image3:''
+		},
+		methods: {
+				retData2: function() {//重置数据
+					Object.assign(this.$data, {Image1:'',Image2:'',Image3:''});
+				}
+			}
+	});
+	
+	function getDefaultData() {
+				return {
+					Product_name: '',
+					Now_price: '',
+					Old_price: '',
+					Content: ''
+				}
+			}
+	//点击选择作业时间
+	document.getElementById("pickDateBtn").addEventListener('tap', function() {
+			var dDate = new Date();
+			dDate.toLocaleString();
+			var minDate = new Date();
+			minDate.setFullYear(2010, 0, 1);
+			var maxDate = new Date();
+			maxDate.setFullYear(2099, 11, 31);
+			plus.nativeUI.pickDate(function(e) {
+				var d = e.date;
+				info.innerText = "选择时间："+d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+			}, function(e) {
+				info.innerText = "请选择作业时间";
+			}, {
+				title: "请选择日期",
+				date: dDate,
+				minDate: minDate,
+				maxDate: maxDate
+			});
+		});
+			
+		//区域选择
+		var btnclass=document.getElementsByClassName("aa");
+		var dianji=false;
+		//choose = btnclass[0];
+			for(var i = 0; i < btnclass.length; i++) {
+				btnclass[i].onclick = function() {
+					
+					//choose.classList.remove("seg_color");
+					//this.classList.add("seg_color");
+					if(this.classList.contains("seg_color")){
+						this.classList.remove("seg_color");
+					}else{
+						this.classList.add("seg_color");
+					}
+					//choose = this;
+				}
+			};
+		//分享功能	
+		function shares(){
+			//outSet('调用系统分享');
+			var msg={content:"大农业农兄弟平台"};
+			/*if(pic&&pic.realUrl){
+				msg.pictures=[pic.realUrl];
+			}*/
+			if('iOS'==plus.os.name){//iOS平台添加链接地址
+				msg.href='http://www.dcloud.io/';
+			}
+			//outLine(JSON.stringify(msg));
+			plus.share.sendWithSystem?plus.share.sendWithSystem(msg, function(){
+				//outLine('Success');
+				//console.log('Success');
+			}, function(e){
+				//outLine('Failed: '+JSON.stringify(e));
+				//console.log('Failed: '+JSON.stringify(e));
+			}):shareSystemNativeJS();
+		}
+			
+		//减少
+		function del(){
+			//alert(num.value)
+			document.getElementById("allPrice").innerHTML=parseFloat(fw.Old_price)*parseFloat(num.value)
+		}
+		//增加
+		function add(){
+			//alert(num.value)
+			document.getElementById("allPrice").innerHTML=parseFloat(fw.Old_price)*parseFloat(num.value)
+		}
+		
+		//联系方式地址
+		function toAddress(){
+			mui.openWindow({
+				url:"../address/userAddress.html"
+			});
+		}
+		
+		//更多评论
+		document.getElementById("pingj").addEventListener('tap',function(e){
+			
+			mui.openWindow({
+				url:"pingjia/pingjia.html"
+			});
+			
+		});
+		
+		//下单
+		document.getElementById("orderTo").addEventListener('tap',function(e){
+			if(document.getElementById("info").innerHTML==="请选择作业时间"){
+				alert("请选择作业时间")
+			}else{
+				mui.openWindow({
+				url:"../pay/pay.html",
+				 extras: {
+	 			 		price:document.getElementById("allPrice").innerHTML
+                    }
+				
+			});
+			
+		}
+			
+		});
+		
+	 //地图
+	var em = null,map = null;
+	var address = null,point = null,coordType = null,marker = null;
+	if(window.plus) {
+		plusReady();
+	} else {
+		document.addEventListener("plusready", plusReady, false);
+	}
+	// DOMContentloaded事件处理
+	document.addEventListener("DOMContentLoaded", function() {
+		em = document.getElementById("map");
+		window.plus && plusReady();
+		//document.getElementById("clear").addEventListener("tap", clearPosition)
+	}, false);
+
+	function clearPosition() {
+		//document.getElementById("address").value = "";
+		map.clearOverlays();
+		marker = null;
+		setUserLocation();
+	}
+
+	function setUserLocation() {
+		map.getUserLocation(function(state, pos) {
+			if(0 == state) {
+				map.centerAndZoom(pos, 18);
+				plus.maps.Map.reverseGeocode(pos, {}, function(event) {
+					address = event.address; // 转换后的地理位置
+					point = event.coord; // 转换后的坐标信息
+					coordType = event.coordType; // 转换后的坐标系类型
+					/*console.log("coordType" + coordType);
+					console.log("Address:" + address);
+					console.log("coordType:" + coordType);
+					document.getElementById("address").placeholder = address;*/
+				}, function(e) {
+					console.error("Failed:" + JSON.stringify(e));
+				});
+			}
+		});
+	}
+	// H5 plus事件处理
+	function plusReady() {
+		if(!em) {
+			return
+		};
+		map = new plus.maps.Map("map");
+		map.showUserLocation(true);
+		setUserLocation();
+		map.onclick = function(point) {
+			map.setCenter(point);
+
+			if(marker) {
+				marker.setPoint(point);
+			} else {
+				marker = new plus.maps.Marker(point);
+				marker.setIcon("../../../img/position.png");
+				map.addOverlay(marker);
+			}
+			plus.maps.Map.reverseGeocode(point, {}, function(event) {
+				document.getElementById("address").value = event.address;
+				var bubble = new plus.maps.Bubble(event.address);
+				marker.setBubble(bubble, true);
+				marker.setLabel(event.address);
+			})
+		}
+	}
+ 
+</script>

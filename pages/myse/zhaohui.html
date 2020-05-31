@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+
+
+<style>
+
+body {
+	padding-top: 50px;
+}
+.register {
+	padding: 8px 6px;
+	font-size: 14px;
+}
+.res-item {
+	position: relative;
+	width: 100%;
+	border-radius: 4px;
+	margin-bottom: 8px;
+	background-color: #fff;
+}
+
+.res-item .input-item {
+	display: inline
+	width: 100%;
+	padding-left: 31px;
+	height: 40px;
+	border: none;
+	font-size: inherit;
+}
+
+
+.yanzhengma {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	z-index: 100;
+	display: inline-block;
+	padding: 0.5rem 0.8rem;
+	font-size: 14px;
+	border: none;
+	background-color: #06BFAC;
+	color: #fff;
+	border-radius: 3rem;
+}
+.login__submit{
+	font-weight:bold;
+    width: 95%;
+    margin: 2.5%;
+	height: 3rem;
+    background: #06BFAC;
+    font-size: 16px;
+    border-radius: 3rem;
+}
+.login__submit a{
+	color: #FFFFFF;
+}
+.mui-icon{
+	margin-left: 5px;
+	margin-right: -15px;
+	padding: 10px;
+}
+
+</style>
+
+
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">重置密码</h1>
+</header>
+<div class="register">
+    <div class="res-item">
+    	<i class="mui-icon mui-icon-phone"></i>
+        <input type="text" placeholder="手机号" class="input-item">
+    </div>
+    <div class="res-item">
+    	<i class="mui-icon mui-icon-email"></i>
+        <input type="text" placeholder="验证码" class="input-item ">
+        
+        <button class="yanzhengma">发送验证码</button>
+    </div>
+    <div class="res-item">
+    	<i class="mui-icon mui-icon-locked"></i>
+        <input type="passWord" placeholder="新密码" class="input-item mima">
+    </div>
+    <div class="res-item">
+    	<i class="mui-icon mui-icon-locked"></i>
+        <input type="passWord" placeholder="确认密码" class="input-item repeatmima">
+    </div>
+    
+    <button type="button" class="login__submit"><a> 完 成 </a></button>
+ 
+</div>
+
+
+
+
+
+
+<script src="../../js/mui.min.js"></script>
+<script type="text/javascript">
+mui.init()
+</script>
+</body>
+
+</html>

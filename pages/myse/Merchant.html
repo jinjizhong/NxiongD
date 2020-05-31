@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="Merchant.css" />
+	</head>
+
+	<body>
+
+		<div class="mui-content">
+			<div class="toubu">
+				<img style="height: 150px; width: 100%;" src="../../img/myse/beijing.jpg" />
+				<div style="margin-top: -45px; margin-left: 15px;">
+					<img style="width: 80px; height: 80px; border-radius:5px;" src="../../img/wodejif.jpg">
+					<div style="margin-left: 95px; margin-top: -35px;">Chenai-尘</div>
+				</div>
+				
+			</div>
+			
+			<div class="zhongbu">
+				<button style="margin: 15px 0px 15px 30px;">关注</button>
+				<table style="width: 50%; float: right; margin-top: 10px;">
+					<tr class="mui-text-center">
+						<td width="33%">{{page_view[0]}}<br />访客</td>
+						<td width="33%">{{page_view[1]}}<br />联系</td>
+						<td width="33%">{{page_view[2]}}<br />订单</td>
+					</tr>
+				</table>
+			</div>
+			
+			<form>
+				<div>
+					<img src="../../img/tubiao/tourism.png"/>
+					<label>店铺认证</label>
+					<a>已认证 ></span></a>
+				</div>
+				<div>
+					<img src="../../img/tubiao/tourism.png"/>
+					<label>机手认证</label>
+					<a>已认证 ></span></a>
+				</div>
+			</form>
+			
+			<!--<div class="xiangqing" style="margin-top: 5px;">
+				<div class="shanghu">商户认证信息</div>
+				<hr />
+				<div>
+					<table class="mui-text-center" border="1">
+						<tr>
+							<th>认证身份</th>
+							<td>{{xinxi[0]}}</td>
+							<th>认证品类</th>
+							<td>{{xinxi[1]}}</td>
+						</tr>
+						<tr>
+							<th>认证地区</th>
+							<td>{{xinxi[2]}}</td>
+							<th>供货渠道</th>
+							<td>{{xinxi[3]}}</td>
+						</tr>
+						<tr>
+							<th>规模</th>
+							<td>{{xinxi[4]}}</td>
+							<th>日供货量</th>
+							<td>{{xinxi[5]}}</td>
+						</tr>
+					</table>
+					<div class="zhengjian">
+						<img :src="img[0]" /> 承诺书
+					</div>
+					<div class="zhengjian">
+						<img :src="img[1]" /> 企业资质
+					</div>
+					<div class="zhengjian">
+						<img :src="img[2]" /> 产品资质
+					</div>
+				</div>
+			</div>-->
+
+			<div style="margin-top: 324px; height: 80%;" class="mui-slider mui-fullscreen">
+				<div style="height: 38px;" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll ">
+						<a class="mui-control-item mui-active" href="#item1mobile">供应</a>
+						<a class="mui-control-item" href="#item2mobile">采购</a>
+					</div>
+				</div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll gongying">
+								<ul>
+									<li v-for="item in Supply_order">
+										<div class="tupian">
+											<img :src="item.linkImg" />
+										</div>
+										<div class="biaoti">{{item.biaoti}}</div>
+										<div class="chandi">{{item.chandi}}</div> 
+										<div class="jiage">￥{{item.jiage}}</div>
+										<div class="yishou">已售{{item.yishou}}</div>
+										<hr />
+									</li>
+									<!--<li>
+										<div class="tupian"><img src="../../img/myse/1536127875.png" /></div>
+										<div class="biaoti">红富士苹果</div>
+										<div class="chandi">江苏省淮安市淮阴区 尘埃</div>
+										<div class="jiage">￥35元/箱</div>
+										<div class="yishou">已售
+											<a>22</a> 箱</div>
+										<hr />
+									</li>-->
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll caigou">
+								<ul>
+									<li v-for="item in Receiving_order">
+										<div class="biaoti">{{item.biaoti}}</div>
+										<div class="yaoqiu">品质要求：{{item.yaoqiu}}</div>
+										<div class="shijian">发布时间：{{item.shijian}}</div>
+										<div class="shuliang">{{item.shuliang}}</div>
+										<div class="zixun" id="phone">{{item.zixun}}</div>
+										<span id="tel" style="display: none;">{{item.tel}}</span>
+										<hr />
+									</li>
+									<!--<li>
+										<div class="biaoti">西瓜</div>
+										<div class="yaoqiu">品质要求：电话沟通</div>
+										<div class="shijian">发布时间：1天前</div>
+										<div class="shuliang">2000斤</div>
+										<div class="zixun">立即咨询</div>
+										<hr />
+									</li>-->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+			<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+			<script src="Merchant.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

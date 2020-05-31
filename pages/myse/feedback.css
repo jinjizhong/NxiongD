@@ -1,0 +1,120 @@
+
+#star li{
+	list-style-type:none;
+	float:left;
+	width:24px;
+	cursor:pointer;
+	text-indent:-9999px;
+	background:url(../../img/myse/star.png)no-repeat;
+}
+#star li.on{
+	background-position:0 -28px;
+}
+.dafen{
+	background-color: #fff;
+	padding: 1px 0px;
+	margin-top: 10px;
+}
+.mui-content img{
+	width: 140px;
+	height: 100px;
+	float: left;
+	margin: 8px 15px 0px 10px;
+}
+.row{
+	width: 100%;
+	background-color: #fff;
+}
+.row img{
+	width: 20%;
+	height: 80%;
+	margin: 10px 5px 0px 5px;
+}
+.question{
+	height: 100px;
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
+	border: none !important;
+}
+.tijiao{
+	background-color: red;
+	font-weight:bold;
+	width:90%;
+	font-size:14px;
+	text-align: center;
+	height:37px;
+	line-height: 37px;
+	color: white;
+	margin: 2rem auto 1rem auto;
+	border-radius: 22px;
+}
+
+
+
+.image-list {
+	width: 100%;
+	height: 85px;
+	background-size: cover;
+	padding: 10px 10px;
+	overflow: hidden;
+}
+.image-item {
+	width: 65px;
+	height: 65px;
+	background-size: 100% 100%;
+	display: inline-block;
+	position: relative;
+	border-radius: 5px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	border: solid 1px #e8e8e8;
+	vertical-align: top;
+}
+.image-item .file {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+	z-index: 0;
+}
+.image-item.space {
+	border: none;
+}
+.image-item .image-close {
+	position: absolute;
+	display: inline-block;
+	right: -6px;
+	top: -6px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	border-radius: 12px;
+	background-color: #FF5053;
+	color: #f3f3f3;
+	border: solid 1px #FF5053;
+	font-size: 9px;
+	font-weight: 200;
+	z-index: 1;
+}
+.image-item .image-up{
+	height: 65px;
+	width: 65px;
+	border-radius: 10px;
+	line-height: 65px;
+	border: 1px solid #ccc;
+	color: #ccc; 
+	display: inline-block;
+	text-align: center;
+}
+.image-item .image-up:after{
+	font-family: "微软雅黑";
+	content: '+';
+	font-size: 60px;
+}
+.image-item.space .image-close {
+	display: none;
+}

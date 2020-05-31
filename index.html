@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>农兄弟</title>
+   <link rel="stylesheet" href="css/mui.min.css"/>
+   <link rel='stylesheet' href='css/custom.css' />
+</head>
+
+<style>
+		html,
+		body {
+			background-color: #2cc666;
+		}
+		header{
+			background-color: #2cc666;
+		}
+</style>
+
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<div class="mui-input-row mui-search">
+			<input type="search" class="mui-input-clear" placeholder="请输入搜索内容">
+		</div>
+	</header>
+	<!--
+    	作者：2303232652@qq.com
+    	时间：2018-06-15
+    	描述：首页
+    -->
+    <!--首页轮播图模块-->
+	<div id="slider" class="mui-slider">
+		<div class="mui-slider-group mui-slider-loop" style="height: 230px;">
+				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="img/timg1.jpg">
+					</a>
+				</div>
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="img/timg.jpg">
+					</a>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="img/timg2.jpg">
+					</a>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="img/timg3.jpg">
+					</a>
+				</div>
+				<!-- 第四张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="img/timg1.jpg">
+					</a>
+				</div>
+				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="img/timg.jpg">
+					</a>
+				</div>
+			</div>
+		<div class="mui-slider-indicator">
+			<div class="mui-indicator mui-active"></div>
+			<div class="mui-indicator"></div>
+			<div class="mui-indicator"></div>
+			<div class="mui-indicator"></div>
+		</div>
+	</div>
+	<!--<div style="display: flex">
+				<img style="padding-left: 10px;" src="img/logo/cloudy.png" alt="" />
+				<h4 style="padding-left: 10px;">天气</h4>
+			</div>-->
+			<!--<div class="title biaoti">
+				<img class="logo" src="img/logo/cloudy.png" alt="" />
+				<span class="huodong">地点</span>
+				<div class="gengduo"><h5>天气</h5></div>
+				
+			</div>-->
+	<!-- 九宫格模块 -->
+	<div class="mui-content" style="padding:0px 0px;background-color: #FFFFFF;">
+		        <ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF;">
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
+		            		<img src="img/logo/currentNews.png" alt="" />
+		                    <div class="mui-media-body">农业资讯</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
+		                    <!--<span class="mui-icon mui-icon-email"></span>-->
+		                    <img src="img/logo/mall.png" alt="" />
+		                    <div class="mui-media-body">农业商城</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
+		                     <img src="img/logo/service.png" alt="" />
+		                    <div class="mui-media-body">农事服务</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
+		                     <img src="img/logo/policy.png" alt="" />
+		                    <div class="mui-media-body">农村政务</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
+		                     <img src="img/logo/service.png" alt="" />
+		                    <div class="mui-media-body">乡村旅游</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		            	<a href="#">
+		                     <img src="img/logo/kefu.png" alt="" />
+		                    <div class="mui-media-body">客服中心</div></a></li>
+		        </ul> 
+        <!--边框间距-->
+        <div class="biankuang"></div>
+	<!--列表页-->	        
+	<div style="padding-top: 10px;padding-bottom:10px ;">
+		<!--推广活动-->	  
+			<div class="title biaoti">
+				<img class="logo" src="img/tubiao/activity.png" alt="" />
+				<span class="huodong">推广活动</span>
+				<div class="gengduo"><h5>更多>></h5></div>
+				
+			</div>
+	
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" src="img/timg.jpg">
+						<div class="mui-media-body">
+							无人机
+							<p class='mui-ellipsis'>无人机打农药活动开始啦！打一亩送一亩</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right' href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/timg.jpg">
+						<div class="mui-media-body">
+							农机收割
+							<p class='mui-ellipsis'>农机收割来啦！下单可享受农机收割上门服务</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" src="img/timg.jpg">
+						<div class="mui-media-body">
+							农机播种
+							<p class='mui-ellipsis'>播种不用急，农机来帮忙</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+			<div class="biankuang"></div>
+		<!--农资动态-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<img class="logo" src="img/tubiao/dynamic.png" alt="" />
+				<span class="nongzi">农资动态</span>
+				<div class="gengduo"><h5>更多>></h5></div>
+				
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" src="img/timg2.jpg">
+						<div class="mui-media-body">
+							种子产品
+							<p class='mui-ellipsis'>瓜果蔬菜种子系类</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right' href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/timg.jpg">
+						<div class="mui-media-body">
+							农药产品
+							<p class='mui-ellipsis'>各种农药应有尽有</p>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+			<div class="biankuang"></div>
+			<!--农产品商城-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<img class="logo" src="img/logo/mall.png" alt="" />
+				<span class="mall">农商城</span>
+				<div class="gengduo"><h5>更多>></h5></div>
+				
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" src="img/timg2.jpg">
+						<div class="mui-media-body">
+							蔬菜
+							<p class='mui-ellipsis'>蔬菜系列</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right' href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/timg.jpg">
+						<div class="mui-media-body">
+							水果
+							<p class='mui-ellipsis'>水果系列</p>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+			<div class="biankuang"></div>
+			<!--农业政策-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<img class="logo" src="img/tubiao/policy.png" alt="" />
+				<span class="zhengce">农业政策</span>
+				<div class="gengduo"><h5>更多>></h5></div>
+				
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" src="img/timg2.jpg">
+						<div class="mui-media-body">
+							补助政策
+							<p class='mui-ellipsis'>政府补助种田农业户</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right' href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/timg.jpg">
+						<div class="mui-media-body">
+							国家补贴
+							<p class='mui-ellipsis'>国家新出台政策补贴个人单体户</p>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+			<div class="biankuang"></div>
+			<!--农业科技-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<img class="logo" src="img/tubiao/technology.png" alt="" />
+				<span class="keji">农业科技</span>
+				<div class="gengduo"><h5>更多>></h5></div>
+				
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" src="img/timg2.jpg">
+						<div class="mui-media-body">
+							科学种田
+							<p class='mui-ellipsis'>科学种田增加加好</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right' href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/timg.jpg">
+						<div class="mui-media-body">
+							农业养殖
+							<p class='mui-ellipsis'>科学养殖</p>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+			<div class="biankuang"></div>
+			<!--乡村旅游-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<img class="logo" src="img/tubiao/tourism.png" alt="" />
+				<span class="lvyou">乡村旅游</span>
+				<div class="gengduo"><h5>更多>></h5></div>
+				
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" src="img/timg2.jpg">
+						<div class="mui-media-body">
+							种子产品
+							<p class='mui-ellipsis'>瓜果蔬菜种子系类</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class='mui-navigate-right' href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/timg.jpg">
+						<div class="mui-media-body">
+							农药产品
+							<p class='mui-ellipsis'>各种农药应有尽有</p>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+		</div>        
+</div>
+	
+</body>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		mui.init({
+			swipeBack: false //启用右滑关闭功能
+		});
+
+		var slider = mui("#slider");
+		slider.slider({
+			interval: 2000
+		});
+
+		
+
+	</script>
+</html>

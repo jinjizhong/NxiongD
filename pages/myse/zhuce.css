@@ -1,0 +1,83 @@
+/*后添加的。用于使输入框摆脱mui的限制*/
+
+input{
+	-webkit-user-select: auto;
+}
+
+body {
+	padding-top: 50px;
+}
+
+input[type=color],
+input[type=date],
+input[type=datetime-local],
+input[type=datetime],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=search],
+input[type=tel],
+input[type=time],
+input[type=url],
+input[type=week],
+select,
+textarea {
+	-webkit-user-select: auto;
+	width: auto;
+	margin: 0;
+}
+
+.register {
+	padding: 8px 6px;
+	font-size: 14px;
+}
+
+.res-item {
+	position: relative;
+	width: 100%;
+	border-radius: 4px;
+	margin-bottom: 8px;
+	background-color: #fff;
+}
+
+.res-item .input-item {
+	display: inline;
+	padding-left: 31px;
+	height: 40px;
+	border: none;
+	font-size: inherit;
+}
+
+.yanzhengma {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	z-index: 2;
+	display: inline-block;
+	padding: 0.5rem 0.8rem;
+	font-size: 14px;
+	border: none;
+	background-color: #06BFAC;
+	color: #fff;
+	border-radius: 3rem;
+}
+
+.login__submit {
+	font-weight: bold;
+	width: 95%;
+	margin: 2.5%;
+	height: 3rem;
+	background: #06BFAC;
+	font-size: 16px;
+	border-radius: 3rem;
+}
+
+.login__submit a {
+	color: #FFFFFF;
+}
+
+.mui-icon {
+	margin-left: 5px;
+	margin-right: -15px;
+	padding: 10px;
+}

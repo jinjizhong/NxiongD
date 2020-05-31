@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>推广活动-作业区域</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
+		<link rel="stylesheet" type="text/css" href="../mall.css"/>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../util/util.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">作业区域</h1>
+	</header>
+		<div class="mui-content mui-row mui-fullscreen"  v-if="info">
+			<!--左侧-->
+			<div class="mui-col-xs-3">
+				<div  id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+						<a  v-for="item,index in types"   class="mui-control-item" 
+						 :class="{'mui-active':index==0}"   :href="'#content' + index">{{item.name}}</a>
+				</div>
+			</div>
+			<!--右侧-->
+			<div id="segmentedControlContents" class="mui-col-xs-9">
+				<div v-for="item,index in types"  :id="'content' + index"  
+					      class="mui-control-content" :class="{'mui-active':index==0}">
+						<div  class="type-item-card">
+								<div  v-for ="item1 in  item.types" class="item-container"  @tap="open_Url(item1)">
+									<img v-if="item1.Class_img" :src="item1.Class_img" style="height: 74px;margin-top: 7px;"/>
+									<div style="text-align: center;margin-top:11px;font-weight: 600;font-size: 14px;">
+										{{item1.name}}
+									</div>
+								</div>
+						</div>
+				</div>
+			</div>
+		</div>
+		<div id="list"></div>
+	</body>
+</html>
+<script>
+	mui.init();
+var info=null;
+var types=null;
+var webview_detail = null;//详情页webview
+var attribute =[];
+
+mui.plusReady(function() {
+	requestData();
+});
+
+
+function requestData(){
+		
+info={
+	"id": "5396c4fb73174e88ab3687ceb2bf9057",
+	"name": "作业区域",
+	"Class_img": "",
+	"types": [{"id": "2344b94f1999d982ad1440b19d",
+				"name": "清江浦区",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "齐湖村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "王元村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "范庄村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "161e582344b94f1999d1440b19d",
+				"name": "淮安区",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "杨柳村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "十里村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "发茂村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "e582344b94f1999d982440b19d",
+				"name": "淮阴区",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "杨庄社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "北桥社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "1e582344b94f1999d982ad149d",
+				"name": "洪泽区",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "长河村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "幸福村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "1e582344b94f1999d982ad149d",
+				"name": "涟水县",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "花园村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "淮浦路社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "1e582344b94f1999d982ad149d",
+				"name": "盱眙县",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "马坝社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "伏湖村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			},{"id": "1e582344b94f1999d982ad149d",
+				"name": "金湖县",
+				"types": [{
+					"id": "0387f659305849a6860634072352bbc2",
+					"name": "三车村",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				},{
+					"id": "cec9240af05b42fc8c938908f383a457",
+					"name": "东方红社区",
+					"Class_img": "http://175k65903h.iask.in:51504/upload888888/image/20180831/6367132396482248129513283.jpg"
+				}]
+			}]
+}
+		 
+		types=new Vue({
+			el:".mui-content",
+			data:info,
+			methods:{
+				open_Url:function(e){
+					open_Url(e);
+				}
+			}
+		})
+}
+
+function open_Url(obj){
+	
+		mui.openWindow({
+	 			url:"tuig_active.html",
+	 			 extras: {
+	 			 		vid:plus.webview.currentWebview().vid,
+                        tyname: plus.webview.currentWebview().tyname
+                    }
+	 		});
+}
+
+	/*mui.back = function() {
+				plus.webview.currentWebview().hide("auto", 300);
+//				var wobj= plus.webview.get.getLaunchWebview();
+   			var wobj = plus.webview.getWebviewById("shop/goodslist/goodslist.html");
+				//动画结束后，恢复默认值
+				setTimeout(function() {
+					window.scrollTo(0, 0);
+					  wobj.reload(true); 
+				}, 200);
+	}*/
+</script>

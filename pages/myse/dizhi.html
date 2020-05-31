@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="myself.css" />
+</head>
+
+<body style="height: 100%;">
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <a id="icon-more"><span class="mui-icon mui-icon-more mui-pull-right"></span></a>
+    <h1 class="mui-title">收货地址管理</h1>
+</header>
+
+
+<div class="shouhdz_hk">
+	<div class="shouh_zk">
+		<div class="shouh_dange_beijin">
+			<div class="shang">
+				<div class="yuanq"><i></i></div>
+				<div class="mz">
+					<p><em>尘埃</em> <em>177*****189</em></p>
+					<p>江苏省淮安市健康西路140号 </p>
+				</div>
+			</div>
+			<div class="boanjk"><a href="#">编辑</a></div>
+		</div>
+		<div class="shouh_dange_beijin">
+			<div class="shang">
+				<div class="yuanq"><i></i></div>
+				<div class="mz">
+					<p><em>尘埃</em> <em>177*****189</em></p>
+					<p>江苏省淮安市健康西路140号 </p>
+				</div>
+			</div>
+			<div class="boanjk"><a href="#">编辑</a></div>
+		</div>
+	</div>
+	<div id="" class="dizhi">
+		    	<div @tap="go_editAddress">
+		    		＋ 新建收货地址
+		   		</div>
+		    </div>
+</div>
+
+
+
+
+<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/mui.min.js"></script>
+<script type="text/javascript">
+mui.init()
+new Vue({
+	el:".dizhi",
+	data:{},
+	methods:{
+		go_editAddress:go_editAddress
+	}
+});
+var editAddress = null; 
+mui.plusReady(function() {
+		//预加载详情页
+		editAddress = mui.preload({
+			url: 'editAddress/editAddress.html',
+			id: 'go_editAddress',
+			styles: {
+				"render": "always",
+				"popGesture": "hide",
+				"bounce": "vertical",
+				"bounceBackground": "#efeff4",
+			}
+		});
+});
+function go_editAddress(){
+	if(!editAddress) {
+		setTimeout(function() {
+			go_editAddress();
+		}, 100);
+	}
+	//触发子窗口变更新闻详情
+	mui.fire(editAddress,'go_editAddress',{
+		
+	});
+	setTimeout(function () {
+		editAddress.show("slide-in-right", 300);
+	},150);
+}
+</script>
+</body>
+
+</html>

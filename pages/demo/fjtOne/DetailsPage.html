@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../../css/mui.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-bar .mui-pull-left .mui-icon {
+				padding-right: 5px;
+				font-size: 28px;
+			}
+			
+			.mui-bar .mui-btn {
+				font-weight: normal;
+				font-size: 17px;
+			}
+			
+			.mui-bar .mui-btn-link {
+				top: 1px;
+			}
+			
+			.mui-content img {
+				width: 100%;
+			}
+			
+			.hm-description {
+				margin: 15px;
+			}
+			
+			.hm-description>li {
+				font-size: 14px;
+				color: #8f8f94;
+			}
+			.span-title {
+				background-color: red;
+				color: white;
+				font-size: 12px;
+				border-radius: 5px;
+				font-weight: 800;
+				display: inline-block;
+			}
+			.span-fangshi {
+				color: red;
+				border: 0.8px solid red;
+				border-radius: 50px;
+				font-size: 8px;
+				margin-right: 2px;
+			}
+			input[type="radio"] {
+			    position: absolute;
+			    clip: rect(0, 0, 0, 0);
+			    
+			}
+			input[type="radio"] +label {
+				display: inline-block;
+				background-color: #ebedef;
+				height: 38px;
+				line-height: 36px;
+				border-radius: 8px;
+				font-size: 13px;
+				box-sizing: border-box;
+			}
+			input[type="radio"]:checked + label{
+			    border: 1px solid #FFE4E1;
+			    background-color: #FFF5EE;
+			    color: orange;
+			    box-sizing: border-box;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<!--轮播图开始-->
+		    <div id="slider" class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<div :class="'mui-slider-item '+((index==0||index==item.length+1)?'mui-slider-item-duplicate':'')" v-for="(item,index) in img">
+						<a href="#">	
+							<img :src="item.linkImg" style="height: 310px;" />
+							<p class="mui-slider-title">{{item.text}}</p>
+						</a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator mui-text-right">
+					<div :class="'mui-indicator '+(index==0?'mui-active':'')" v-for="(item,index) in img" v-if="index<=3"></div>
+				</div>
+			</div>
+			<!--轮播图结束-->
+			<div style="background-color: white;">
+				<div class=" mui-content-padded">
+					<h3 style="color: red;">￥{{money}}</h3>
+				    <h4 style="font-weight: 800;">{{title}}</h4>
+				    <div style="font-size: 15px;font-weight: 200;">
+				    	<span style="color: #696969;">快递:免运费</span><span style="text-align: center;display: inline-block;width: 50%;color: #696969;">月销51笔</span><span style="float: right;color: #696969;"> 浙江杭州</span>
+				    </div>
+				</div>
+			</div>
+			<div style="margin-top: 10px;background-color: white;">
+				<div class="mui-content-padded">
+					<span style="font-size: 15px;font-weight: 300;color: #696969;">优惠</span>
+					<span style="text-indent: 2em;display: inline-block;width: 90%;font-size: 15px;font-weight: 400;">
+						领券后至少可减<span style="color: red;">￥10</span>
+						<a href="#lingquan" style="float: right;color: #696969;">领券></a>
+					</span>
+				</div>
+				<div class="mui-content-padded">
+					<span style="font-size: 15px;font-weight: 300;color: #696969;">服务</span>
+					<span style="font-size: 15px;text-indent: 2em;display: inline-block;">
+						<a href="#fuwu" style="color: #696969;">7天无理由·48小时内发货</a>
+					</span>
+				</div>
+			</div>
+			<div style="margin-top: 10px;background-color: white;">
+				<div class="mui-content-padded">
+					<span style="font-size: 15px;font-weight: 300;color: #696969;">选择</span>
+					<span style="font-size: 15px;text-indent: 2em;display: inline-block;">
+						<a href="#xuanze" style="color: #696969;">选择&nbsp;&nbsp;颜色分类</a>
+					</span>
+				</div>
+				<div class="mui-content-padded">
+					<span style="font-size: 15px;font-weight: 300;color: #696969;">参数</span>
+					<span style="font-size: 15px;text-indent: 2em;display: inline-block;">
+						<a href="#canshu" style="color: #696969;">大小&nbsp;&nbsp;流行款式名称</a>
+					</span>
+				</div>
+			</div>
+			<!--评价-->
+			<div>
+				<div class="title mui-content-padded">
+				宝贝评价<a style="float: right;display: inline-block;" @tap="open_u()">查看全部   ></a>
+				</div>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-media">
+						<a class="mui-navigate-right">
+							<img class="mui-media-object mui-pull-left" src="../../../img/timg.jpg">
+							<div class="mui-media-body">
+								费宇
+								<p class='mui-ellipsis'>这个非常不错。绿色蔬菜</p>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a class='mui-navigate-right' href="javascript:;">
+							<img class="mui-media-object mui-pull-left" src="../../../img/timg1.jpg">
+							<div class="mui-media-body">
+								远眺
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a class="mui-navigate-right">
+							<img class="mui-media-object mui-pull-left" src="../../../img/timg2.jpg">
+							<div class="mui-media-body">
+								幸福
+								<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--评价结束-->
+			<!--店铺简介开始-->
+			<div style="margin-top: 10px;background-color: white;height: 80px;width: 100%;display: flex;">
+				<div style="display: flex;justify-content: center;align-items: center;height: 80px;width: 100%;">
+					<div style="display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: center;height: 70px;width: 95%;">
+						<div style="display: flex;flex-direction: row;width: 90px;">
+						    <img class="" src="../../../img/timg.jpg">
+						</div>
+						<div style="display: flex;flex-direction: row;width: 70%;">
+							<div class="mui-media-body mui-content-padded">
+								<div>{{shop}}</div>
+								<span class="span-fangshi" v-for="item in attribute">&nbsp;{{item}}&nbsp;</span>
+							</div>
+						</div>
+						<div style="display: flex;flex-direction: row;width: 30%;;">
+							<div style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+								<input type="button" style="border-radius: 15px;font-size: 11px;" value="进店逛逛" />
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--店铺简介结束-->
+			<!--商品详情开始-->
+			<div class="mui-content-padded">
+				商品详情
+				<img src="../../../img/timg.jpg" />
+				<img src="../../../img/shopcar/fly.png" />
+				<img src="../../../img/timg1.jpg" />
+				<img src="../../../img/timg2.jpg" />
+			</div>
+			<!--商品详情结束-->
+			<!--弹出层开始-->
+			<!--领券-->
+			<div id="lingquan" class="box mui-popover mui-popover-action mui-popover-bottom">
+				<div style="height: 100%;width: 100%;background-color: white;border-radius: 10px;">
+					<div style="padding: 20px 20px 0;">
+						<h4 style="text-align: center;margin-bottom: 20px;">优惠</h4>
+						<div style="display: flex;flex-direction: column;align-content: center;height: 80px; background-color: #FFE4E1;border-radius: 5px;margin-bottom: 5px;" v-for="item in lingquan">
+							<div style="display: flex;flex-direction: row;justify-content: center;align-content: center;color: #FF8C00;">
+								<div style="display: flex;flex-direction: row;justify-content: flex-start;align-items: center;width: 360px;height: 80px;border-right: 1px dashed black ;">
+								    <div style="font-size: 12px;padding-left: 5px;">
+								    	￥<span style="font-size: 25px;color: red;">{{item.money}}</span>&nbsp;店铺优惠券<br />{{item.full}}<br />{{item.validity}}
+								    </div>
+								</div>
+								<div style="display: flex;flex-direction: row;justify-content: center;align-items: center;width: 120px;height:80px;">
+									<a href="#">立即领取</a>
+								</div>
+							</div>
+						</div>
+					</div>
+			    </div>
+			</div>
+			<!--服务-->
+			<div id="fuwu" class="box mui-popover mui-popover-action mui-popover-bottom">
+				<div style="height: 100%;width: 100%;background-color: white;border-radius: 10px;">
+					<div style="padding:20px 20px 0;">
+						<h4 style="text-align: center;margin-bottom: 20px;">基础服务</h4>
+						<div style="display: flex;flex-direction: column;align-content: center;height: 80px;" v-for="item in fuwu">
+							<div style="display: flex;flex-direction: row;justify-content: center;align-content: center;">
+								<div style="display: flex;flex-direction: row;justify-content: center;align-items: baseline;width: 60px;height: 80px;">
+								    <div style=" width=15px height=15px">
+								    	<img :src="item.linkImg" />
+								    </div>
+								</div>
+								<div style="display: flex;flex-direction: row;justify-content: flex-start;width: 420px;height:80px;">
+									<div style="display: flex;flex-direction: column;margin-left: 10px;">
+										<div style="display: flex;flex-direction: column;align-items: flex-start;justify-content: center;font-size: 13px;height: 35px;">
+										            {{item.title}}
+										</div>
+										<div style="display: flex;flex-direction: column;align-items: flex-start;justify-content: flex-start;color: #696969;font-size: 12px;height: 45px;">
+											{{item.text}}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			    </div>
+			</div>
+			<!--分类-->
+			<div id="xuanze" class="box mui-popover mui-popover-action mui-popover-bottom">
+				<div style="height: 100%;width: 100%;background-color: white;border-radius: 10px;">
+					<div style="padding:20px 20px 0;">
+						<h4 style="text-align: center;margin-bottom: 20px;">商品选择</h4>
+						<!--<div style="display: flex;flex-direction: row;" id="niqu">-->
+							<form class="">
+								<div class="" style="display: inline-block;padding: 5px;box-sizing: border-box;" v-for="item in xuanze">
+									<input name="radio1" type="radio">
+									<label>&nbsp;&nbsp;{{item.text}}&nbsp;&nbsp;</label>
+								</div>
+							</form>
+						<!--</div>-->
+						<div>
+							
+						</div>
+				    </div>
+			    </div>
+			</div>
+			<!--款式-->
+			<div id="canshu" class="box mui-popover mui-popover-action mui-popover-bottom">
+				<div style="height: 100%;width: 100%;background-color: white;border-radius: 10px;">
+					<div style="padding:20px 20px 0;">
+						<h4 style="text-align: center;margin-bottom: 20px;">产品参数</h4>
+						<div style="display: flex;flex-direction: column;border-bottom: 1px solid #CDBA96;" v-for="item in canshu">
+							<div style="display: flex;flex-direction: row;justify-content: flex-start;font-size: 15px;font-weight: 350;margin:6px 0 6px 0;">
+								<div style="display: flex;flex-direction: row;width: 20%;">
+									{{item.title}}
+								</div>
+								<div style="display: flex;flex-direction: row;width: 70%;margin-left: 20px;">
+									{{item.text}}
+								</div>
+							</div>
+						</div>
+				    </div>
+			    </div>
+			</div>
+			<!--弹出层结束-->
+		</div>
+		<script type="text/javascript" src="../../../js/mui.js"></script>
+		<script type="text/javascript" src="../../../js/vue.min.js"></script>
+		<script type="text/javascript" src="../fjt/js/jquery-3.3.1.min.js" ></script>
+	    <script type="text/javascript" src="DetailsPage.js" ></script>
+		<script type="text/javascript">
+				mui.init({
+					swipeBack:true //启用右滑关闭功能
+				});
+				
+				var webview_detail = null;//详情页webview
+		            var titleNView = {
+					    backgroundColor: '#FFFAFA',//导航栏背景色
+					    titleText: '全部评价', //导航栏标题
+					    titleColor: '#000000',//文字颜色
+					    type:'transparent',//透明渐变样式
+					    autoBackButton: true,//自动绘制返回箭头
+					    splitLine:{//底部分割线
+					        color:'#cccccc'
+					    }
+					}
+					mui.plusReady(function() {
+						//预加载详情页
+						webview_detail = mui.preload({
+							url:'evaluate.html',
+							id: 'evaluate',
+							styles: {
+								
+								"titleNView": titleNView
+							},
+							
+						});
+					});
+					function open_u(itemss){
+						mui.fire(webview_detail,'',{
+							
+						});
+						//更改详情页原生导航条信息
+//						titleNView.titleText = itemss.title;
+						webview_detail.setStyle({
+							"titleNView":titleNView
+						});
+						setTimeout(function () {
+							webview_detail.show("slide-in-right", 300);
+						},150);
+					}
+				
+				//自适应弹出框高度
+				total = document.documentElement.clientHeight;
+				colHeight = total-250-document.getElementById("lingquan").offsetTop;
+				document.getElementById("lingquan").style.height=colHeight+"px";
+				document.getElementById("fuwu").style.height=colHeight+"px";
+				document.getElementById("xuanze").style.height=colHeight+"px";
+				document.getElementById("canshu").style.height=colHeight+"px";
+				
+				function getDefaultData() {
+				return {
+					money: '',
+					title: '',
+					shop:'',
+					attribute:[],
+					wayOfSelling:'',
+					}
+				}
+				var vm = new Vue({
+					el: '.mui-content',
+					data: getDefaultData(),
+					methods: {
+						resetData: function() {//重置数据
+							Object.assign(this.$data, getDefaultData());
+						}
+					}
+				});
+				var slider = mui("#slider");
+				slider.slider({
+							interval: 5000
+						});
+				//监听自定义事件，获取详情
+			    document.addEventListener('get_mess',function(item){
+			    	//前页传入的数据，直接渲染，无需等待ajax请求详情后
+			    	vm.money = item.detail.money;
+			    	vm.title = item.detail.title;
+			    	vm.shop = item.detail.shop;
+			    	vm.attribute = item.detail.attribute;
+			    	vm.wayOfSelling = item.detail.wayOfSelling;
+			    })
+			    //窗口隐藏时，重置页面数据
+				mui.plusReady(function () {
+					var self = plus.webview.currentWebview();
+					self.addEventListener("hide",function (e) {
+						window.scrollTo(0, 0);
+						vm.resetData();
+					},false);
+				})
+		</script>
+
+	</body>
+
+</html>

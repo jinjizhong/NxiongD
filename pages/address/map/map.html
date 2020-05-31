@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var em = null,map = null;
+			var address = null,point = null,coordType = null,marker = null;
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", plusReady, false);
+			}
+			// DOMContentloaded事件处理
+			document.addEventListener("DOMContentLoaded", function() {
+				em = document.getElementById("map");
+				window.plus && plusReady(
+					
+				);
+				document.getElementById("clear").addEventListener("tap", clearPosition)
+					document.getElementById("set").addEventListener("tap", setParentPageLocation)
+			}, false);
+
+			function clearPosition() {
+				document.getElementById("address").value = "";
+				map.clearOverlays();
+				marker = null;
+				setUserLocation();
+			}
+
+			function setUserLocation() {
+				map.getUserLocation(function(state, pos) {
+					if(0 == state) {
+						map.centerAndZoom(pos, 18);
+						plus.maps.Map.reverseGeocode(pos, {}, function(event) {
+							address = event.address; // 转换后的地理位置
+							point = event.coord; // 转换后的坐标信息
+							coordType = event.coordType; // 转换后的坐标系类型
+//							console.log("coordType" + coordType);
+//							console.log("Address:" + address);
+//							console.log("coordType:" + coordType);
+							document.getElementById("address").placeholder = address;
+						}, function(e) {
+							console.error("Failed:" + JSON.stringify(e));
+						});
+					}
+				});
+			}
+			function  setParentPageLocation(){
+				   var valObj= document.getElementById('address');
+				    var parentView=plus.webview.getWebviewById("go_editAddress");
+					mui.fire(parentView,'addresVal',{detailAddress:valObj.value||valObj.placeholder});
+					mui.back();
+			}
+			// H5 plus事件处理
+			function plusReady() {
+				if(!em) {
+					return
+				};
+				// 获取窗口对象
+				//ws = plus.webview.currentWebview();
+				//	wo=ws.opener();
+				//高德地图坐标为(116.3974357341,39.9085574220), 百度地图坐标为(116.3975,39.9074)
+				map = new plus.maps.Map("map");
+				map.showUserLocation(true);
+				setUserLocation();
+				map.onclick = function(point) {
+					map.setCenter(point);
+
+					if(marker) {
+						marker.setPoint(point);
+					} else {
+						marker = new plus.maps.Marker(point);
+						marker.setIcon("../../../img/position.png");
+						map.addOverlay(marker);
+					}
+					plus.maps.Map.reverseGeocode(point, {}, function(event) {
+						document.getElementById("address").value = event.address;
+						var bubble = new plus.maps.Bubble(event.address);
+						marker.setBubble(bubble, true);
+						marker.setLabel(event.address);
+					})
+				}
+			}
+		</script>
+		<style type="text/css">
+			#map {
+				width: 100%;
+				position: fixed;
+				top: 91px;
+				bottom: 0px;
+				line-height: 200px;
+				text-align: center;
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">地址</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-input-row" style="display: flex;align-items: center;height:51px;">
+				<input id="address" type="search" class="mui-input-clear" placeholder="" style="height:30px ;width: 70%;margin-top: 13px;margin-left: 7px;" />
+				<button id="set" style="margin-left:4px;height:31px;">确认</button>
+				<button id="clear" style="margin-left:4px;height:31px;">清除</button>
+			</div>
+			<div id="map">地图加载中...</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,134 @@
+
+.mui-search:before{
+	margin-top: -13px;
+}
+.mui-search .mui-placeholder{
+	line-height: 27px;
+}
+.mui-input-row.mui-search{
+	flex: 1;
+	margin-top:10px;
+	height: 27px;
+	line-height: 27px;
+}
+.mui-input-row.mui-search .mui-input-clear{
+	height: 27px;
+	line-height: 27px;
+}
+.top-adv{
+	height:47px;
+	background-color:white;
+	display: flex;
+	padding: 0px 14px;
+	position: fixed;
+	top:44px;
+	width: 100%;
+	z-index: 100;
+}
+#filter{
+	height:47px;
+	border-top:1px solid #eee;
+	border-bottom:1px solid #eee;
+	width:100%;
+	background-color: white;
+	display: flex;
+	position: fixed;
+	top: 91px;
+	z-index: 100;
+}
+.filter-button{
+	flex: 1;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color:#828282;
+}
+.filter-button.active{
+	opacity: .4;
+}
+.filter-button label{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.filter-button label img{
+	margin-left: 7px;
+}
+
+.filter-button a{
+	color:#828282;
+}
+
+#refresh{
+    padding-top:91px;
+	background-color: white;
+	display: flex;
+	flex-wrap: wrap;
+}
+.shop_area{
+	color:#808080;
+	font-size: 12px;
+}
+.list-item{
+	width: 50%;
+	border-top: 4px solid #eee;
+	border-right: 4px solid #eee;
+}
+.grid-item{
+	height:117px;
+	width:100%;
+	display:flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 2px 7px;
+	margin-top: 4px;
+	box-shadow: -1px  1px 3px rgba(0,0,0,.1);
+}
+.list-item img{
+	width:100%;
+	height:175px;
+}
+.item-content{
+	padding: 7px;
+	display:flex;
+    flex-direction: column;
+}
+.item-price,.item-evaluate,.item-name{
+	display: flex;
+	align-items: center;
+}
+.item-name{
+	height:54px;
+	color:#515151;
+	font-size: 15px;
+}
+
+.grid-item-right{
+	flex:1.5;
+	height:100%;
+	padding-left: 12px;
+}
+.item-price,.item-evaluate{
+	height:23px;
+}
+
+.item-price .current{
+	color:red;
+	font-size: 14px;
+}
+.item-price .old{
+    color:#bfbfbf;
+    text-decoration: line-through;
+	font-size: 13px;
+	margin-left: 9px;
+}
+.item-evaluate{
+	font-size: 12px;
+	color:#bfbfbf;
+}
+.item-evaluate .item-buynum{
+	color:blue;
+	margin: 4px;
+}
+

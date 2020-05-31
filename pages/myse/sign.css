@@ -1,0 +1,60 @@
+body {
+	margin: 0;
+}
+.login_bg{
+position: absolute;
+width: 100%;
+height: 100%;
+background: url(../../img/myse/beijing2.jpg)no-repeat;
+background-size: 100%100%;
+}
+.login__form{
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    padding: 1.5rem 2.5rem;
+    text-align: center;
+	box-sizing: border-box;
+    margin: 0;
+}
+.login__row{
+    height: 4rem;
+    padding-top: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.uk-icon-medium {/*账号密码前的图标大小*/
+  font-size: 200%;
+  vertical-align: -16%;
+  color: #FFFFFF;
+}
+.login__input{/*账号输入样式*/
+	    display: inline-block;
+    /*width: 22rem;*/
+    height: 100%;
+    padding-left: 1.5rem;
+    font-size: 1.0rem;
+    background: transparent;
+    color: #FDFCFD;
+	    outline: none;
+    border: none;
+	box-sizing: border-box;
+	font-family:"微软雅黑";
+}
+.login__submit{
+    width: 95%;
+    font-weight:bold;
+    height: 3rem;
+    margin: 2rem auto 1rem auto;
+    background: #06BFAC;
+    font-size: 16px;
+    border-radius: 3rem;
+    border: none;
+}
+.login__signup{
+	color:#999;
+}
+.login__signup a, .login__submit a{
+	color:#fff;
+}

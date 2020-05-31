@@ -1,0 +1,236 @@
+#contentOne img {
+	width: 90%;
+}
+
+.length {
+	width: 110px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+ul {
+	padding: 0;
+}
+
+a {
+	color: black;
+	margin: 0px;
+	padding: 0px;
+}
+
+a:hover {
+	color: black;
+}
+
+p {
+	/*word-wrap: break-word;*/
+	word-break: break-all
+}
+
+li {
+	list-style-type: none;
+}
+
+
+/*.pj_k{margin: 20px 10px;background-color: white;}
+.pj_k .toux_k{overflow: hidden;width: 85%;height: 20px;float: right;}
+.pj_k .toux_k h1{width: 0.7rem;height: 0.7rem; overflow: hidden; border-radius: 50%; border:solid 1px #f5f5f5; float: left;}
+.pj_k .toux_k span{ float: left;}*/
+
+.plBtn {
+	width: 15%;
+	line-height: 36px;
+	background-color: #339b53;
+	text-align: center;
+	display: block;
+	float: right;
+	color: #FFFFFF;
+	font-size: 12px;
+	border-radius: 6px;
+	margin-right: 10px;
+	margin-top: 7px;
+	position: absolute;
+	height: 39px;
+	bottom: 5.5px;
+	right: 2px;
+	background-color: #48a86c;
+	text-align: center;
+	line-height: 39px;
+	font-size: 14px;
+	display: inline-block;
+}
+
+.plBtn:hover {
+	background-color: #2f904d;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+}
+
+footer {
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	min-height: 50px;
+	border-top: solid 1px #bbb;
+	left: 0px;
+	bottom: 0px;
+	overflow: hidden;
+	padding: 0px 80px 0px 0px;
+	background-color: #fafafa;
+}
+
+
+/*.footer-left {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	left: 0px;
+	bottom: 0px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 100%;
+	padding: 12px 4px;
+}*/
+
+.footer-rightTwo {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	right: 75px;
+	bottom: 0px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 100%;
+	padding: 12px 5px;
+	display: inline-block;
+}
+
+.footer-center {
+	height: 100%;
+	padding: 5px 0px;
+}
+
+.footer-center [class*=input] {
+	width: 98%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+.footer-center .input-text {
+	background: #fff;
+	border: solid 1px #ddd;
+	padding: 10px !important;
+	font-size: 16px !important;
+	line-height: 18px !important;
+	font-family: verdana !important;
+	overflow: hidden;
+}
+
+.footer-center .input-sound {
+	background-color: #eee;
+}
+
+.mui-content {
+	height: 100%;
+	padding: 44px 0px 50px 0px;
+	/*overflow: auto;*/
+	background-color: #eaeaea;
+}
+
+footer .mui-icon {
+	color: #000;
+}
+
+footer .mui-icon:active {
+	color: #007AFF !important;
+}
+
+footer .mui-icon-paperplane:before {
+	content: "发送";
+}
+
+footer .mui-icon-paperplane {
+	/*-webkit-transform: rotateZ(45deg);
+				transform: rotateZ(45deg);*/
+	font-size: 16px;
+	word-break: keep-all;
+	line-height: 100%;
+	padding-top: 6px;
+	color: rgba(0, 135, 250, 1);
+}
+
+/*----------------mui.showLoading---------------*/
+
+.mui-show-loading {
+	position: fixed;
+	padding: 5px;
+	width: 120px;
+	min-height: 120px;
+	top: 45%;
+	left: 50%;
+	margin-left: -60px;
+	background: rgba(0, 0, 0, 0.6);
+	text-align: center;
+	border-radius: 5px;
+	color: #FFFFFF;
+	visibility: hidden;
+	margin: 0;
+	z-index: 2000;
+	-webkit-transition-duration: .2s;
+	transition-duration: .2s;
+	opacity: 0;
+	-webkit-transform: scale(0.9) translate(-50%, -50%);
+	transform: scale(0.9) translate(-50%, -50%);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+}
+
+
+/*这个是隐藏滚动条的*/
+
+.mui-scrollbar {
+	display: none !important;
+}
+
+.mui-show-loading.loading-visible {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transform: scale(1) translate(-50%, -50%);
+	transform: scale(1) translate(-50%, -50%);
+}
+
+.mui-show-loading .mui-spinner {
+	margin-top: 24px;
+	width: 36px;
+	height: 36px;
+}
+
+.mui-show-loading .text {
+	line-height: 1.6;
+	font-family: -apple-system-font, "Helvetica Neue", sans-serif;
+	font-size: 14px;
+	margin: 10px 0 0;
+	color: #fff;
+}
+
+.mui-show-loading-mask {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
+
+.mui-show-loading-mask-hidden {
+	display: none !important;
+}

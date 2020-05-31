@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="land.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a onclick="fabu();" class="fabu" style="z-index: 99;">发布</a>
+			<h1 class="mui-title">土地流转</h1>
+		</header>
+
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="">
+			<div style="z-index: 99;">
+				<div class="screening">
+					<ul>
+						<li class="Regional" style="padding: 0;vertical-align: middle;" @tap='toggle' id="toggle">
+							<span id="qu">所在区域</span>
+							<img src="../../img/shop/bottom.png" style="height: 13px;" v-if="show"/>
+							<img src="../../img/shop/top.png" style="height: 13px;" v-else/>
+						</li>
+						<li class="Brand" style="padding: 0;" @tap='leixing' id="leixing">
+							<span id="lei">土地类型</span>
+							<img src="../../img/shop/bottom.png" style="height: 13px;" v-if="showTwo"/>
+							<img src="../../img/shop/top.png" style="height: 13px;" v-else/>
+						</li>
+						<li class="Sort" style="padding: 0;" @tap='zhonghe' id="zhonghe">
+							<span id="xu">排序</span>
+							<img src="../../img/shop/bottom.png" style="height: 13px;" v-if="showThree"/>
+							<img src="../../img/shop/top.png" style="height: 13px;" v-else/>
+						</li>
+					</ul>
+				</div>
+				<!-- End screening -->
+				<!-- grade -->
+				<div class="diqu waiborder" id="tanchuOne" v-if="isquyu" style="z-index: 999;">
+					<ul class="" id="gradew" style="">
+						<li @tap="diqu('')">全部区域</li>
+						<li @tap="diqu('清河区')">清河区 </li>
+						<li @tap="diqu('淮安区')">淮安区</li>
+						<li @tap="diqu('淮阴区')">淮阴区</li>
+						<li @tap="diqu('清浦区')">清浦区</li>
+						<li @tap="diqu('涟水县')">涟水县</li>
+						<li @tap="diqu('洪泽县')">洪泽县</li>
+						<li @tap="diqu('盱眙县')">盱眙县</li>
+						<li @tap="diqu('金湖县')">金湖县</li>
+					</ul>
+				</div>
+				<!-- End grade -->
+				<!-- Category -->
+				<div class="Category-eject leixing waiborder" v-if="isleixing" style="z-index: 999;">
+					<ul id="Categorytw">
+						<li @tap="typeL('')">全部类型</li>
+						<li @tap="typeL('耕地')">耕地</li>
+						<li @tap="typeL('园地')">园地</li>
+						<li @tap="typeL('水域')">水域</li>
+						<li @tap="typeL('养殖用地')">养殖用地</li>
+						<li @tap="typeL('商业及住宅')">商业及住宅</li>
+						<li @tap="typeL('其他用地')">其他用地</li>
+					</ul>
+				</div>
+				<!-- End Category -->
+				<!-- Category -->
+				<div class="zhonghe waiborder" v-if="iszhonghe" style="z-index: 999;">
+					<ul class="" id="">
+						<li @tap="desc('CreateDateTime','1')">默认排序</li>
+						<li @tap="desc('CreateDateTime','0')">最近更新</li>
+						<li @tap="desc('Land_acreage','0')">面积小-大</li>
+						<li @tap="desc('Land_acreage','1')">面积大-小</li>
+						<li @tap="desc('Land_year','0')">年限小-大</li>
+						<li @tap="desc('Land_year','1')">年限大-小</li>
+					</ul>
+				</div>
+			</div>
+			<div class="mui-scroll" style="margin-top: 48px;height: 800px;position: relative;">
+				<ul class="mui-table-view mui-table-view-chevron" style="">
+					<template  v-for="item,index in shuju"> 
+						<li @tap="toNewsUrl(item.Land_title,item.Id)" class="mui-table-view-cell">
+							<img :src="item.Image1" />
+							<div class="title" style="font-size: 16px;">{{item.Land_title}}</div>
+							<div class="biaoqian">&nbsp;{{item.Land_used}}&nbsp;</div>
+							<div class="biaoqian2">{{item.Land_type}}</div><br />
+							<div class="nian">{{item.Land_year}}年</div>
+							<div class="jiage">{{item.Land_price}}元/亩/年</div>
+							<div class="mushu">亩数：{{item.Land_acreage}}亩</div>
+							<div class="quyu">{{item.Land_area}}</div>
+						</li>
+					</template>
+				
+				</ul>
+			</div>
+		</div>
+
+		<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="land.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../util/util.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init()
+			//打开遮罩层
+			//			mui.showLoading("正在加载..", "div");
+		</script>
+	</body>
+
+</html>

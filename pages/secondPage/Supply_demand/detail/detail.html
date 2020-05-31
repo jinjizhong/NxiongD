@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../../css/mui.min.css" rel="stylesheet" />
+		<link href="detail.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="title">土地流转</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="mui-slider" id="slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<div class="mui-slider-item  mui-slider-item-duplicate">
+						<img :src="shuju.Image3" />
+					</div>
+					<div class="mui-slider-item">
+						<img :src="shuju.Image1" />
+					</div>
+					<div class="mui-slider-item">
+						<img :src="shuju.Image2" />
+					</div>
+					<div class="mui-slider-item">
+						<img :src="shuju.Image3" />
+					</div>
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<img :src="shuju.Image1" />
+					</div>
+				</div>
+				<div class="mui-slider-indicator">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+				</div>
+			</div>
+			<div class="shangbu">
+				<div class="jiage">￥{{shuju.Land_price}}元</div><br />
+				<div class="jiaoyi" v-if="shuju.Land_statu==0">未交易</div>
+				<div class="jiaoyi" v-else-if="shuju.Land_statu==1">待交易</div>
+				<div class="jiaoyi" v-else>已交易</div><br />
+				<div class="biaoti">{{shuju.Land_special}}</div>
+				<div class="shijian">
+					<p style="float : left;">发布时间：{{shuju.ModifyDateTime}}</p>
+				</div>
+			</div>
+			<div class="xiabu">
+				<div>
+					<h4>基本信息</h4>
+				</div>
+				<hr />
+				<div class="xinxi">
+					<span class="qian">核实情况</span>
+					<span>{{shuju.Land_verify}}</span>
+				</div><br />
+				<hr />
+				<div style="margin-left: 10px;">土地介绍</div>
+				<hr />
+				<div>
+					<p style="margin: 10px 15px;">
+						{{shuju.Description}}
+					</p>
+				</div>
+			</div>
+			<nav class="mui-bar mui-bar-tab">
+				<div class="lianxiren" style="">
+					<span class="mui-icon mui-icon-contact"></span>
+					<p>{{shuju.Land_people}}</p>
+				</div>
+				<div class="lianxidi" id="telephone">
+					<span class="mui-icon mui-icon-phone"></span>
+					<p id="phone">{{shuju.Land_tel}}</p>
+				</div>
+			</nav>
+		</div>
+
+		<script src="../../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="detail.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../secondPage/public.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../util/util.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</body>
+	<script type="text/javascript">
+		//		mui.init();
+		//自动轮播
+		var slider = mui("#slider");
+		slider.slider({
+			interval: 2000
+		});
+		//打开遮罩层
+		mui.showLoading("正在加载..", "div");
+		document.getElementById("telephone").addEventListener('tap', function() {
+			var btnArray = ['立即拨打', '取消'];
+			var phone = document.getElementById('phone').innerText;
+			plus.device.dial(phone, false);
+		});
+	</script>
+
+</html>

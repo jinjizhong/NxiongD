@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>农兄弟</title>
+   <link rel="stylesheet" href="../css/custom.css"/>
+   <link rel='stylesheet' href='../css/mui.min.css' />
+   <link rel="stylesheet" href="../css/zy.css" />
+   <link rel="stylesheet" href="home.css" />
+   <script type="text/javascript" src="util/util.js" ></script>
+</head>
+
+<body id="shouye_list">
+	<header class="mui-bar mui-bar-nav">
+		<!--<div class="mui-input-row mui-search">
+			<input type="search" class="mui-input-clear" placeholder="请输入搜索内容">
+		</div>-->
+		
+		<!--头部--> 
+	<div class="toub_beij toub_beij_shouye">
+		<div class="zhongj_k">
+			<div class="logo_k">
+				<p style="line-height: 42px;font-size: 20px;color: #5f5f5f;">
+				<span>
+					<a id="location" style="color: #3c8fff;font-size:0.26rem;"></a>
+				</span>
+				</p>
+			</div>
+			<div class="shous_k"><span></span><input id="sos_tanc" input_key="" placeholder="请输入搜索内容" placeholder_str=""></div>
+			<!--<div class="dengl">
+				<a href="#"><div class="caid_img" ><img src="../img/logo/cd.png"></div></a>
+			</div>-->
+		</div>
+	</div>
+	
+		
+	</header>
+	<!--
+    	作者：@金继中
+    	时间：2018-06-15
+    	描述：首页
+    -->
+    <!--首页轮播图模块-->
+	<div id="slider" class="mui-content mui-slider">
+		<div id="lunbuchi" class="mui-slider-group mui-slider-loop" style="">
+			<!--<div :class="'mui-slider-item '+(index1==0||index1==index1?'mui-slider-item-duplicate':'')" v-for="(item,index1) in Imginfo">
+				<a @tap="toImgUrl(item)">
+					<img :src="item.Img_url">
+				</a>
+			</div>-->
+			<div class="mui-slider-item mui-slider-item-duplicate">
+				<a>
+					<img :src="Img1.Img_url">
+				</a>
+			</div>
+			<div class="mui-slider-item" v-for="(item,index1) in Imginfo">
+				<a @tap="toImgUrl(item)">
+					<img :src="item.Img_url">
+				</a>
+			</div>
+			<div class="mui-slider-item mui-slider-item-duplicate">
+				<a>
+					<img :src="Img2.Img_url">
+				</a>
+			</div>	
+						
+		</div>
+		<div class="mui-slider-indicator">
+			<div :class="'mui-indicator '+(index==0?'mui-active':'')" v-for="(item1,index) in Imginfo" :key="index"></div>
+		</div>
+		
+		<!--<div id="Lunbo_img" class="mui-slider-group mui-slider-loop" style="height: 200px;">
+			
+		</div>
+		<div id="Img_to" class="mui-slider-indicator">
+			
+		</div> -->
+	</div>
+	
+	<!--轮播图结束-->
+	<div class="biankuang"></div>
+			<!--<div class="title biaoti">
+				<img class="logo" src="img/logo/cloudy.png" alt="" />
+				<span class="huodong">地点</span>
+				<div class="gengduo"><h5>天气</h5></div>
+				
+			</div>-->
+	<!-- 九宫格模块 -->
+	<style>
+		.hei{
+			height: 100px;
+		}
+		.card_rol {
+			width: 46%;
+			margin: 4px;
+			border-radius: 2px;
+			background-color: #efeff4;
+			background-clip: padding-box;
+			box-shadow:0 0px 0px rgba(0,0,0,.3);
+			display:block;
+			margin:6px 10px 6px 14px;
+		}
+	</style>
+	<div class="" style="background-color: #FFFFFF;">
+		        
+	<div class="neir_beij"> 
+		<ul>
+			<li>
+				<a onclick="urlTo('农业资讯','AAAA')">
+				    <div class="daohangk"><img src="../img/logo/zixun.png"></div><p>农业资讯</p>
+				</a>
+			</li>
+			<li>
+			<a  onclick="open_Url()">
+				<div class="daohangk">
+					<img src="../img/logo/mall.png">
+				</div>
+				<p>农业商城</p>
+			</a>
+			</li>
+			<li>
+				<a onclick="urlTo('农事服务','AAAC')">
+					<div class="daohangk">
+						<img src="../img/logo/service.png">
+				    </div>
+				    <p>农事服务</p>
+				</a>
+			</li>
+			<li>
+				<a onclick="urlTo('农村政务','AAAD')" name="农村政务">
+					<div class="daohangk">
+						<img src="../img/logo/policy.png">
+				    </div>
+				    <p>农村政务</p>
+				</a>
+			</li>
+		
+			<li>
+				<a href="#" onclick="lvyou('乡村旅游','AAAB')" name="乡村旅游">
+					<div class="daohangk">
+					    <img src="../img/logo/lvyou.png">
+				    </div>
+				    <p>乡村旅游</p>
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="lvyou('农业保险','AD')">
+					<div class="daohangk">
+						<img src="../img/logo/baoxian.png">
+					</div>
+					<p>农业保险</p>
+				</a>
+			</li>
+			<li><a onclick="lanD();">
+					<div class="daohangk">
+						<img src="../img/logo/tudi.png">
+					</div>
+					<p>土地流转</p>
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="Supply_demand('供求信息','AAAD')">
+					<div class="daohangk">
+						<img src="../img/logo/gongqiu.png">
+					</div>
+					<p>供求信息</p>
+				</a>
+			</li>
+		</ul>
+	</div>
+		        
+        <!--边框间距-->
+        <div class="biankuang"></div>
+	<!--列表页-->	        
+	<div style="padding-top: 10px;padding-bottom:10px ;">
+		<!--推广活动-->	  
+			<div class="title biaoti">
+				<div class="logo">
+					<img style="width: 25px;height: 25px;" src="../img/tubiao/activity.png" alt="" />
+					<span class="huodong">推广活动</span>
+				</div>
+				<!--<div class="gengduo"><h5>更多>></h5></div>-->
+				
+			</div>
+	 <ul id="tuiguang" class="mui-table-view mui-grid-view">
+		         <li class="mui-table-view-cell mui-col-xs-6 card_rol" v-for="active in actives">
+		            <a @tap="addActive(active)" style="padding-top:3px;padding-left: 0px;">
+		            	<img class="huodong_two" v-bind:src="active.Img_url">
+		            	<div class="huodong_one">
+							<span style="font-size:15px;font-weight:800;">{{active.Name}}</span>
+							<p style="font-size:12px;padding-right: 5px;" class='mui-ellipsis-3'>
+								{{active.Remark}}</p>
+						</div>
+		            </a>
+		        </li>
+		    </ul> 
+	 
+			<div class="biankuang"></div>
+		<!--农资动态-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<div class="logo">
+					<img style="width: 25px;height: 25px;" src="../img/tubiao/dynamic.png" alt="" />
+					<span class="nongzi">农资动态</span>
+				</div>
+				
+				<div class="gengduo"  onclick="urlTo('农业资讯','AAAA')" title="农资动态"><h5>更多>></h5></div>
+				
+			</div>
+			<ul id="dongtai" class="mui-table-view">
+				<li class="mui-table-view-cell" title="最新趋势" v-for="nz in nongzi">
+					<div @tap="toNZ(nz)">
+						<span class="single_size_color">{{nz.News_name}}</span>
+						<span class="single_size_pad">{{nz.News_Title}}</span>
+					</div>
+					
+				</li>
+				
+			</ul>
+			<div class="biankuang"></div>
+			<!--农产品商城-->
+			<div class="title biaoti" style="padding-top: 6px;border-bottom: 1px solid #eee;">
+				<div class="logo">
+					<img style="width: 25px;height: 25px;" src="../img/logo/mall2.png"/>
+					<span class="mall">农商城</span>
+				</div>
+				<div class="gengduo" onclick="moreType()"><h5>更多>></h5></div>
+			</div>
+			<style>
+				.mui-scroll a {
+					width: 40px;
+					padding: 0px;
+					z-index: 999;
+				}
+				.mui-scroll a img {
+					width: 120px;
+				}
+				.mui-segmented-control.mui-scroll-wrapper .mui-control-item{
+					padding: 2px;
+				}
+				.mui-segmented-control .mui-control-item {
+					line-height: 18px;
+				}
+			</style>
+			<div class="mui-content">
+			    <div class="mui-slider" style="height: 92px;background-color: white;">
+					<div id="sliderSegmentedControl" style="height: 110px;" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<div class="mui-scroll" style="height: 110px;">
+							<a class="mui-control-item" @tap="imgUrlTo(item.text)" v-for="item in imgTo">
+							    <img :src="item.linkImg" />
+							    <div>{{item.text}}</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="biankuang"></div>
+			<!--农业政策-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<div class="logo">
+					<img src="../img/tubiao/policy.png" alt="" />
+					<span class="zhengce">农业政策</span>
+				</div>
+				<div class="gengduo"  onclick="urlTo('农村政务','AAAD')" title="农业政策"><h5>更多>></h5></div>
+				
+			</div>
+			<ul id="ny_zhengce" class="mui-table-view">
+				<li class="mui-table-view-cell mui-media" v-for="zc in nongce">
+					<a @tap="toZC(zc)" name="农业政策">
+						<img style="width: 100px;" class="mui-media-object mui-pull-right" :src="zc.Img_url">
+						<div class="mui-media-body">
+							{{zc.News_name}}
+							<p class='mui-ellipsis-3'>{{zc.News_Title}}</p>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+			<div class="biankuang"></div>
+			<!--农业科技-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<div class="logo">
+					<img src="../img/tubiao/technology.png" alt="" />
+					<span class="keji">农业科技</span>
+				</div>
+				<span class="gengduo"  onclick="urlTo('农村政务','AAAD')" title="农业科技"><h5>更多>></h5></span>
+				
+			</div>
+			<ul id="ny_keji" class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media" v-for="kj in keji">
+					<a class="mui-navigate-right" @tap="toKJ(kj)" name="农业科技">
+						<img style="width: 120px;" class="mui-media-object mui-pull-left" :src="kj.Img_url">
+						<div class="mui-media-body">
+							{{kj.News_name}}
+							<p class='mui-ellipsis-2'>{{kj.News_Title}}</p>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+			<div class="biankuang"></div>
+			<!--乡村旅游-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<div class="logo">
+					<img src="../img/tubiao/tourism.png" alt="" />
+					<span class="lvyou">乡村旅游</span>
+				</div>
+				<div class="gengduo" onclick="lvyou('乡村旅游','AAAB')" title="乡村旅游"><h5>更多>></h5></div>
+				
+			</div>
+			<div class="shangp_lieb_beij"> 
+				<style>
+					  .shangp_lieb_k li .lieb_img {
+					  	height: 110px;
+					  }
+					  .shangp_lieb_k li {
+					  	height: 185px;
+					  }
+				</style>
+			<ul id="ny_lvyou" class="shangp_lieb_k">
+				<li v-for="ly in lvyou">
+					<a  @tap="toLY(ly)" name="农家乐">
+						<div class="lieb_img" style="width: 96%;"><img :src="ly.Img_url" height="120px"></div>
+						<div class="lieb_txt">
+							<p class="biao">{{ly.News_name}}</p>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+			<div class="biankuang"></div>
+			<!--农业保险-->
+			<div class="title biaoti" style="padding-top: 6px;">
+				<div class="logo">
+					<img src="../img/tubiao/tourism.png" alt="" />
+					<span class="lvyou">农业保险</span>
+				</div>
+				<div class="gengduo" onclick="lvyou('农业保险','AAAB')" title="乡村旅游">
+					<h5>更多>></h5>
+				</div>
+				
+			</div>
+			<div class="shangp_lieb_beij">
+			<ul id="ny_baoxian" class="shangp_lieb_k">
+				<li v-for="item in baoxian">
+					<a  @tap="toLY(item)" name="保险">
+						<div class="lieb_img" style="width: 96%;">
+							<img :src="item.Img_url" height="120px">
+						</div>
+						<div class="lieb_txt">
+							<p class="biao">{{item.News_name}}</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+</div>
+<!--<div class="jiazz">
+	<p class="px22">拼命加载中...</p>
+	<div style="width: 100%; height: 10px; background-color: #dedede;"></div>
+</div>-->
+	</div>  
+		
+</div>
+	
+</body>
+	<script src="../js/mui.js"></script>
+	<script type="text/javascript" src="../js/vue.min.js" ></script>
+	<script src="home.js"></script>
+    <script type="text/javascript">
+    	
+    	function lanD(){
+    		mui.openWindow({
+    			url : "land/land.html",
+    			id : "land/land.html"
+    		});
+    	}
+    	function moreType(){
+    		mui.openWindow({
+    			url:'secondPage/moreTypes/moreTypes.html',
+    			id:'moreTypes',
+    			extras:{
+    				
+    			}
+    		})
+    	}
+    	function lvyou(item,itemTwo){
+    		mui.openWindow({
+    			url:"secondPage/lvyouPage/travelPage.html",
+    			id:"travelPage",
+    			extras:{
+    				title:item,
+    				ic:itemTwo,
+    			}
+    		})
+    	}
+    	function Supply_demand(item,itemTwo){
+    		mui.openWindow({
+    			url:"secondPage/Supply_demand/Supply_demand.html",
+    			id:"Supply_demand",
+    			extras:{
+    				title:item,
+    				ic:itemTwo,
+    			}
+    		})
+    	}
+    	function shopUrl(){
+    		mui.openWindow({
+    			url:"mall.html",
+    			id:"mall"
+    		})
+    	}
+    	function urlTo(item,itemTwo){
+			mui.openWindow({
+				url:"secondPage/secondPage.html",
+				id:"secondPage",
+				extras:{
+					title:item,
+					ic:itemTwo,
+				}
+			});
+		}
+    </script>
+</html>

@@ -1,0 +1,273 @@
+{
+	"pages/tab-webview-main.html": {
+		"resources": [
+			"pages/home.html",
+			"pages/tab-webview-subpage-chat.html"
+		],
+		"refer": [
+			"pages/tab-webview-subpage-setting.html",
+			"pages/home.html",
+			"pages/tab-webview-subpage-contact.html",
+			"pages/tab-webview-subpage-chat.html",
+			"pages/shopcart.html",
+			"pages/myself.html",
+			"pages/mall.html"
+		]
+	},
+	"pages/details/listview.html": {
+		"refer": [
+			"pages/details/detail.html"
+		],
+		"resources": []
+	},
+	"pages/home.html": {
+		"refer": [
+			"pages/details/listview.html",
+			"pages/zixun/listview.html",
+			"pages/zixun/newslist.html",
+			"pages/zixun/news_list.html",
+			"pages/shopcart.html",
+			"pages/myself.html",
+			"pages/mall.html",
+			"pages/demo/news_tab_demo.html",
+			"pages/demo/article_cat.html",
+			"pages/shopcar.html",
+			"pages/tuiguang/tuig_active.html",
+			"pages/secondPage/new_file.html",
+			"pages/secondPage/lvyouPage/lvyouPage.html",
+			"pages/secondPage/pinglun/lvyouPage.html",
+			"pages/secondPage/secondPage.html",
+			"pages/secondPage/moreTypes/moreTypes.html",
+			"pages/land/land.html",
+			"pages/shop/goodslist/goodslist.html",
+			"pages/tuiguang/tuig_type.html",
+			"pages/secondPage/Supply_demand/Supply_demand.html"
+		],
+		"resources": [
+			"pages/mall.html"
+		]
+	},
+	"pages/zixun/listview.html": {
+		"refer": [
+			"pages/zixun/detail.html"
+		],
+		"resources": []
+	},
+	"pages/zixun/newslist.html": {
+		"refer": [
+			"pages/zixun/detail.html"
+		],
+		"resources": []
+	},
+	"pages/zixun/news_list.html": {
+		"refer": [
+			"pages/zixun/news_detail.html"
+		],
+		"resources": []
+	},
+	"pages/myself.html": {
+		"refer": [
+			"pages/set.html",
+			"pages/myse/set.html",
+			"pages/myse/notice.html",
+			"pages/myse/information.html",
+			"pages/myse/dizhi.html",
+			"pages/myse/dingdan.html",
+			"pages/address/uerAddress.html",
+			"pages/address/dizhi.html",
+			"pages/myse/sign.html",
+			"pages/myse/renzheng.html",
+			"pages/address/userAddress.html",
+			"pages/myse/+mui�html.html",
+			"pages/myse/html.html",
+			"pages/myse/zhibao.html",
+			"pages/myse/shanghu.html",
+			"pages/myse/driver_fabu.html",
+			"pages/myse/erweiM.html",
+			"pages/myse/Merchant.html"
+		],
+		"resources": [
+			"pages/myself.css"
+		]
+	},
+	"pages/myse/set.html": {
+		"resources": [
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"pages/settle/settle.html": {
+		"refer": [
+			"pages/address/uerAddress.html",
+			"pages/pay/pay.html",
+			"pages/address/userAddress.html"
+		]
+	},
+	"pages/shopcar.html": {
+		"refer": [
+			"pages/settle/settle.html"
+		],
+		"resources": [
+			"pages/shopcar.css"
+		]
+	},
+	"pages/address/uerAddress.html": {
+		"refer": [
+			"pages/address/editAddress/editAddress.html",
+			"pages/address/map/map.html"
+		]
+	},
+	"pages/mall.html": {
+		"refer": [
+			"pages/demo/fjtOne/new_file.html",
+			"pages/demo/fjtOne/DetailsPage.html",
+			"pages/shop/goodsdetail.html",
+			"pages/shop/goodslist/goodslist.html"
+		]
+	},
+	"pages/myse/sign.html": {
+		"refer": [
+			"pages/myself.html",
+			"pages/myse/sign.html",
+			"pages/myse/zhuce.html",
+			"pages/myse/zhaohui.html"
+		]
+	},
+	"pages/demo/fjtOne/DetailsPage.html": {
+		"refer": [
+			"pages/demo/fjtOne/evaluate.html"
+		]
+	},
+	"pages/tuiguang/tuig_active.html": {
+		"refer": [
+			"pages/tuiguang/tuig_detail.html"
+		]
+	},
+	"pages/demo/news_tab_demo.html": {
+		"refer": [
+			"pages/demo/detail.html"
+		]
+	},
+	"pages/myse/dingdanxiangQ_mei.html": {
+		"refer": [
+			"pages/pay/pay.html",
+			"pages/myse/dingdan.html"
+		]
+	},
+	"pages/myse/dingdanxiangQ.html": {
+		"refer": [
+			"pages/myse/dingdan.html"
+		]
+	},
+	"pages/pay/pay.html": {
+		"refer": [
+			"pages/myse/dingdanxiangQ_mei.html"
+		]
+	},
+	"pages/myse/dingdan.html": {
+		"refer": [
+			"pages/myse/dingdanxiangQ_mei.html",
+			"pages/myse/dingdanxiangQ.html",
+			"pages/myse/pingfen.html",
+			"pages/tuiguang/tuig_detail.html"
+		]
+	},
+	"pages/shop/goodslist/goodslist.html": {
+		"refer": [
+			"pages/shop/goodsdetail/goodsdetail.html"
+		]
+	},
+	"pages/shop/goodsdetail/goodsdetail.html": {
+		"refer": [
+			"pages/shopcar.html",
+			"pages/settle/settle.html"
+		]
+	},
+	"pages/myse/renzheng.html": {
+		"refer": [
+			"pages/myse/feishou.html"
+		]
+	},
+	"pages/myse/feishou.html": {
+		"refer": [
+			"pages/myse/renzheng.html",
+			"pages/myse/pingfen.html"
+		]
+	},
+	"pages/address/editAddress/editAddress.html": {
+		"refer": [
+			"pages/address/map/map.html"
+		]
+	},
+	"pages/address/userAddress.html": {
+		"refer": [
+			"pages/address/editAddress/editAddress.html"
+		]
+	},
+	"pages/myse/pingfen.html": {
+		"refer": [
+			"pages/myse/feishou.html",
+			"pages/myse/dingdan.html"
+		]
+	},
+	"pages/tuiguang/tuig_detail.html": {
+		"refer": [
+			"pages/myse/dingdan.html",
+			"pages/pay/pay.html"
+		]
+	},
+	"pages/myse/zhuce.html": {
+		"refer": [
+			"pages/myse/feishou.html",
+			"pages/myse/shanghu.html"
+		]
+	},
+	"pages/secondPage/secondPage.html": {
+		"refer": [
+			"pages/secondPage/pinglun/lvyouPage.html"
+		]
+	},
+	"pages/secondPage/moreTypes/moreTypes.html": {
+		"refer": [
+			"pages/shop/goodslist/goodslist.html"
+		]
+	},
+	"pages/tab_main.html": {
+		"resources": [
+			"pages/home.html"
+		],
+		"refer": [
+			"pages/shop/goodslist/goodslist.html",
+			"pages/shopcar.html",
+			"pages/home.html",
+			"pages/myself.html",
+			"pages/shop/type.html"
+		]
+	},
+	"guide.html": {
+		"refer": [
+			"pages/tab_main.html"
+		]
+	},
+	"pages/tuiguang/tuig_type.html": {
+		"refer": [
+			"pages/tuiguang/tuig_active.html"
+		]
+	},
+	"pages/shop/type.html": {
+		"refer": [
+			"pages/shop/goodslist/goodslist.html"
+		]
+	},
+	"pages/secondPage/Supply_demand/Supply_demand.html": {
+		"refer": [
+			"pages/secondPage/Supply_demand/detail/detail.html",
+			"pages/secondPage/Supply_demand/Publish/Publish.html"
+		]
+	},
+	"pages/land/land.html": {
+		"refer": [
+			"pages/land/details/details.html"
+		]
+	}
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
+		<link rel="stylesheet" type="text/css" href="mall.css"/>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="util/util.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">商品分类</h1>
+	</header>
+		<div class="mui-content mui-row mui-fullscreen"  v-if="info">
+			<!--左侧-->
+			<div class="mui-col-xs-3">
+				<div  id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+						<a  v-for="item,index in types"   class="mui-control-item" 
+							 :class="{'mui-active':index==0}"   :href="'#content' + index">{{item.name}}</a>
+				</div>
+			</div>
+			<!--右侧-->
+			<div id="segmentedControlContents" class="mui-col-xs-9">
+				<div  v-for="item,index in types"  :id="'content' + index"  
+					      class="mui-control-content" :class="{'mui-active':index==0}">
+						<div  class="type-item-card">
+								<div  v-for ="item1 in  item.types" class="item-container"  @tap="open_Url(item1)">
+									<img v-if="item1.Class_img" :src="item1.Class_img" style="height: 74px;margin-top: 7px;"/>
+									<img v-else  src="../img/fair.png" style="height: 74px;margin-top: 7px;"/>
+									<div style="text-align: center;margin-top:11px;font-weight: 600;font-size: 14px;">
+										{{item1.name}}
+									</div>
+								</div>
+						</div>
+				</div>
+			</div>
+		</div>
+		<div id="list"></div>
+	   <script src="mall.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

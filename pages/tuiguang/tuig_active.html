@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../shop/goodslist/goodslist.css"/>
+		<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../util/util.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style>
+		.tab_check{
+			height:47px;
+			border-top:1px solid #eee;
+			border-bottom:1px solid #eee;
+			width:100%;
+			background-color: white;
+			display: flex;
+			position: fixed;
+			top: 43px;
+			z-index: 100;
+		}
+		.list_top{
+		    padding-top:47px;
+			background-color: white;
+			display: flex;
+			flex-wrap: wrap;
+		}
+	</style>
+	<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 id="title" class="mui-title">{{t_title}}</h1>
+	</header>
+		<div class="mui-content">
+				<div class="tab_check">
+						<div class="filter-button" :class="{active:!listType}" @tap="listState">产品服务</div>
+					    <div class="filter-button" :class="{active:listType}" @tap="girdState">机手服务</div>
+				</div>
+				<div id="list" class="mui-scroll-wrapper" >
+				<!--机手服务-->
+				<template  v-if="listType==0">
+					<div  class="mui-scroll list_top" >
+					<div class="grid-item" v-for="item in shop_rows"  @tap="next_page(item)" >
+							
+						<div class="grid-item-left" style="flex:1;padding-left: 20px;">
+		        			<!--<img  :src="item.ImgUrls" style="border-radius:333px;height: 80px;width: 80px; border:0.1px solid #000;"/>-->
+		        			<img src="../../img/logo/android/qdym720.png" style="border-radius:333px;height: 80px;width: 80px; border:0.1px solid #000;"/>
+		        		</div>
+		        		<div style="flex:2.5;height:120%;padding-left: 12px;">
+							<div class="item-name">
+									<span>{{item.Product_name}}</span>
+							</div>
+							<div class="" style="color:#808080;font-size: 13px;">
+										<span>联系人：{{item.User_name}}</span>
+								</div>
+							<div class="item-price">
+										<span class="current">¥{{item.Now_price}}</span>
+										<span class="old">¥{{item.Old_price}}</span>
+							</div>
+							<div class="shop_area">
+										江苏省 淮安市 {{item.Place}}
+								</div>
+		        		</div>
+							
+						</div>
+		        </div>
+		        </template>
+		        <!--产品服务-->
+		        <template  v-else>
+					<div class="mui-scroll list_top" >
+		        	<div class="grid-item" v-for="item in rows" @tap="next_page(item)">
+		        		<div class="grid-item-left" style="flex:1;">
+		        			<img  :src="item.ImgUrls" style="width:100%;height:97px;"/>
+		        		</div>
+		        		<div class="grid-item-right">
+							<div class="item-name">
+									<span>{{item.Product_name}}</span>
+							</div>
+							<div class="item-price">
+										<span class="current">¥{{item.Now_price}}</span>
+										<span class="old">¥{{item.Old_price}}</span>
+							</div>
+							<div class="item-evaluate">
+									<span>作业区域</span> 
+							 	    <span class="item-buynum">{{item.Place}}</span>
+							       <!-- <span>条</span> -->
+							</div>
+		        		</div>
+		        	</div>
+		        </div>
+		        </template>
+				</div>
+				</div>
+	</body>
+</html>
+<script>
+	
+var uploadObj=null;
+var isFirstRefresh=true;
+var rows=[];
+var webview_detail = null;//详情页webview
+var titleNView = { //详情页原生导航配置
+		backgroundColor: '#f7f7f7', //导航栏背景色
+		titleText: '', //导航栏标题
+		titleColor: '#000000', //文字颜色
+		type: 'transparent', //透明渐变样式
+		autoBackButton: true, //自动绘制返回箭头
+		splitLine: { //底部分割线
+			color: '#cccccc'
+		}
+	}
+
+//打开详情页
+function open_Url(action){
+		//触发子窗口变更新闻详情
+		mui.fire(webview_detail, 'tui_detail', {
+			Id: action.Id,
+			Product_name:action.Product_name,
+			Old_price:action.Old_price,
+			Now_price:action.Now_price,
+			title:"详情信息"
+		});
+
+		setTimeout(function () {
+			webview_detail.show("slide-in-right", 300);
+		},150);
+}
+
+//产品服务请求数据
+function requestData(e,pageNo){
+	//请求参数
+		var sy_data={
+			"DriverID":"1234567890",
+			"UserID": "任务标识",
+			"TaskGuid":"b4026263-704e-4e12-a64d-f79cb42962cc",
+			"DataType": "ServerList",
+			"Type": "0",
+			"Classid":plus.webview.currentWebview().vid,
+			"page":pageNo,
+			"rows":"10",
+			"keywords":""
+			};
+			
+		//ajax请求数据返回成功方法处理
+		ToConn(serverUrl,sy_data, function(aa){
+			//console.log("666666"+aa)
+			var goods=JSON.parse(aa);
+			if(goods&&goods.rows.length!=0){
+				 listinfo.pageNo+=1;
+			   	 listinfo.rows=listinfo.rows.concat(goods.rows);
+				 uploadObj.endPullupToRefresh(false);
+			}else{
+			  uploadObj.endPullupToRefresh(true);
+			}
+		},function(xhr, type, errorThrown){
+					
+				mui.toast("连接失败,请检查网络");
+				uploadObj.endPullupToRefresh(true);
+		});
+			
+}
+//机手服务数据请求
+function driverData(e,pageNo){
+		var jsonData={
+			"DriverID":"1234567890",
+			"UserID": "任务标识",
+			"TaskGuid":"b4026263-704e-4e12-a64d-f79cb42962cc",
+			"DataType": "NJSList",
+			"Type":"1",
+			"Class_id":plus.webview.currentWebview().vid,
+			"page":pageNo,
+			"rows":"5"
+		};
+		
+		//ajax请求数据返回成功方法处理
+		ToConn(serverUrl,jsonData, function(data){
+			console.log("99999999"+data);
+				var shops=JSON.parse(data).rows;
+				if(shops&&shops.length!=0){
+					 listinfo.shopPageNo+=1;
+				   	 listinfo.shop_rows=listinfo.shop_rows.concat(shops);
+					 uploadObj.endPullupToRefresh(false);
+				}else{
+				     uploadObj.endPullupToRefresh(true);
+				}
+			},function(xhr, type, errorThrown){
+				mui.toast("连接失败,请检查网络");
+				 uploadObj.endPullupToRefresh(true);
+			});
+		
+}
+mui.init({
+	pullRefresh : {
+	    container:"#list",
+	    up : {
+	      //height:95,//可选.默认50.触发上拉加载拖动距离
+	      auto:true,//可选,默认false.自动上拉加载一次
+	      callback :function(){
+	        uploadObj=this;
+	        if(isFirstRefresh){
+	        	requestData(listinfo.typeID,listinfo.pageNo);
+	        	driverData(listinfo.typeID,listinfo.pageNo);
+	        }else{
+		        if(listinfo.listType==1){
+		        	requestData(listinfo.typeID,listinfo.pageNo);
+		        }else{
+		        	driverData(listinfo.typeID,listinfo.shopPageNo);
+		        }
+	        }
+	      }//必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+	    }
+    }
+});
+mui.plusReady(function() {
+	vt.t_title=plus.webview.currentWebview().tyname;
+	//预加载详情页
+	webview_detail = mui.preload({
+			url: 'tuig_detail.html',
+			id: 'tuig_detail',
+			styles: {
+				"titleNView": titleNView
+			}
+		});
+});
+
+//标题	
+	var vt = new Vue({
+			el: '#title',
+			data: {
+				t_title: '',
+				remark:''
+			}
+		});
+
+	var listinfo=new Vue({
+	el:'.mui-content',
+	data:{
+		listType:1,
+		pageNo:1,
+		shopPageNo:1,
+		typeID:'',
+//		records:0,
+		rows:[],
+		shop_rows:[]
+	},
+	methods:{
+		next_page:function(e){
+			open_Url(e);
+		},		
+		toogleOpenListTypeMenu:function(e){
+			this.isOpenListTypeMenu=!this.isOpenListTypeMenu
+		},
+		girdState:function(){
+			toTop();
+			this.listType=0;
+		},
+		listState:function(){
+			this.listType=1;
+		}
+	},
+	filters:{
+		search:function (value){
+		    if (!value) return ''
+		    value = value.toString();
+		    return 
+		}
+	}
+});
+
+
+function toTop(){
+	mui('#list').pullRefresh().scrollTo(0,0);
+}
+</script>

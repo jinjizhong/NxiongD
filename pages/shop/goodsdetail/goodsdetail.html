@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" href="goodsdetail.css"/>
+		<script src="../../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../util/util.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="mui-content" style="padding-bottom: 51px;">
+<!--轮播-->
+		  		<div id="slider" class="mui-slider" style="background-color:white;">
+		  		  	<div class="mui-slider-group mui-slider-loop">
+			  		    <div class="mui-slider-item mui-slider-item-duplicate">
+							<img :src="goodsinfo.imgUrls[goodsinfo.imgUrls.length-1]">
+						</div>
+						<div v-for="item,index in goodsinfo.imgUrls" class="mui-slider-item">
+							<img :src="item">
+						</div>
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<img :src="goodsinfo.imgUrls[0]">
+						</div>
+		  			</div>
+		  			<div class="mui-slider-indicator">
+			  		    <div v-for="item,index in goodsinfo.imgUrls" class="mui-indicator mui-active" :class="{'mui-active':index===0}"></div>
+		  		  	</div>
+		  		</div>
+<!--产品内容部分-->		  		 
+		  		<div id="detailbody">
+				  			<div class="title">
+				  					<div class="title-left">
+					  						<div class="name">{{goodsinfo.goodsName}}</div>
+					  						<div class="price">
+					  								<span id="">¥ {{goodsinfo.currentprice}}</span>
+					  						</div>
+				  					</div>
+				  					<div class="title-right">
+				  							<label class="share" @tap="share">
+				  									<a><span class="mui-icon mui-icon-redo"></span></a>
+				  									<span class="text">分享</span>
+				  							</labei>
+				  					</div>
+				  			</div>
+				  		   <div class="count">
+				  						<div class="text">购买数量 (斤)</div>
+				  						<div class="edit">
+				  								<div class="button" @tap="del">-</div>
+				  									<label style="width:38%;"><input type="number" :value="goodsinfo.goodsnum" :max="goodsinfo.stock"/></label>
+				  								<div class="button" @tap="add">+</div>
+				  						</div>
+				  			</div>
+		  					<div class="paramconfig">
+		  								<span class="title">产品规格</span>
+		  								<span class="item" v-for="item in goodsinfo.params" >
+		  									  <span>{{item.name}}</span>
+		  									  <span>{{item.value}}</span>
+		  								</span>
+		  					</div>
+		  					<div class="evaluate" id="evaluate">
+		  								<div  class="flag">
+		  									<span><span>用户评价</span><span class="evaluate-count">(999 条)</span></span>
+		  									<span class="checkall">查看所有>></span>
+		  								</div>
+		  								<div class="content">
+		  										<div class="evaluate-item" v-for="item in goodsinfo.evaluates">
+		  												<div class="item-head">
+		  														<div class="uericon" >
+		  																<img  :src="item.userTag"/>
+		  														</div>
+		  														<div class="userinfo">
+		  																<span class="left">
+		  																		<span id="">
+		  																		{{item.userName}}
+		  																		</span>
+		  																		<span id="">
+		  																		{{item.evaluateTime}}
+		  																		</span>
+		  																</span>
+		  																<span class="right">
+		  																		评分:{{item.evaluateScore}}
+		  																</span>
+		  														</div>
+		  												</div>
+		  												<div class="item-body">
+		  													<span>{{item.evaluateContent}}</span>	
+		  													<span class="imgs-container">
+		  															<img :src="img" v-for="img in item.imgs" />
+		  													</span>
+		  												</div>
+		  										</div>
+		  									<!--<span id="">暂无评论</span>-->
+		  								</div>
+		  					</div>
+		  					<div class="advertisement" id="advertisementDetail">
+		  						  	<div class="flag"><span>货品详情</span></div>
+		  						  	<div class="content" id="advertisementDetail_content">
+		  						  			<img src="../../../img/home/fruit.png"/>
+		  						  			<img src="../../../img/home/xumu.png"/>
+		  						  			<img src="../../../img/home/vagetables.png"/>
+		  						  	</div>
+		  					</div>
+		  		</div> 
+		  		<div id="bottombar">
+		  				<div class="shoppingCar" @tap="toShoppingCar">
+		  						<div class="topImg">
+		  							<div  class="tag" v-if="car_sumGoods">
+		  								{{car_sumGoods}}
+		  							</div>
+		  						</div>  
+		  						<span>购物车</span>
+		  				</div>
+		  				<div class="buy" @tap="buyNow">立即购买</div>
+		  				<div class="addToShoppingCar" @tap="addToShopCar">加入购物车</div>
+		  		</div>
+		</div>
+		<script src="goodsdetail-data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="goodsdetail-mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="goodsdetail-vue.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

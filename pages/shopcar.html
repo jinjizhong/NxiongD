@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="shopcar.css"/>
+    <script src="../js/mui.min.js"></script>
+    <script src="util/util.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="list">	
+		</div>
+		<header class="mui-bar mui-bar-nav"  id='title-header'>
+		  	    <h1 class="mui-title" id="title-center">
+			  	    <div>购物车</div>
+			  	    <!--<img src="../img/shopcar/position.png"/>-->
+		  	    </h1>
+				<div id='title-right-info' @tap="del()"><a v-bind:class="{active: isActive }"><span class="mui-icon mui-icon-trash"></span></a></div>
+		</header>
+		<div class="mui-content"  v-bind:style="cargoods.length>0?'padding-bottom:51px;':''" style="padding-top: 34px;">
+			<template v-if="cargoods.length==0">
+						<div class="mui-card">
+							<div class="mui-card-content-inner">
+								<div id="inner_content"  style="margin:auto;display: flex;align-items: center;">
+									<img src="../img/shopcar/emptycar.png" v-if="isLogin"/>
+									<span  style="font-size: 15px;margin-left: 14px;color: #707070;" v-if="isLogin">购物车是空的&nbsp;</span>
+									<span  style="font-size: 14px;margin-left: 14px;color: #707070;" v-else="isLogin">您还未登录&nbsp;</span>
+									<a  v-if="!isLogin" id="login">
+										先去登陆
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="mui-card-footer">
+							<a class="mui-card-link">去逛逛?</a>
+							<a class="mui-card-link">关注店铺</a>
+						</div>
+			</template>
+		    <template v-else>
+					<div class="mui-card dilute"  v-for="item,index in cargoods">
+						<div class="producttype">
+							<div class="mui-input-row mui-checkbox mui-left" @tap="checkedItem(index,-1)">
+							  <label>{{item.shopInfo.name}}</label>
+							  <input name="checkbox1" type="checkbox" v-bind:checked="item.checked">
+							</div>
+						</div>
+						<div class="mui-card-header" v-if="item.shopInfo.activity.length>0" v-for="activity in item.shopInfo.activity">
+							<div>
+								<span class="head-left-redflag">{{activity.name}}</span>
+								<span class="head-left-text">{{activity.title}}</span>
+							</div>
+							<div class="head-right">
+								<span class="head-right-text">
+									{{activity.linktext}}
+								</span>
+								<span class="mui-icon mui-icon-arrowright"></span>
+							</div>
+						</div>
+						<div class="mui-card-content" >
+							<div class="mui-card-content-inner" v-for="item1,index1 in item.goodsInfo">
+								<div class="mui-input-row mui-checkbox mui-left content-left-checkbox" @tap="checkedItem(index,index1)">
+								  <label>
+								  	<input name="checkbox" type="checkbox" v-bind:checked="item1.checked">
+								  </label>
+								</div>
+								<div class='content-right'>
+									<img :src="item1.imgUrls[0].src"/>
+									<div class="content-right-goodsinfo">
+										<div class='goodsinfo-title'>
+											{{item1.title}}
+										</div>	
+										<div class='goodsinfo-config'>
+											{{item1.configstr}}
+										</div>	
+										<div class='goodsinfo-activity'>
+						<span class='goodsinfo-activity-text' v-if="item1.discounts.length>0"  v-for="discount in item1.discounts">
+												{{discount}}  
+											</span>
+										</div>	
+										<div class="goodsinfo-bottom">
+											<div class="goodsinfo-bottom-left">¥{{item1.price}}</div>
+											<div class='goodsinfo-bottom-right'>
+												<span class="add-goods-num" @tap="reduce(index,index1)">-</span>
+												<span class="goods-num">{{item1.num}}</span>
+												<span class="add-goods-num" @tap="add(index,index1)">+</span>
+											</div>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bottom-bar">
+						<div style="flex: 1;"  @tap="checkedAll()">
+							<div class="mui-input-row mui-checkbox mui-left checked-all-position">
+							  <label>全选</label>
+							  <input name="checkbox1" type="checkbox" v-bind:checked="allchecked">
+							</div>
+						</div>
+						<div style="line-height: 51px;text-align: left;flex:1.6;">合计：¥ {{orderinfo.total}}</div>
+						<div @tap="go_settle" style="line-height: 51px;background-color:red;color: white;flex: 1.3;text-align: center;">
+							去结算({{orderinfo.allgoodsnum}})
+						</div>
+					</div>
+			</template>
+		</div>
+		
+<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="shopcar.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

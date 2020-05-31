@@ -1,0 +1,540 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../land/Release/Release.css" rel="stylesheet" />
+		<style type="text/css">
+			/*后添加的。用于使输入框摆脱mui的限制*/
+			
+			input,
+			textarea {
+				-webkit-user-select: auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">机手发布</h1>
+		</header>
+		<div class="mui-content" style="background-color: #f4f5f5">
+			
+			<form class="mui-input-group">
+				<div class="border">
+					<label>
+						<span>标题名称<span>
+						<input id="biaoti" name='biaoti' type="text" placeholder="请输入服务的名称" />
+					</label>
+				</div>
+			</form>
+			<form class="mui-input-group">
+				<div class="border">
+					<label>
+						<span>作业区域</span>
+						<a class="jianku"><span class="mui-icon mui-icon-arrowright"></span></a>
+						<input id="Place" name='Place' type="text" placeholder="请选择区域" readonly="readonly" />
+					</label>
+				</div>
+				<div class="border">
+					<label>
+						<span>详细地址</span>
+						<input id="Area_config" name='Area_config' type="text" placeholder="输入作业详细区域" />
+					</label>
+				</div>
+				<div class="border">
+					<label>
+						<span>服务类型</span>
+						<a class="jianku"><span class="mui-icon mui-icon-arrowright"></span></a>
+						<input id="ClassName" name='ClassName' type="text" placeholder="请选择服务类型" readonly="readonly" />
+					</label>
+				</div>
+				<div class="border">
+					<label>
+						<span>原价（元）</span>
+						<input id="Old_price" name='oldPrice' type="text" onKeyUp="amount(this)" onBlur="overFormat(this)" placeholder="填写原价" />
+					</label>
+				</div>
+				<div class="border">
+					<label>
+						<span>现价（元）</span>
+						<input id="Now_price" name='nowPrice' type="text" onKeyUp="amount(this)" onBlur="overFormat(this)" placeholder="填写现价" />
+					</label>
+				</div>
+				
+			</form>
+			
+			<div style="padding-top: 10px;">
+				<textarea id="Content" cols="6" style="height: 150px;width: 95%;margin-left: 2.5%;" onkeyup="keyUP(this)" placeholder="请输入您的详细介绍，不超过200字。。。"></textarea>
+			</div>
+			<div style="margin: 10px">
+				图片上传
+				<p>(限三张，提供图片大小5M以下)</p>
+			</div>
+			<div style="width: 100%;background-color: #fff;">
+			<div id="image-list" style="width: 75%;height: 85px;background-size: cover;padding: 10px 10px;overflow: hidden;"></div>
+			</div>
+			<button type="submit" class="tijiao">提交信息</button>
+		</div>
+	<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../util/util.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	mui.init();
+	var Class_id="";
+	var img1="";
+	var img2="";
+	var img3="";
+	var dianji=false;
+	var biaoti = $('#biaoti');//标题名称
+	var Place = $('#Place');//作业区域
+	var Area_config = $('#Area_config');//详细地点
+	var Old_price=$('#Old_price');//原价
+	var Now_price=$('#Now_price');//现价
+	var ClassName = $('#ClassName');//服务类型
+	var Content = $('#Content');//详细介绍
+	
+	//选择区域
+	document.getElementById('Place').addEventListener('tap', function() {
+		if(mui.os.plus) {
+			var leixingID = [{
+				title: "清河区"
+			}, {
+				title: "淮安区"
+			}, {
+				title: "淮阴区"
+			}, {
+				title: "清浦区"
+			}, {
+				title: "涟水县"
+			}, {
+				title: "洪泽县"
+			}, {
+				title: "盱眙县"
+			}, {
+				title: "金湖县"
+			}];
+			plus.nativeUI.actionSheet({
+				title: "选择所在区域",
+				cancel: "取消",
+				buttons: leixingID
+			}, function(b) {
+				switch(b.index) {
+					case 0:
+						break;
+					case 1:
+						document.getElementById("Place").value = leixingID[0].title;
+						break;
+					case 2:
+						document.getElementById("Place").value = leixingID[1].title;
+						break;
+					case 3:
+						document.getElementById("Place").value = leixingID[2].title;
+						break;
+					case 4:
+						document.getElementById("Place").value = leixingID[3].title;
+						break;
+					case 5:
+						document.getElementById("Place").value = leixingID[4].title;
+						break;
+					case 6:
+						document.getElementById("Place").value = leixingID[5].title;
+						break;
+					case 7:
+						document.getElementById("Place").value = leixingID[6].title;
+						break;
+					case 8:
+						document.getElementById("Place").value = leixingID[7].title;
+						break;
+					default:
+						break;
+				}
+			});
+		}
+	}, false);
+	
+	//点击提交发布信息
+	$("button").click(function(){
+		
+  		if(biaoti.val()===""){
+  			alert("标题不能为空！");
+  		}else if(Place.val()===""){
+  			alert("作业区域不能为空");
+  		}else if(Area_config.val()===""){
+  			alert("请输入详细区域");
+  		}else if(Old_price.val()===""){
+  			alert("原价不能为空");
+  		}else if(Now_price.val()===""){
+  			alert("现价不能为空");
+  		}else if(ClassName.val()===""){
+  			alert("服务类型不能为空");
+  		}else if(Content.val()===""){
+  			alert("详细介绍不能为空");
+  		}else if(picNum!=3){
+  			alert("至少上传三张图片");
+  		}else{
+  			serve_order(img1,img2,img3);
+  		}
+	});
+	
+	//点击逻辑判断
+	function serve_order(img1,img2,img3){
+		var s1="";
+		var s2="";
+		var s3="";
+		if(!dianji){
+			dianji=true;
+			
+			//上传图片
+			var wt = plus.nativeUI.showWaiting("图片上传中...",{back:"none"});
+			updatefile(img1, function(s){
+						succes='1';
+						if(JSON.parse(s).Success=="0"){
+							mui.toast("上传出错,重新上传");
+							wt.close();
+						}else{
+							mui.toast("第一张上传成功");
+							s1=JSON.parse(s).Date;
+							updatefile(img2,function(ss){
+								if(JSON.parse(ss).Success=="0"){
+									mui.toast("上传出错,重新上传");
+									wt.close();
+								}else{
+									mui.toast("第二张上传成功");
+									s2=JSON.parse(ss).Date;
+									updatefile(img3,function(sss){
+										if(JSON.parse(sss).Success=="0"){
+											mui.toast("上传出错,重新上传");
+											wt.close();
+										}else{
+											mui.toast("第三张上传成功");
+											s3=JSON.parse(sss).Date;
+											wt.close();
+											Toajax(s1,s2,s3);
+										}
+									});
+								}
+							});
+						}
+					});
+							
+			}else{
+				alert("不要重复提交")
+			}
+		}
+		//提交验证到服务器
+		function Toajax(s1,s2,s3){
+			var ss=localStorage.getItem("UserInfo");
+			var ww = plus.nativeUI.showWaiting("信息提交中...",{back:"none"});
+			
+			var data={ 
+				"TaskGuid":"86537836334",
+				"DriverID":"1234567890",
+				"DataType":"GoodsServer",
+				"User_id":JSON.parse(ss).userinfo.Id,
+				"Class_id":Class_id,
+				"ClassName":ClassName.val(),
+  				"Product_name":biaoti.val(),
+				"Old_price":Old_price.val(),
+				"Now_price":Now_price.val(),
+				"Content":Content.val(),
+				"Area_config":Area_config.val(),
+				"Place":Place.val(),
+				"Type":"1",
+				"Image1":s1,
+				"Image2":s2,
+				"Image3":s3
+			};
+			
+			ToConn(setUrl,data, function(aa){
+				//console.log(aa);
+				if(JSON.parse(aa).Success==="1"){
+					alert("信息提交成功！");
+					ww.close();
+					plus.webview.currentWebview().close();
+				}else{
+					alert("提交失败！");
+					dianji=false;
+					ww.close();
+				}
+					
+				},function(ee){
+					alert("提交失败，检查网络！")
+					dianji=false;
+					ww.close();
+			});
+		}
+
+	
+	//重写返回逻辑
+	mui.back = function() {
+		dianji=false;
+		plus.webview.currentWebview().close();
+	}
+	//选择区域
+	document.getElementById('ClassName').addEventListener('tap', function() {
+		if(mui.os.plus) {
+			var typeName = [{
+				title: "服务类产品-无人机"
+			}, {
+				title: "服务类产品-农机收割"
+			}, {
+				title: "服务类产品-农机播种"
+			}, {
+				title: "服务类产品-植保飞防"
+			}];
+			plus.nativeUI.actionSheet({
+				title: "选择类型",
+				cancel: "取消",
+				buttons: typeName
+			}, function(b) {
+				switch(b.index) {
+					case 0:
+						break;
+					case 1:
+						document.getElementById("ClassName").value = typeName[0].title;
+						Class_id="35ee36e7ae5f4e05bde8d5361b317d69";
+						break;
+					case 2:
+						document.getElementById("ClassName").value = typeName[1].title;
+						Class_id="2c120ba13c2a4c8e87e2f235a2badd67";
+						break;
+					case 3:
+						document.getElementById("ClassName").value = typeName[2].title;
+						Class_id="619b538d319f41e19179744f21817a7c";
+						break;
+					case 4:
+						document.getElementById("ClassName").value = typeName[3].title;
+						Class_id="8e9bd5b71fd6461f9403bdfeda296a0f";
+						break;
+					default:
+						break;
+				}
+			});
+		}
+	}, false);
+	
+
+		var picNum=0;
+	var index = 1;
+	var size = null;
+	var imageIndexIdNum = 0;
+	var starIndex = 0;
+	var feedback = {
+		imageList: document.getElementById('image-list'),
+	};
+	feedback.files = [];
+	feedback.uploader = null;
+	feedback.deviceInfo = null;
+	mui.plusReady(function() {
+		//设备信息，无需修改
+		feedback.deviceInfo = {
+			appid: plus.runtime.appid,
+			imei: plus.device.imei, //设备标识
+			images: feedback.files, //图片文件
+			p: mui.os.android ? 'a' : 'i', //平台类型，i表示iOS平台，a表示Android平台。
+			md: plus.device.model, //设备型号
+			app_version: plus.runtime.version,
+			plus_version: plus.runtime.innerVersion, //基座版本号
+			os: mui.os.version,
+			net: '' + plus.networkinfo.getCurrentType()
+		}
+	});
+	/**
+	 *提交成功之后，恢复表单项 
+	 */
+	feedback.clearForm = function() {
+		feedback.question.value = '';
+		feedback.contact.value = '';
+		feedback.imageList.innerHTML = '';
+		feedback.newPlaceholder();
+		feedback.files = [];
+		index = 0;
+		size = 0;
+		imageIndexIdNum = 0;
+		starIndex = 0;
+	};
+	feedback.getFileInputArray = function() {
+		return [].slice.call(feedback.imageList.querySelectorAll('.file'));
+	};
+	feedback.addFile = function(path) {
+		picNum=picNum+1;
+		if(picNum===1){
+			img1=path;
+		}else if(picNum===2){
+			img2=path;
+		}else{
+			img3=path;
+		}
+		//alert(picNum)
+		//alert(path);
+	/*	feedback.files.push({
+			name: "images" + index,
+			path: path,
+			id: "img-" + index
+		});*/
+	};
+	/**
+	 * 初始化图片域占位
+	 */
+	feedback.newPlaceholder = function() {
+		var fileInputArray = feedback.getFileInputArray();
+		if(fileInputArray &&
+			fileInputArray.length > 0 &&
+			fileInputArray[fileInputArray.length - 1].parentNode.classList.contains('space')) {
+			return;
+		};
+		imageIndexIdNum++;
+		var placeholder = document.createElement('div');
+		placeholder.setAttribute('class', 'image-item space');
+		var up = document.createElement("div");
+		up.setAttribute('class', 'image-up')
+		//删除图片
+		var closeButton = document.createElement('div');
+		closeButton.setAttribute('class', 'image-close');
+		closeButton.innerHTML = 'X';
+		closeButton.id = "img-" + index;
+		//小X的点击事件
+		closeButton.addEventListener('tap', function(event) {
+			picNum=picNum-1;
+			
+			setTimeout(function() {
+				for(var temp = 0; temp < feedback.files.length; temp++) {
+					if(feedback.files[temp].id == closeButton.id) {
+						feedback.files.splice(temp, 1);
+					}
+				}
+				feedback.imageList.removeChild(placeholder);
+			}, 0);
+			return false;
+		}, false);
+
+		//
+		var fileInput = document.createElement('div');
+		fileInput.setAttribute('class', 'file');
+		fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
+		fileInput.addEventListener('tap', function(event) {
+			var self = this;
+			var index = (this.id).substr(-1);
+
+			plus.gallery.pick(function(e) {
+				var name = e.substr(e.lastIndexOf('/') + 1);
+				console.log("name:" + name);
+
+				plus.zip.compressImage({
+					src: e,
+					dst: '_doc/' + name,
+					overwrite: true,
+					quality: 50
+				}, function(zip) {
+					size += zip.size
+					console.log("filesize:" + zip.size + ",totalsize:" + size);
+					if(size > (5* 1024 * 1024)) {
+						return mui.toast('文件超大,请重新选择~');
+					}
+					if(!self.parentNode.classList.contains('space')) { //已有图片
+						feedback.files.splice(index - 1, 1, {
+							name: "images" + index,
+							path: e
+						});
+					} else { //加号
+						
+						placeholder.classList.remove('space');
+						feedback.addFile(zip.target);
+						feedback.newPlaceholder();
+					}
+					up.classList.remove('image-up');
+					placeholder.style.backgroundImage = 'url(' + zip.target + ')';
+				}, function(zipe) {
+					mui.toast('压缩失败！')
+				});
+
+			}, function(e) {
+				mui.toast(e.message);
+			}, {});
+		}, false);
+		placeholder.appendChild(closeButton);
+		placeholder.appendChild(up);
+		placeholder.appendChild(fileInput);
+		feedback.imageList.appendChild(placeholder);
+	};
+	feedback.newPlaceholder();
+
+
+
+	//详细信息介绍判断
+	function keyUP(t) {
+		var len = $(t).val().length;
+		if(len > 200) {
+			$(t).val($(t).val().substring(0, 200));
+			mui.toast('最多只能输入200字');
+		} else if(len == 0) {
+			$('.tijiao').attr("disabled", true);
+		}
+	}
+	// 实时动态强制更改用户录入
+    function amount(th,event) {
+        var event = event || window.event;
+        var code = event.keyCode;
+        if(navigator.userAgent.indexOf("Firefox")>-1){
+            code = event.which;
+        }
+        if(code == 37 || code ==39) return;
+        var regStrs = [
+            ['^0(\\d+)$', '$1'], //禁止录入整数部分两位以上，但首位为0
+            ['[^\\d\\.]+$', ''], //禁止录入任何非数字和点
+            ['\\.(\\d?)\\.+', '.$1'], //禁止录入两个以上的点
+            ['^(\\d+\\.\\d{2}).+', '$1'], //禁止录入小数点后两位以上
+            ['^(\\.\\d+)','$1']//禁止输入情况下小数点出现在首位
+        ];
+        for (i = 0; i < regStrs.length; i++) {
+            var reg = new RegExp(regStrs[i][0]);
+            th.value = th.value.replace(reg, regStrs[i][1]);
+        }
+    }
+    // 录入完成后，输入模式失去焦点后对录入进行判断并强制更改，并对小数点进行0补全
+    function overFormat(th) {
+        var v = th.value;
+        if (v === '') {
+            v = '0.00';
+        } else if (v === '0') {
+            v = '0.00';
+        } else if (v === '0.') {
+            v = '0.00';
+        } else if (/^0+\d+\.?\d*.*$/.test(v)) {
+            v = v.replace(/^0+(\d+\.?\d*).*$/, '$1');
+            v = inp.getRightPriceFormat(v).val;
+        } else if (/^0\.\d$/.test(v)) {
+            v = v + '0';
+        } else if (!/^\d+\.\d{2}$/.test(v)) {
+            if (/^\d+\.\d{2}.+/.test(v)) {
+                v = v.replace(/^(\d+\.\d{2}).*$/, '$1');
+            } else if (/^\d+$/.test(v)) {
+                v = v + '.00';
+            } else if (/^\d+\.$/.test(v)) {
+                v = v + '00';
+            } else if (/^\d+\.\d$/.test(v)) {
+                v = v + '0';
+            } else if (/^[^\d]+\d+\.?\d*$/.test(v)) {
+                v = v.replace(/^[^\d]+(\d+\.?\d*)$/, '$1');
+            } else if (/\d+/.test(v)) {
+                v = v.replace(/^[^\d]*(\d+\.?\d*).*$/, '$1');
+                ty = false;
+            } else if (/^0+\d+\.?\d*$/.test(v)) {
+                v = v.replace(/^0+(\d+\.?\d*)$/, '$1');
+                ty = false;
+            } else {
+                v = '0.00';
+            }
+        }
+        th.value = v;
+    }
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,153 @@
+/*重置*/
+body,h1,h2,h3,h4,h5,dl,dd,dt,p,ul,li,ol{ margin:0; padding:0;}
+input,select,form,textarea,button{ border:none; margin:0;outline:none; padding:0;}
+h1,h2,h3,h4,h5{ font-weight:normal;}
+img{ border:none;}
+a{ text-decoration:none;}
+li{ list-style-type:none;}
+html{ width:100%;min-height: 100%; height: 100%;}
+body.shouye{height: 100%;}
+body{background-color: #fff;min-height: 100%; }
+
+/**/
+@media screen and (min-width: 320px) {html{font-size:50px;}}
+@media screen and (min-width: 360px) {html{font-size:56.25px;}}
+@media screen and (min-width: 375px) {html{font-size:58.59375px;}}
+@media screen and (min-width: 400px) {html{font-size:62.5px;}}
+@media screen and (min-width: 414px) {html{font-size:64.6875px;}}
+@media screen and (min-width: 440px) {html{font-size:68.75px;}}
+@media screen and (min-width: 480px) {html{font-size:75px;}}
+@media screen and (min-width: 520px) {html{font-size:81.25px;}}
+@media screen and (min-width: 560px) {html{font-size:87.5px;}}
+@media screen and (min-width: 600px) {html{font-size:93.75px;}}
+@media screen and (min-width: 640px) {html{font-size:100px;}}
+@media screen and (min-width: 680px) {html{font-size:100px;}}
+@media screen and (min-width: 720px) {html{font-size:100px;}}
+@media screen and (min-width: 760px) {html{font-size:100px;}}
+@media screen and (min-width: 800px) {html{font-size:100px;}}
+@media screen and (min-width: 960px) {html{font-size:100px;}}
+
+/*公共样式*/
+.cs{border: solid 1px #ccc;}
+
+.px22{font-size: .22rem;}
+.px24{font-size: .24rem;}
+.px26{font-size: .26rem;}
+
+.color_h{color: #bdbdbd;}
+
+ .da_xiao_xianz{
+ 	width:100%;
+	max-width: 640px;
+	margin:0 auto;
+	background: #fff;
+ }
+/*头部开始了*/ 
+
+.toub_beij{
+	width: 100%;
+	height: 43px;
+	background:#fff;
+	top: 0;
+ 	z-index: 110; 
+	
+}
+.toub_beij_shouye{
+	max-width: 640px;
+
+}
+
+.zhongj_k{
+	padding: 0.1rem 0.1rem -0.01px;
+	height: 50px;
+}
+
+/*.logo_k{width: 30%;float: left;height: 0.68rem;}*/
+.logo_k{width: 25%;float: left;height: 40px;padding-left: 10px;}
+/*.logo_k,.shous_k {vertical-align: middle;}*/
+.shous_k{width: 69%;float: left; background: #f1f1f1;border-radius:0.08rem;margin: 0.1rem 0; padding:0 0.1rem;height: 33px;line-height: 28px; }
+.shous_k span{display:inline-block;width: 0.3rem;height: 100%;background: url(../img/logo/sos.png) center;background-repeat: no-repeat;background-size: 100%;
+	float: left;
+	margin-right: 5px;
+}
+.shous_k input{background-color:inherit;font-size: 0.22rem; width: 85%;}
+.dengl{width: 10%;float: right; position: relative;height: 0.68rem;}
+.dengl .caid_img{width: 70%;float: right;height: 100%;margin-right: 0.1rem;}
+.dengl .caid_img img{width: 100%;margin-top: 11px;}
+.zhu_daoh{
+	position: absolute;
+	top: 0.8rem;
+	right: 0px;
+	display: none;
+	background:rgba(0,0,0,.8);width: 120px; border-radius: 0.1rem; z-index: 100;
+}
+.zhu_daoh em{
+	display: block;
+	width: 0;
+    height: 0;
+    position: absolute;
+    top: -0.19rem;
+    right: 0.2rem;
+    border-right: 0.2rem solid transparent;
+    border-bottom: 0.2rem solid rgba(0,0,0,.8);
+    border-left: 0.2rem solid transparent;
+}
+.zhu_daoh li{padding:0 0.2rem; border-bottom:solid 1px #4f4f4f;} 
+.zhu_daoh li.wu{border-bottom:none;}
+.zhu_daoh li a{color: #fff;font-size: 0.26rem;line-height: .8rem;display: block;}
+
+
+/*<!--内容-->*/
+
+.neir_beij{
+	width: 100%;
+}
+
+.neir_beij ul{
+	overflow: hidden;
+	margin: 0.2rem 0;
+}
+.neir_beij ul li{width: 25%;float: left; text-align: center; margin-bottom: .2rem;}
+
+.neir_beij ul li .daohangk{position: relative; margin:0 auto 0.1rem; text-align: center;}
+.neir_beij ul li .daohangk img{width: .75rem;height: 0.75rem;}
+.neir_beij ul li p{font-size: 0.22rem;color: #5f5f5f;}
+
+/*加载中*/
+.jiazz{text-align: center; line-height: 0.65rem; height: 0.65rem; background: #dedede; margin-bottom: 0.2rem;}
+.jiazz p{
+	 line-height: 0.65rem;
+	 color: #989898;
+}
+
+/*搜索*/
+.logo_k_fanh{width: 15%;}
+.logo_k_fanh a{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.logo_k_fanh .fanh_ann{
+	width: 0.20rem;
+    height: 0.38rem;
+    margin: 0.15rem 0 0 0.3rem;}
+.zhongj_k_tanc{border-bottom: solid 1px #e2e2e2;}
+.shous_k_ganc{width: 75%;}
+.shous_k .sous_ann_k{    width: 0.5rem;display: block; float: right;height: 0.48rem;}
+.shous_k span.sous_ann{float:right;}
+
+.remen_sos{margin:.2rem;}
+.remen_sos p{line-height: 0.35rem;}
+.remen_sos ul{overflow: hidden;margin: 0.2rem 0; }
+.remen_sos ul li{
+	float: left;
+	margin: 0.15rem 0.15rem 0 0;
+	
+	border: solid 1px #828282;
+	border-radius: 0.05rem;
+}
+
+.remen_sos ul li a{color: #828282;line-height: 0.25rem;display: inline-block;font-size: 0.22rem;padding: 0.1rem 0.15rem;}
+
+#shous_yem{display: none; height: 100%; background: #fff;}
+

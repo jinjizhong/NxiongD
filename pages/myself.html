@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>农兄弟-我的</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="../css/mui.min.css">
+<link rel="stylesheet" type="text/css" href="../css/icons-extra.css" />
+<link rel="stylesheet" type="text/css" href="myself.css"/>
+</head>
+<body>
+<header class="chenai">
+	<div id="information" class="mui-btn">
+		<img id="userImg" src="../img/logo/android/qdym1080.png"><br />
+		<h4 class="mui-pull-caption">
+		    <a id="userName"  style="font-size: 14px;text-decoration: underline;color: white;">未登录</a> 
+		</h4>
+	</div>
+</header>
+<div class="mui-card" style="border-radius: 8px;">
+	<table width="100%" height="66px" style="margin-top:-50px ;">
+		<tr class="mui-text-center">
+			<td id="zhibao" width="33%">--<br />植保订单</td>
+			<td id="dingdan" width="33%">--<br />商品订单</td>
+			<td width="33%">--<br />关注</td>
+		</tr>
+	</table>
+</div>
+<div class="mui-content">
+	<ul class="mui-table-view">
+		<li onclick="zhuye()" class="mui-table-view-cell">
+			<a class="mui-navigate-right">
+				<img src="../img/myse/dianpu.png"/>
+				店铺主页
+			</a>
+		</li>
+		<li id="shanghu" class="mui-table-view-cell">
+			<a class="mui-navigate-right">
+				<img src="../img/myse/shopdefine.png"/>
+					商户认证
+			</a>
+		</li>
+		<li id="shiming" class="mui-table-view-cell">
+			<a class="mui-navigate-right">
+				<img src="../img/myse/myself1.png"/>
+				机手认证
+			</a>
+		</li>
+		<li id="fabu" class="mui-table-view-cell">
+			<a class="mui-navigate-right">
+				<img src="../img/myse/fabu.png"/>
+				机手发布
+			</a>
+		</li>
+		
+		<li id="dizhi" class="mui-table-view-cell">
+			<a class="mui-navigate-right">
+				<img src="../img/myse/myself2.png"/>
+				收货地址
+			</a>
+		</li>
+	</ul>
+	<ul class="mui-table-view" style="margin-top: 8px;">
+		<li class="mui-table-view-cell">
+			<a id="set" class="mui-navigate-right">
+				<img src="../img/myse/myself3.png"/>
+				系统设置
+			</a>
+		</li>
+		<li class="mui-table-view-cell">
+			<a id="share" class="mui-navigate-right">
+				<img src="../img/myse/myself4.png"/>
+				邀请好友
+			</a>
+		</li>
+		<li class="mui-table-view-cell">
+			<a id="telephone" class="mui-navigate-right">
+				<img src="../img/myse/myself5.png"/>
+				在线客服
+			</a>
+		</li>
+		<li class="mui-table-view-cell">
+			<a id="erweiM" class="mui-navigate-right">
+				<img src="../img/myse/myself6.png"/>
+				下载二维码
+			</a>
+		</li>
+	</ul>
+	<div v-if="isLogin" id="out_sign" class="tuichudenglu" style="background-color: red;" onclick="out_sign()">
+			退出当前登录
+	</div>
+	<div v-else  id="sign" class="tuichudenglu" style="background-color: #06bfac;" onclick="open_detail()">
+		请登录
+	</div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="myself.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

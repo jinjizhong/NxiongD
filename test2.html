@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>信息修改</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/mui.picker.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">信息修改</h1>
+			<a class="mui-icon mui-icon-more mui-icon-right-nav mui-pull-right"></a>
+		</header>
+		<div class="mui-content">
+			<ul class="info_ul">
+				<!--<li class="portrait_li">
+					<div class="portrait">
+						<img id="headImage" style="width: 100%;height: 100%;" src="" onerror="this.src='img/head.png'" />
+					</div>
+				</li>-->
+				<li>
+					<div class="button" onclick="upload(0)">上 传</div>
+				</li>
+				
+				<li>
+					<p>营业执照</p>
+					<div class="file">
+						<img id="file" style="width:10%;height:10%;" src="" onerror="this.src='img/head.png'" />
+						<div class="button" onclick="upload(1)">上 传</div>
+					</div>
+				</li>
+				
+			</ul>
+			<button id="btn_confirm" onclick="confirm()">确认修改</button>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.picker.min.js"></script>
+		<script src="js/md5.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/personInfo.js"></script>
+		<script src="js/image.js"></script>
+		<script src="js/jquery-3.3.1.min.js"></script>
+
+		<script>
+			var server = "http://192.168.1.149/hq_svn/app_file.php";
+			var files = document.getElementById('file');
+			var headImage = document.getElementById('headImage');
+			//扩展API完成后执行的操作
+			function plusReady() {
+				headImage.addEventListener('click', function() {
+					page.imgUp(0);
+				});
+				files.addEventListener('click', function() {
+					page.imgUp(1);
+				});
+			}
+			//弹出系统按钮选择框
+			var page = null;
+			page = {
+				imgUp: function(num) {
+					var m = this;
+					/* console.log(m);*/
+					plus.nativeUI.actionSheet({
+						cancel: "取消",
+						buttons: [{
+								title: "拍照"
+							},
+							{
+								title: "从相册中选择"
+							}
+						]
+					}, function(e) { //1 是拍照  2 从相册中选择  
+						switch(e.index) {
+							case 1:
+								appendByCamera(num);
+								break;
+							case 2:
+								appendByGallery(num);
+								break;
+						}
+					});
+				}
+			}
+			// 上传文件
+			function upload(num) {
+				if(num == 0 && headImage.src.indexOf('img/head.png') > -1) {
+					plus.nativeUI.alert("请添加上传文件！");
+					return;
+				}
+				if(num == 1 && files.src.indexOf('img/head.png') > -1) {
+					plus.nativeUI.alert("请添加上传文件！");
+					return;
+				}
+				console.log("开始上传：")
+				var wt = plus.nativeUI.showWaiting();
+				var task = plus.uploader.createUpload(server, {
+						method: "POST"
+					},
+					function(t, status) { //上传完成
+						if(status == 200) {
+							var strData = t.responseText;
+							if(strData != "") {
+								var data = strData.split(",");
+								document.getElementById("relativeUrl").value = (data[0].split(":"))[1];
+								document.getElementById("absoluteUrl").value = (data[1].split(":"))[1];
+								plus.nativeUI.alert("上传成功!");
+							}
+							wt.close();
+						} else {
+							plus.nativeUI.alert("上传失败：" + status);
+							wt.close();
+						}
+					}
+				);
+				//添加其他参数
+				if(num == 0) {
+					task.addFile(headImage.src, {
+						key: "file"
+					});
+				}
+				if(num == 1) {
+					task.addFile(files.src, {
+						key: "file"
+					});
+				}
+				task.start();
+			}
+			// 拍照添加文件
+			function appendByCamera(num) {
+				plus.camera.getCamera().captureImage(function(e) {
+					plus.io.resolveLocalFileSystemURL(e, function(entry) {
+						var path = entry.toLocalURL();
+						console.log("num:" + num);
+						if(num == 0) {
+							console.log("00");
+							$("#headImage")[0].src = path;
+						} else {
+							console.log("11");
+							$("#file")[0].src = path;
+						}
+					}, function(e) {
+						mui.toast("读取拍照文件错误：" + e.message);
+					});
+
+				});
+			}
+			// 从相册添加文件
+			function appendByGallery(num) {
+				plus.gallery.pick(function(path) {
+
+					if(num == 0) {
+						console.log("000");
+						$("#headImage")[0].src = path;
+					} else {
+						console.log("111");
+						$("#file")[0].src = path;
+					}
+				});
+			}
+			//扩展API是否准备好，如果没有准备好则监听plusReady  
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", plusReady, false);
+			}
+		</script>
+
+	</body>
+
+</html>

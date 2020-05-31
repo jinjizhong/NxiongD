@@ -1,0 +1,109 @@
+.mui-content{
+	padding-bottom: 20px;
+}
+.mui-slider-item img {
+	height: 230px;
+}
+.mui-content .shangbu{
+	padding-bottom: 25px;
+	background:#FFFFFF;
+}
+.mui-content .jiage{
+	float : left;
+	color: #FF9224;
+	font-size: 130%;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.mui-content .shangbu .jiaoyi{
+	float : left;
+	margin: -10px 20px;
+	text-align: center;
+	border-radius:4px;
+	color: #FFFFFF;
+	font-size: 12px;
+	width: 55px;
+	height: 20px;
+	background-color: #00DB00;
+}
+.mui-content .shangbu .biaoti{
+	margin: 15px 10px;
+}
+.mui-content .shangbu .shijian{
+	margin: 0px 10px;
+}
+
+
+.mui-content .xiabu{
+	width: 100%;
+	margin-top: 10px;
+	background:#FFFFFF;
+	padding-bottom: 25px;
+}
+.mui-content .xiabu h4{
+	color: #FF9224;
+	padding-bottom: 5px;
+	padding-top: 15px;
+	text-align: center;
+}
+.mui-content .xiabu .xinxi{
+	font-size: 14px;
+	margin: 15px 10px;
+}
+.mui-content .xiabu .xinxi .qian{
+	color: #626262;
+	float : left;
+}
+.mui-content .xiabu .xinxi span{
+	float : right;
+}
+
+hr{
+	height:1px;
+	border:none;
+	border-top:1px solid #CECECE; 
+}
+
+
+
+.mui-bar-tab{
+	width: 100%;
+	height: 51px;
+}
+.mui-bar-tab .lianxiren{
+	float: left;
+	margin-top: -3px ;
+	margin-left: 10px;
+	width: 30%;
+	height: 45px;
+	text-align: center;
+}
+.mui-bar-tab .lianxidi{
+	float: right;
+	margin-top: 3px ;
+	margin-right: 10px;
+	width: 60%;
+	height: 45px;
+	text-align: center;
+	background-color: #8CEA00;
+}
+.mui-bar-tab .lianxiren span{
+	margin-top: -5px;
+	font-size: 33px;
+}
+.mui-bar-tab .lianxiren p{
+	font-size: 12px;
+	margin-top: -15px;
+}
+.mui-bar-tab .lianxidi span{
+	color: #FFFFFF;
+	margin-top: -12px;
+	font-size: 33px;
+}
+.mui-bar-tab .lianxidi p{
+	font-size: 11px;
+	color: #FFFFFF;
+	margin-top: -15px;
+}
+

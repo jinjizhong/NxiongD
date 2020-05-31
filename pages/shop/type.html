@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="type.css"/>
+    <script src="../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+    <title>分类</title>
+    <script type="text/javascript" src="http://cdn01.weipaitang.com/res/js/zepto.js?v=0.9.1.58"></script>
+    <script type="text/javascript" src="http://cdn01.weipaitang.com/res/js/zepto.picLazyLoad.min.js?v=0.9.1.58"></script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <h1 class="mui-title">分类</h1>
+	</header>
+<div id="contentbox">
+    <div class="menu" id="left-menu">
+    </div>
+    <div class="categoryBox" >
+        <div class="categoryContent" id="right-content">
+        </div>
+    </div>
+</div>
+<script src="../util/util.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+mui.init();
+mui.plusReady(requestData);
+function requestData(){
+				var param=JSON.stringify({
+										DriverID:'1234567890',
+										UserID: '任务标识',
+										TaskGuid: 'b4026263-704e-4e12-a64d-f79cb42962cc',
+										DataType: 'ClassList',
+										Classid: 'AC'
+				});
+			if(window.plus){
+				mui.ajax(serverUrl,{
+					data:{
+						"strJson": param
+					},
+					dataType:'json',//服务器返回json格式数据  
+					type:'POST',//HTTP请求类型
+					timeout:8000,//超时时间设置为10秒；              
+					success:function(data){
+						console.log(data);
+						var backObj=JSON.parse(data);
+						if (data){
+							setInfo(backObj)
+						}
+//						window.scrollBy(0,-45);
+//                  	document.getElementsByClassName("categoryBox")[0].scrollBy(0,-45);
+					},
+					error:function(xhr,type,errorThrown){
+						//异常处理；
+						console.log(errorThrown);
+					}
+				})
+			}else{
+				document.addEventListener("plusready",requestData,false);
+			}
+}
+
+function setInfo(data){
+	if(!data){
+		return;
+	}
+	console.log(data)
+	var leftTypeArr=data.types;
+	var leftHtmlStr="";
+	document.getElementById("right-content").innerHTML="";
+	for(var i=0;i<leftTypeArr.length;i++){
+		leftHtmlStr+='<div  id="aaa'+i+'" class="menuItem" category="'+(i-1)+'" onClick="moveTo(this)" >'+leftTypeArr[i].name+'</div>';
+		
+		var rightHtmlStr=(i==0?"<div class='categoryList first' category='"+(i-1)+"'>":"<div class='categoryList' category='"+(i-1)+"'>");
+		
+		rightHtmlStr+='<div class="title" id="aa'+i+'">'+leftTypeArr[i].name+'<a id="'+leftTypeArr[i].id+'" class="all"  onClick="checkType(this)">查看全部</a></div>';
+		
+		for(var j=0;j<leftTypeArr[i].types.length;j++){
+			
+		rightHtmlStr+='<div class="categoryItem" id="'+leftTypeArr[i].types[j].id+'" onClick="checkType(this)"><div class="categoryIcon lazyLoad" data-original="'+leftTypeArr[i].types[j].Class_img+'"></div><div class="cursorArea"></div><span class="text">'+leftTypeArr[i].types[j].name+'</span></div>';
+			
+		}
+		rightHtmlStr+="</div>";
+		document.getElementById("right-content").innerHTML+=rightHtmlStr;
+	}
+		document.getElementById("left-menu").innerHTML=leftHtmlStr;
+}
+function checkType(self){
+//	self.id
+	mui.openWindow({
+		id:"goodslist.html",
+		url:"goodslist/goodslist.html"
+	})
+}
+function moveTo(self){
+	var aID=self.id;
+// document.getElementById(aID.substring(1)).scrollIntoView(true);
+   location.href='#'+aID.substring(1);
+   document.getElementsByClassName("categoryBox")[0].scrollBy(0,-45); 
+//	window.scrollBy(0,-45)
+}
+</script>
+<script src="type.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

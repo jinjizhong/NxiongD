@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="myself.css">
+		<script src="../util/util.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.mui-slider-indicator {
+				height: 45px
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a id="icon-more"><span class="mui-icon mui-icon-more mui-pull-right"></span></a>
+			<h1 class="mui-title">商品订单</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-slider mui-fullscreen">
+				<div style="height: 38px;" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll ">
+						<a class="mui-control-item mui-active" href="#item1mobile">全部</a>
+						<a class="mui-control-item" href="#item2mobile">待付款</a>
+						<a class="mui-control-item" href="#item3mobile">待收货</a>
+						<a class="mui-control-item" href="#item4mobile">已完成</a>
+						<a class="mui-control-item" href="#item5mobile">已取消</a>
+					</div>
+				</div>
+				<div class="mui-slider-group" id="refresh-container">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active" style="background-image: url(../../img/none.png);background-position: center 47px;background-repeat: no-repeat;">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<template v-for="item in orders">
+									<div class="gouwuc_kk gouwuc_kk_ddxq" style="background-color: white;">
+										<div class="dianpmc_gw" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<p class="px24">{{item.goodsInfo[0].shopInfo.shopName}}</p>
+												<span class="mui-icon mui-icon-trash"></span>
+											</a>
+										</div>
+										<div class="dianpmc_gw" v-else>
+											<a href="#">
+												<p class="px24">农兄弟商城</p>
+												<span class="mui-icon mui-icon-trash"></span>
+											</a>
+										</div>
+										<div class="dingd_hao">
+											<p>订单号：{{item.id}}</p>
+											<a @tap="go_detail(item)">查看详情</a>
+										</div>
+										<div class="diannao_shanp" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<h1><img :src="item.goodsInfo[0].baseInfo.imgUrl"></h1>
+											</a>
+											<div class="you">
+												<a href="#">
+													<p class="px24 bt">{{item.goodsInfo[0].baseInfo.goodsName}}</p>
+												</a>
+												<p class="xh">{{item.goodsInfo[0].baseInfo.configstr}}</p>
+												<div class="youjfy">
+													<div class="goum_sl">
+														<div class="counter_box">
+															<span>x{{item.goodsInfo[0].baseInfo.num}}</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="diannao_shanp" v-else>
+											<a href="#">
+												<h1 v-for="item1,index in item.goodsInfo" v-if="index<3">
+													<img :src="item1.baseInfo.imgUrl">
+												</h1>
+												<div class="mui-icon mui-icon-more" style="float: right;line-height:1.26rem;"></div>
+											</a>
+										</div>
+										<div class="qqq_jia">
+											<div class="zuo">
+												<p>状 态：<em v-if="item.goodsInfo[0].shopInfo.shopName">{{allStates[item.state]}}</em></p>
+												<p>总 价：<em class="qq">￥{{item.sumPrice}}</em></p>
+											</div>
+											<div class="you">
+												<p>
+													<a href="pingfen.html">去评价</a>
+													<a onclick="zaigou()" style="background: #FF0000; color: #fff;">再次购买</a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content" style="background-image: url(../../img/none.png);background-position: center 47px;background-repeat: no-repeat;">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll" >
+								<template v-for="item in orders">
+									<div class="gouwuc_kk gouwuc_kk_ddxq" v-if="item.state==5" style="background-color: white;">
+										<div class="dianpmc_gw" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<p class="px24">{{item.goodsInfo[0].shopInfo.shopName}}></p>
+												<span class="mui-icon mui-icon-trash"></span>
+											</a>
+										</div>
+										<div class="dianpmc_gw" v-else>
+											<a href="#">
+												<p class="px24">农兄弟商城</p>
+												<span class="mui-icon mui-icon-trash"></span>
+											</a>
+										</div>
+										<div class="dingd_hao">
+											<p>订单号：{{item.id}} </p>
+											<a href="dingdanxiangQ.html">查看详情</a>
+										</div>
+										<div class="diannao_shanp" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<h1><img :src="item.goodsInfo[0].baseInfo.imgUrl"></h1></a>
+											<div class="you">
+												<a href="#">
+													<p class="px24 bt">{{item.goodsInfo[0].baseInfo.goodsName}}</p>
+												</a>
+												<p class="xh">{{item.goodsInfo[0].baseInfo.configstr}}</p>
+												<div class="youjfy">
+													<div class="goum_sl">
+														<div class="counter_box">
+															<span>x{{item.goodsInfo[0].baseInfo.num}}</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="diannao_shanp" v-else>
+											<a href="#">
+												<h1 v-for="item1,index in item.goodsInfo" v-if="index<3"><img :src="item1.baseInfo.imgUrl"></h1>
+												<div class="mui-icon mui-icon-more" style="float: right;line-height:1.26rem;"></div>
+											</a>
+										</div>
+										<div class="qqq_jia">
+											<div class="zuo">
+												<p>状 态：<em>{{allStates[item.state]}}</em></p>
+												<p>总 价：<em class="qq">￥{{item.sumPrice}}</em></p>
+											</div>
+											<div class="you">
+												<p>
+													<a href="pingfen.html">去评价</a>
+													<a onclick="zaigou()" style="background: #FF0000; color: #fff;">再次购买</a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content" style="background-image: url(../../img/none.png);background-position: center 47px;background-repeat: no-repeat;">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<template v-for="item in orders">
+									<div class="gouwuc_kk gouwuc_kk_ddxq" v-if="item.state==1" style="background-color: white;">
+										<div class="dianpmc_gw" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<p class="px24">{{item.goodsInfo[0].shopInfo.shopName}}></p><span class="mui-icon mui-icon-trash"></span></a>
+										</div>
+										<div class="dianpmc_gw" v-else>
+											<a href="#">
+												<p class="px24">农兄弟商城</p>
+												<span class="mui-icon mui-icon-trash"></span>
+											</a>
+										</div>
+										<div class="dingd_hao">
+											<p>订单号：{{item.id}} </p>
+											<a href="dingdanxiangQ.html">查看详情</a>
+										</div>
+										<div class="diannao_shanp" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<h1><img :src="item.goodsInfo[0].baseInfo.imgUrl"></h1></a>
+											<div class="you">
+												<a href="#">
+													<p class="px24 bt">{{item.goodsInfo[0].baseInfo.goodsName}}</p>
+												</a>
+												<p class="xh">{{item.goodsInfo[0].baseInfo.configstr}}</p>
+												<div class="youjfy">
+													<div class="goum_sl">
+														<div class="counter_box">
+															<span>x{{item.goodsInfo[0].baseInfo.num}}</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="diannao_shanp" v-else>
+											<a href="#">
+												<h1 v-for="item1,index in item.goodsInfo" v-if="index<3"><img :src="item1.baseInfo.imgUrl"></h1>
+												<div class="mui-icon mui-icon-more" style="float: right;line-height:1.26rem;"></div>
+											</a>
+										</div>
+										<div class="qqq_jia">
+											<div class="zuo">
+												<p>状 态：<em>{{allStates[item.state]}}</em></p>
+												<p>总 价：<em class="qq">￥{{item.sumPrice}}</em></p>
+											</div>
+											<div class="you">
+												<p>
+													<a href="pingfen.html">去评价</a>
+													<a onclick="zaigou()" style="background: #FF0000; color: #fff;">再次购买</a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+					<div id="item4mobile" class="mui-slider-item mui-control-content" style="background-image: url(../../img/none.png);background-position: center 47px;background-repeat: no-repeat;">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<template v-for="item in orders">
+									<div class="gouwuc_kk gouwuc_kk_ddxq" v-if="item.state==2" style="background-color: white;">
+										<div class="dianpmc_gw" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<p class="px24">{{item.goodsInfo[0].shopInfo.shopName}}></p><span class="mui-icon mui-icon-trash"></span></a>
+										</div>
+										<div class="dianpmc_gw" v-else>
+											<a href="#">
+												<p class="px24">农兄弟商城</p>
+												<span class="mui-icon mui-icon-trash"></span>
+											</a>
+										</div>
+										<div class="dingd_hao">
+											<p>订单号：{{item.id}} </p>
+											<a href="dingdanxiangQ.html">查看详情</a>
+										</div>
+										<div class="diannao_shanp" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<h1><img :src="item.goodsInfo[0].baseInfo.imgUrl"></h1></a>
+											<div class="you">
+												<a href="#">
+													<p class="px24 bt">{{item.goodsInfo[0].baseInfo.goodsName}}</p>
+												</a>
+												<p class="xh">{{item.goodsInfo[0].baseInfo.configstr}}</p>
+												<div class="youjfy">
+													<div class="goum_sl">
+														<div class="counter_box">
+															<span>x{{item.goodsInfo[0].baseInfo.num}}</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="diannao_shanp" v-else>
+											<a href="#">
+												<h1 v-for="item1,index in item.goodsInfo" v-if="index<3"><img :src="item1.baseInfo.imgUrl"></h1>
+												<div class="mui-icon mui-icon-more" style="float: right;line-height:1.26rem;"></div>
+											</a>
+										</div>
+										<div class="qqq_jia">
+											<div class="zuo">
+												<p>状 态：<em>{{allStates[item.state]}}</em></p>
+												<p>总 价：<em class="qq">￥{{item.sumPrice}}</em></p>
+											</div>
+											<div class="you">
+												<p>
+													<a href="pingfen.html">去评价</a>
+													<a onclick="zaigou()" style="background: #FF0000; color: #fff;">再次购买</a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+					<div id="item5mobile" class="mui-slider-item mui-control-content" style="background-image: url(../../img/none.png);background-position: center 47px;background-repeat: no-repeat;">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<template v-for="item in orders">
+									<div class="gouwuc_kk gouwuc_kk_ddxq" v-if="item.state==3" style="background-color: white;">
+										<div class="dianpmc_gw" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<p class="px24">{{item.goodsInfo[0].shopInfo.shopName}}></p><span class="mui-icon mui-icon-trash"></span>
+											</a>
+										</div>
+										<div class="dianpmc_gw" v-else>
+											<a href="#">
+												<p class="px24">农兄弟商城</p>
+												<span class="mui-icon mui-icon-trash"></span>
+											</a>
+										</div>
+										<div class="dingd_hao">
+											<p>订单号：{{item.id}} </p>
+											<a href="dingdanxiangQ.html">查看详情</a>
+										</div>
+										<div class="diannao_shanp" v-if="item.goodsInfo.length==1">
+											<a href="#">
+												<h1><img :src="item.goodsInfo[0].baseInfo.imgUrl"></h1></a>
+											<div class="you">
+												<a href="#">
+													<p class="px24 bt">{{item.goodsInfo[0].baseInfo.goodsName}}</p>
+												</a>
+												<p class="xh">{{item.goodsInfo[0].baseInfo.configstr}}</p>
+												<div class="youjfy">
+													<div class="goum_sl">
+														<div class="counter_box">
+															<span>x{{item.goodsInfo[0].baseInfo.num}}</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="diannao_shanp" v-else>
+											<a href="#">
+												<h1 v-for="item1,index in item.goodsInfo" v-if="index<3"><img :src="item1.baseInfo.imgUrl"></h1>
+												<div class="mui-icon mui-icon-more" style="float: right;line-height:1.26rem;"></div>
+											</a>
+										</div>
+										<div class="qqq_jia">
+											<div class="zuo">
+												<p>状 态：<em>{{allStates[item.state]}}</em></p>
+												<p>总 价：<em class="qq">￥{{item.sumPrice}}</em></p>
+											</div>
+											<div class="you">
+												<p>
+													<a href="pingfen.html">去评价</a>
+													<a onclick="zaigou()" style="background: #FF0000; color: #fff;">再次购买</a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="dingdan.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		</script>
+	</body>
+</html>

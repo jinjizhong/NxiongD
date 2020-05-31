@@ -1,0 +1,273 @@
+<html class=" overthrow-enabled">
+
+	<head>
+		<meta charset="utf-8">
+		<title>优创精品</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			
+		</style>
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">设置</h1>
+		</header>-->
+
+		<div class="mui-content">
+
+			<ul id="gg" class="mui-table-view">
+				<li class="mui-table-view-cell infoName">
+			    <a class="mui-navigate-right" id="userImg"  href="#">头像</a>
+			    <img class="userImg" src="" />
+			</li>
+
+			</ul>
+			<ul id="hasTo" class="mui-table-view" style="margin-top:10px ;">
+				<img id="tupian" style="height: 60px;width: 60px;" src="" />
+				 
+    			<textarea id="Imgdata" type="text" style="height: 300px;width: 100%;">
+    			</textarea>
+			</ul>
+			
+		</div>
+	</body>
+
+	<script src="js/mui.min.js"></script>
+	<script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		
+	mui.plusReady(function(){
+    document.getElementById('userImg').addEventListener('tap',function(){
+        if(mui.os.plus){
+            var a=[{
+                title:'拍照'
+            },{
+                title:'从手机相册选择'
+            }];
+            plus.nativeUI.actionSheet({
+                title:'修改头像',
+                cancel:'取消',
+                buttons:a
+            },function(b){
+                switch(b.index){
+                    case 0:
+                        break;
+                    case 1:
+                        //拍照
+                        getImages();
+                        break;
+                    case 2:
+                        //打开相册
+                        galleryImages();
+                        break;
+                    default:
+                        break;
+                }
+            },false);   
+        }
+    });
+
+    //拍照
+    function getImages(){
+    	
+    var c = plus.camera.getCamera();
+    c.captureImage(function(e) {
+        plus.io.resolveLocalFileSystemURL(e, function(entry) {
+        	var imgSrc = entry.toLocalURL() + "?version=" + new Date().getTime(); //拿到图片路径
+        	updatefile(entry.toLocalURL())
+            //uploadHeadImg(entry.toLocalURL());
+        }, function(e) {
+            console.log("读取拍照文件错误：" + e.message);
+        });
+    }, function(s) {
+        console.log("error" + s);
+    }, {
+        filename: "_doc/camera/"
+    })
+
+    	
+        /*var mobileCamera=plus.camera.getCamera();
+        mobileCamera.captureImage(function(e){
+            plus.io.resolveLocalFileSystemURL(e,function(entry){
+                var path=entry.toLocalURL()+'?version='+new Date().getTime();
+                
+                uploadHeadImg(path);
+            },function(err){
+                console.log("读取拍照文件错误");
+            });
+        },function(e){
+            console.log("er",err);
+        },function(){
+            filename:'_doc/head.png';
+        });*/
+    
+    }
+
+    //从本地相册选择
+    function galleryImages(){
+    	
+	// 从相册中选择图片
+    plus.gallery.pick( function(e){
+    	for(var i in e.files){
+	    	var fileSrc = e.files[i]
+	    	//uploadHeadImg(fileSrc);
+	    	updatefile(fileSrc);
+    	}
+    }, function ( e ) {
+    	console.log( "取消选择图片" );
+    },{
+    	filter: "image",
+    	multiple: true,
+    	maximum: 1,
+    	system: false,
+    	onmaxed: function() {
+    		plus.nativeUI.alert('最多只能选择1张图片');
+    	}
+    });
+
+    	
+       /* console.log("你选择了从相册选择");
+        plus.gallery.pick(function(a){
+            plus.io.resolveLocalFileSystemURL(a,function(entry){
+                plus.io.resolveLocalFileSystemURL('_doc/',function(root){
+                    root.getFile('head.png',{},function(file){
+                        //文件已经存在
+                        file.remove(function(){
+                            console.log("文件移除成功");
+                            entry.copyTo(root,'head.png',function(e){
+                                var path=e.fullPath+'?version='+new Date().getTime();
+                                uploadHeadImg(path);
+                            },function(err){
+                                console.log("copy image fail: ",err);
+                            });
+                        },function(err){
+                            console.log("删除图片失败：（"+JSON.stringify(err)+")");
+                        });
+                    },function(err){
+                        //打开文件失败
+                        entry.copyTo(root,'head.png',function(e){
+                            var path=e.fullPath+'?version='+new Date().getTime();
+                            uploadHeadImg(path);
+                        },function(err){
+
+                            console.log("上传图片失败：（"+JSON.stringify(err)+")");
+                        });
+                    });
+                },function(e){
+                    console.log("读取文件夹失败：（"+JSON.stringify(err)+")");
+                });
+            });
+        },function(err){
+            console.log("读取拍照文件失败: ",err);
+        },{
+            filter:'image'
+        });*/
+    
+    };
+
+function updatefile(filename)
+	{
+		var image=new Image();
+		image.onload=function()
+		{
+			//获取图片的base64
+			var imgData=getBase64Image(image);
+			//调用ajax上传
+			document.getElementById("tupian").src=imgData;
+			console.log(imgData);
+		};
+		image.src=filename;
+		image.style.width='60px';
+		image.style.height='60px';
+		console.log('打开文件');
+	}
+
+    //上传图片
+    function uploadHeadImg(imgPath){
+        //选中图片之后，头像当前的照片变为选择的照片
+        var mainImg=document.getElementById('userImg');
+        mainImg.src=imgPath;
+		alert(imgPath);
+		document.getElementById("tupian").src=imgPath;
+        var images=new Image();
+        images.src=imgPath;
+        var imgData=getBase64Image(images);
+        document.getElementById("Imgdata").value=imgData;
+        //alert(imgData)
+       /* mui.ajax('http://127.0.0.1/uploadHeadImg',{
+            data:{
+                'imgDatas':imgData
+            },
+            dataType:'json',//服务器返回json格式数据
+            type:'post',//HTTP请求类型
+            timeout:10000,//超时时间设置为10秒；
+            success:function(data){
+                if(data.status=='1'){
+                    mui.alert('上传成功！');
+                }
+            },
+            error:function(xhr,type,errorThrown){
+                if(type=='timeout'){
+                    mui.alert('服务器连接超时，请稍后再试');
+                }   
+            }
+        });*/
+    }
+
+
+    //压缩图片转成base64
+    function getBase64Image(img){
+       /* var canvas = document.createElement("canvas");
+	    canvas.width = img.width;
+	    canvas.height = img.height;
+	    if(img.width==0){
+	    	alert("图片上传出错")
+	    }
+	    
+	    var ctx = canvas.getContext("2d");
+	    ctx.drawImage(img, 0, 0, img.width, img.height);  
+	    var ext = img.src.substring(img.src.lastIndexOf(".")+1).toLowerCase();
+	    var dataURL = canvas.toDataURL("image/"+ext);
+	    canvas = null; //释放
+	    return dataURL;*/
+	   
+	   var canvas = document.createElement("canvas");
+        var width=img.width;
+        var height=img.height;
+        alert(width)
+        if(width>height){
+            if(width>100){
+                height=Math.round(height*=100/width);
+                width=100;
+            }
+        }else{
+            if(height>100){
+                width=Math.round(width*=100/height);
+            }
+            height=100;
+        }
+
+        canvas.width=width;
+        canvas.height=height;
+        var ctx=canvas.getContext('2d');
+        ctx.drawImage(img,0,0,width,height);
+			
+        var dataUrl=canvas.toDataURL('image/png',0.8);
+        return dataUrl.replace('data:image/png:base64,','');
+    }   
+});
+		
+	</script>
+</html>

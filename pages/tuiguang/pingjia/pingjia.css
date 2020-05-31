@@ -1,0 +1,66 @@
+/*重置*/
+body,h1,h2,h3,h4,h5,dl,dd,dt,p,ul,li,ol{ margin:0; padding:0;}
+img{ border:none;}
+a{ text-decoration:none;}
+*{ font: normal 0.22rem/100% Helvetica, Arial, sans-serif;}
+li{ list-style-type:none;}
+
+/**/
+@media screen and (min-width: 320px) {html{font-size:50px;}}
+@media screen and (min-width: 360px) {html{font-size:56.25px;}}
+@media screen and (min-width: 375px) {html{font-size:58.59375px;}}
+@media screen and (min-width: 400px) {html{font-size:62.5px;}}
+@media screen and (min-width: 414px) {html{font-size:64.6875px;}}
+@media screen and (min-width: 440px) {html{font-size:68.75px;}}
+@media screen and (min-width: 480px) {html{font-size:75px;}}
+@media screen and (min-width: 520px) {html{font-size:81.25px;}}
+@media screen and (min-width: 560px) {html{font-size:87.5px;}}
+@media screen and (min-width: 600px) {html{font-size:93.75px;}}
+@media screen and (min-width: 640px) {html{font-size:100px;}}
+@media screen and (min-width: 680px) {html{font-size:100px;}}
+@media screen and (min-width: 720px) {html{font-size:100px;}}
+@media screen and (min-width: 760px) {html{font-size:100px;}}
+@media screen and (min-width: 800px) {html{font-size:100px;}}
+@media screen and (min-width: 960px) {html{font-size:100px;}}
+
+.px22{font-size: .22rem;}
+
+.pingl_xuanz{padding: 0.4rem 0.2rem; border-bottom: solid #e2e2e2 2px;overflow: hidden; }
+
+.pingl_xuanz ul{ float: left; width: 80%;overflow: hidden; }
+.pingl_xuanz ul li{float: left;}
+.pingl_xuanz ul li a{padding: 0.2rem 0.3rem;display: inline-block; margin: 0.1rem; color: #fff;background: #bdbdbd;border-radius: 0.05rem; font-size: 0.22rem;}
+.pingl_xuanz ul li a.a{background:#e10601;}
+.pingl_xuanz .haopd{float: right; width: 20%;text-align: right;}
+.pingl_xuanz .haopd h1{color:#bdbdbd;margin: 0.2rem 0;font-size: 0.22rem;}
+.pingl_xuanz .haopd p{color:#e10601;margin: 0.2rem 0;font-size: 0.35rem;}
+
+.pengl_k{
+	margin: 0.2rem 0;
+}
+.pengl_k .pj_k{
+	 border-bottom: solid #e2e2e2 2px;
+}
+.pengl_k .pj_k .pjtp_img{margin: 0.2rem 0; overflow: hidden;}
+.pengl_k .pj_k .pjtp_img p{width: 19%; float: left; margin-right: 1%;}
+.pengl_k .pj_k .pjtp_img p img{width: 100%;}
+.pengl_k .pj_k .guig{margin: 0.1rem 0; color: #bdbdbd;}
+
+
+.pj_k{padding: 0.2rem;}
+.pj_k .bt{margin: 0.1rem 0;overflow: hidden;}
+.pj_k .bt p{float: left;font-size: 0.22rem}
+.pj_k .bt span{float: right;font-size: 0.22rem}
+.pj_k .bt p em{color: #016ff8;font-size: 0.22rem}
+.pj_k .bt span em{color: #e10601;font-size: 0.22rem}
+
+.pj_k .toux_k{margin: 0.3rem 0; overflow: hidden;}
+.pj_k .toux_k h1{width: 0.7rem;height: 0.7rem; overflow: hidden; border-radius: 50%; border:solid 1px #f5f5f5; float: left;}
+.pj_k .toux_k h1 img{width: 100%;}
+.pj_k .toux_k span{line-height:  0.7rem;margin-left:0.2rem;height: 0.7rem; float: left;}
+.pj_k .toux_k .sd{overflow: hidden; float: left;margin: 0.3rem 0 0 0.3rem;}
+.pj_k .toux_k .sd p{width: 0.2rem; height: 0.2rem;background:url(../images/web/wujx.png) no-repeat;background-size: 100%;float: left;
+	margin-left: 0.03rem;
+}
+
+.pj_k .px22{color: #6a6a6a;line-height: 0.35rem;}

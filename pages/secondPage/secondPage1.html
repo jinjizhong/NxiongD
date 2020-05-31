@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<!--<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+
+		<link rel="stylesheet" href="../../css/mui.css">
+		<link rel="stylesheet" href="secondPage.css" />
+
+	</head>
+	<style>
+		.meta-info {
+			position: absolute;
+			left: 115px;
+			right: 15px;
+			bottom: 8px;
+			color: #8f8f94;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="title">新闻资讯</h1>
+		</header>
+		<style>
+			.padd {
+				padding-left: 6px;
+				padding-right: 6px;
+			}
+		</style>
+		<div class="mui-content" id="message">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+					<a :class="'mui-control-item '+(index==0?'mui-active':'')" :href="'#item'+index" v-for="item,index in info">
+						{{item.name}}
+					</a>
+					</div>
+				</div>
+				<div class="mui-slider-group">
+					<!--<div id="item1" class="mui-slider-item mui-control-content mui-active">-->
+					<div v-for="itemOne in info.news" :id="'item'+index" :class="'mui-slider-item mui-control-content '+(indexOne==0?'mui-active':'')">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell">
+										{{itemOne.News_Title}}
+									</li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<!--<div class="mui-content" id="message">
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a :class="'mui-control-item '+(index==0?'mui-active':'')" :href="'#item'+index" v-for="item,index in info">
+					{{item.name}}
+				</a>
+			</div>
+			<div class="mui-slider-group" id="pullrefresh">
+				<div v-for="itemOne,indexOne in info" :id="'item'+indexOne" :class="'mui-slider-item mui-control-content '+(indexOne==0?'mui-active':'')">
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul id="news_list" class="mui-table-view">
+								<li class="mui-table-view-cell mui-media" v-for="items in itemOne.news">
+									<a :data-guid="items.Id" @tap="toUrl(items.News_Title,items.Id)">
+										<img class="mui-media-object mui-pull-left" :src="items.Img_url">
+										<div class="mui-media-body">
+											<div class="mui-ellipsis-2">{{items.News_Title}}</div>
+										</div>
+										<div class="meta-info">
+											<div class="author">{{items.Read_count}}</div>
+											<div class="time">{{items.Time}}</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>-->
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/vue.js"></script>
+		<script type="text/javascript" src="secondPage.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.js"></script>
+		<script type="text/javascript" src="../../js/mui.pullToRefresh.material.js"></script>
+		<script type="text/javascript" src="../util/util.js"></script>
+		<script>
+			mui.init({
+				/*pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						style: 'circle',
+						auto: false,
+						offset:'0px',
+						height: 75,
+						callback: function() {
+							
+							mui('#scroll1').pullRefresh().endPulldown(true);
+							mui('#scroll1').pullRefresh().refresh(true);
+						}
+					},
+					up: {
+						auto: false,
+//						offset: 100, //距离底部高度(到达该高度即触发)
+						show: true,
+						contentinit: '上拉显示更多',
+						contentdown: '上拉显示更多',
+						contentrefresh: '正在加载...',
+						contentnomore: '没有更多数据了',
+						callback: function() {
+							
+							mui('#scroll1').pullRefresh().endPulldown(true);
+							mui('#scroll1').pullRefresh().refresh(true);
+						}
+					}
+				}*/
+
+			});
+			(function($) {})(mui);
+			
+			var items = null;
+			var info = null;
+			mui.plusReady(function() {
+				var ss = plus.webview.currentWebview().title;
+				document.getElementById('title').innerHTML = ss;
+
+				var data = {
+					"strJson": "{'DriverID':'1234567890','UserID': '任务标识','TaskGuid': 'b4026263-704e-4e12-a64d-f79cb42962cc','DataType': 'ClassNewsList','Classid': 'AAAC'}"
+				};
+				ToPostConn(data, function(e) {
+					info = JSON.parse(e);
+					news.info = info;
+				});
+			});
+			var news = new Vue({
+				el: '#message',
+				data: {
+					info: []
+				},
+				methods: {
+					toUrl: function(item, message) {
+						lvyouPage(item, message);
+					}
+				}
+			})
+
+			function lvyouPage(item, message) {
+				mui.openWindow({
+					url: 'pinglun/lvyouPage.html',
+					id: 'lvyouPage',
+					extras: {
+						title: item,
+						message: message
+					}
+				})
+			}
+		</script>
+	</body>
+
+</html>
